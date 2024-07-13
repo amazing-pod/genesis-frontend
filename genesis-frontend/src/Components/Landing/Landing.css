@@ -1,0 +1,37 @@
+
+/* .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
+  }
+  
+  .header-left {
+    flex: 1;
+  }
+  
+  .header-title {
+    color: pink;
+    margin: 0;
+  }
+  
+  .header-right {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .header-signup {
+    background-color: #6C63FF;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  
+  .header-button:hover {
+    background-color: darkpurple;
+  } */
