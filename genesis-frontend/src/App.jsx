@@ -8,7 +8,6 @@ function App() {
   return (
     <>
     <Landing/>
-    <h1>Hi</h1>
     </>
   )
 }
