@@ -1,0 +1,60 @@
+/* Register.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+.register-page {
+    background-color: #ACA7FF;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    background-color: white;
+    display: flex;
+    padding: 2em;
+    border-radius: 20px;
+    height: 600px;
+    align-items: center;
+    gap: 30px;
+}
+
+.register-image {
+    width: 593px;
+    height: 432px;
+}
+
+.register-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-up {
+    color: #6C63FF;
+}
+
+h2 {
+    margin: 20px 0px;
+    font-size: 40px;
+}
+
+
+.register-user-info {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+
+form {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+
+input {
+    padding: 1em;
+    width: 100%;
+}

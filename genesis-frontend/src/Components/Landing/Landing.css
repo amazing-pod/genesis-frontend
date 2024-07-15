@@ -63,12 +63,13 @@ header {
 
 /* Landing Page Content */
 .page-container {
-  width: 1400px;
+  width: 1200px;
   margin: auto;
   /* outline: 1px solid #6C63FF; */
   display: flex;
   flex-direction: column;
   gap: 60px;
+  /* outline: 1px solid #6C63FF; */
 }
 
 span {
@@ -90,7 +91,7 @@ span {
 }
 
 img {
-  margin: auto;
+  margin-left: auto;
 }
 
 h2 {
@@ -113,6 +114,137 @@ h3 {
   gap: 30px;
   align-items: center;
   margin: 200px 0px;
+}
+
+/* Media Queries For Mobile Screens */
+@media screen and (max-width: 1000px) {
+  .page-container {
+    margin: auto;
+    text-align: center;
+    gap: 30px;
+    width: 100%;
+  }
+  .landing-item-container {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  img {
+    width: 100px;
+    height: 200px;
+  }
+  /* h2 {
+    font-size: 23px;
+  }
+  p {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 23px;
+    text-align: start;
+    text-align: center;
+  } */
+
+
+  .landing-info {
+    width: 100%;
+  }
+  .page-container {
+    width: 90%;
+  }
+
+  .project-collaboration-image {
+    width: 598px;
+    height: 560px;
+    margin: 0px;
+  }
+
+  .project-management-image {
+    width: 530px;
+    height: 530px;
+    margin: 20px 0px 0px 0px;
+  }
+  
+  .project-ideation-image {
+    width: 584px;
+    height: 510px;
+    margin: 30px 0px 0px 0px;
+  }
+
+  .community-image {
+    width: 588px;
+    height: 530px;
+    margin: 30px 0px 0px 0px;
+  }
+
+  .landing-item-container {
+    margin: 50px 0px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .page-container {
+    margin: auto;
+    text-align: center;
+    gap: 30px;
+    width: 100%;
+  }
+  .landing-item-container {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+  img {
+    width: 100px;
+    height: 200px;
+  }
+  h2 {
+    font-size: 23px;
+  }
+  p {
+    font-size: 20px;
+  }
+  h3 {
+    font-size: 23px;
+    text-align: start;
+    text-align: center;
+  }
+
+
+  .landing-info {
+    width: 100%;
+  }
+  .page-container {
+    width: 90%;
+  }
+
+  .project-collaboration-image {
+    width: 398px;
+    height: 360px;
+    margin: 0px;
+  }
+
+  .project-management-image {
+    width: 330px;
+    height: 330px;
+    margin: 20px 0px 0px 0px;
+  }
+  
+  .project-ideation-image {
+    width: 384px;
+    height: 310px;
+    margin: 30px 0px 0px 0px;
+  }
+
+  .community-image {
+    width: 388px;
+    height: 330px;
+    margin: 30px 0px 0px 0px;
+  }
+
+  .landing-item-container {
+    margin: 50px 0px;
+  }
 }
 
 /* Media Queries For Mobile Screens */
@@ -155,94 +287,28 @@ h3 {
   .project-collaboration-image {
     width: 288px;
     height: 250px;
+    margin: 0px;
   }
 
   .project-management-image {
-    margin-top: 20px;
     width: 230px;
     height: 230px;
+    margin: 20px 0px 0px 0px;
+  }
+  
+  .project-ideation-image {
+    width: 288px;
+    height: 240px;
+    margin: 30px 0px 0px 0px;
+  }
+
+  .community-image {
+    width: 288px;
+    height: 230px;
+    margin: 30px 0px 0px 0px;
   }
 
   .landing-item-container {
     margin: 50px 0px;
   }
-  
-  .project-ideation-image {
-    margin-top: 30px;
-    width: 288px;
-    height: 240px;
-  }
-
-  .community-image {
-    margin-top: 30px;
-    width: 288px;
-    height: 230px;
-  }
-
-}
-
-
-/* Media Queries For Tablets */
-@media screen and (max-width: 100px) {
-  .page-container {
-    margin: auto;
-    text-align: center;
-    gap: 30px;
-  }
-  .landing-item-container {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-  }
-  img {
-    width: 100px;
-    height: 200px;
-  }
-  h2 {
-    font-size: 20px;
-  }
-  p {
-    font-size: 16px;
-  }
-  h3 {
-    font-size: 20px;
-    text-align: start;
-    text-align: center;
-  }
-
-
-  .landing-info {
-    width: 100%;
-  }
-  .page-container {
-    width: 90%;
-  }
-
-  .project-collaboration-image {
-    width: 288px;
-    height: 250px;
-  }
-
-  .project-management-image {
-    margin-top: 20px;
-    width: 230px;
-    height: 230px;
-  }
-
-  .landing-item-container {
-    margin: 50px 0px;
-  }
-  
-  .project-ideation-image {
-    margin-top: 30px;
-    width: 288px;
-    height: 240px;
-  }
-
-  .community-image {
-    margin-top: 30px;
-    width: 288px;
-    height: 230px;
-  }
-
 }
