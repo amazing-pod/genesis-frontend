@@ -4,6 +4,7 @@ import community_image from "../../assets/png/landing_community.png"
 import project_collaboration_image from "../../assets/svg/landing_project_collaboration.svg"
 import project_ideation_image from "../../assets/png/landing_project_ideation.png"
 import project_management_image from "../../assets/svg/landing_project_management.svg"
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
   return (
@@ -12,8 +13,8 @@ const Landing = () => {
     <header className="navbar">
       <h6 className="genesis-text">Genesis</h6>
       <div className="button-container">
-        <button className="login-button">Login</button>
-        <button className="register-button">Register</button>
+        <Link to="/login" className="landing-login-button">Login</Link>
+        <Link to="/register" className="landing-register-button">Register</Link>
       </div>
     </header>
 
@@ -73,7 +74,7 @@ const Landing = () => {
       <div className="landing-end">
         <h2>What are you waiting for?</h2>
         <p className="landing-register">Register now and get started today</p>
-        <button className="register-button">Sign Up</button>
+        <Link to="/register" className="landing-register-button">Register</Link>
       </div>
 
     </div>

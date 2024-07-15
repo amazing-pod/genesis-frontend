@@ -19,12 +19,16 @@ header {
   display: flex;
   gap: 30px;
   margin-right: 20px;
+  height: 60px;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
 
 }
 
-.login-button {
+.landing-login-button {
   border: 5px solid #6C63FF;
-  padding: 0.5em;
+  padding: 1em;
   background-color: white;
   border-radius: 20px;
   width: 200px;
@@ -32,14 +36,15 @@ header {
   color: #6C63FF;
 }
 
-.register-button {
-  border: none;
+.landing-register-button {
+  border: 5px solid #6C63FF;
+  padding: 1em;
   background-color: #6C63FF;
-  padding: 0.5em;
   border-radius: 20px;
   width: 200px;
   font-size: 20px;
   color: white;
+  text-align: center;
 }
 
 /* Navbar Media Queries */
@@ -65,11 +70,9 @@ header {
 .page-container {
   width: 1200px;
   margin: auto;
-  /* outline: 1px solid #6C63FF; */
   display: flex;
   flex-direction: column;
   gap: 60px;
-  /* outline: 1px solid #6C63FF; */
 }
 
 span {
@@ -116,6 +119,19 @@ h3 {
   margin: 200px 0px;
 }
 
+
+/* Media Queries For Mobile Screens */
+@media screen and (max-width: 1300px) {
+  .page-container {
+    width: 95%;
+  }
+  h2 {
+    font-size: 40px;
+  }
+
+}
+
+
 /* Media Queries For Mobile Screens */
 @media screen and (max-width: 1000px) {
   .page-container {
@@ -133,18 +149,6 @@ h3 {
     width: 100px;
     height: 200px;
   }
-  /* h2 {
-    font-size: 23px;
-  }
-  p {
-    font-size: 20px;
-  }
-  h3 {
-    font-size: 23px;
-    text-align: start;
-    text-align: center;
-  } */
-
 
   .landing-info {
     width: 100%;

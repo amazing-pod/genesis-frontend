@@ -1,0 +1,165 @@
+.login-page {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ACA7FF;
+}
+
+.login-container {
+    height: 600px;
+    width: 1100px;
+    background-color: white;
+    padding: 2em;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    border-radius: 20px;
+}
+
+.login-info {
+    height: 500px;
+    gap: 20px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+input {
+    width: 400px;
+    font-size: 20px;
+    padding: 0.5em;
+}
+
+h2 {
+    margin: 20px 0px;
+}
+
+
+a {
+    text-decoration: none;
+    color: #6C63FF;
+}
+
+.login-button {
+    margin: 0px auto;
+    width: 200px;
+    background-color: #6C63FF;
+    padding: 1em;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .login-container {
+        width: 85%;
+        gap: 25px;
+        height: 500px;
+    }
+
+    input {
+        font-size: 16px;
+        width: 100%;
+    }
+    form {
+        width: 90%;
+    }
+    .login-to-register {
+        font-size: 16px;
+    }
+
+    .login-image {
+        width: 400px;
+        height: 350px;
+        margin: 0px auto;
+    }
+}
+
+
+@media screen and (max-width: 1000px) {
+    .login-container {
+        width: 85%;
+        gap: 25px;
+    }
+
+    input {
+        font-size: 16px;
+        width: 100%;
+    }
+    form {
+        width: 90%;
+    }
+    .login-to-register {
+        font-size: 16px;
+    }
+
+    .login-image {
+        width: 300px;
+        height: 250px;
+        margin: 0px auto;
+    }
+}  
+
+
+/* Media Queries for Phone Screens */
+@media screen and (max-width: 600px) {
+    .login-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        height: 700px;
+        padding: 1em;
+        scroll-behavior: auto;
+    }
+
+    .login-info {
+        width: 270px;
+    }
+
+    .page-container {
+        width: 95%;
+    }
+
+    input {
+        width: 250px;
+        font-size: 16px;
+        padding: 0.5em;
+    }
+    
+    h2 {
+        font-size: 26px;
+    }
+
+    .login-image {
+        width: 250px;
+        height: 200px;
+        margin: 0px;
+    }
+
+    form {
+        align-items: center;
+        gap: 20px;
+    }
+
+    .login-button {
+        height: 20px;
+        font-size: 16px;
+        width: 150px;
+        margin: 0px auto;
+    }
+}  
