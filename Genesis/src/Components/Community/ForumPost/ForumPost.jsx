@@ -6,6 +6,7 @@ import message_icon from "../../../assets/png/reply_icon.png"
 
 
 const ForumPost = () => {
+
     return (
     <>
     <div className="forum-post-container">
@@ -24,7 +25,7 @@ const ForumPost = () => {
 
         <div className="forum-post-interactions">
             <div className="likes">
-                <p>4</p>
+                <p>0</p>
                 <img className="forum-icon"src={upvote_inactive_icon} alt="upvote status" />
             </div>
             <div className="messages">
