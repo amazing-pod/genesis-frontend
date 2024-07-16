@@ -101,3 +101,18 @@
 .mini-navbar > p {
     margin-right: 20px;
 }
+
+@media screen and (max-width: 450px) {
+    .dropbtn {
+        width: 160px;
+        font-size: 16px;
+    }
+    #myDropdown {
+        width: 160px;
+    }
+
+    .dropdown-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
