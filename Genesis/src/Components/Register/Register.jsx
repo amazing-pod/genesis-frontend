@@ -44,13 +44,14 @@ const Register = () => {
 							<p className="register-to-login">
 								Already a member? <a href="/login">Log in now</a>
 							</p>
-							<form action="/action_page.php">
+							<form autoComplete="off">
 								<input
 									type="text"
 									id="username"
 									name="username"
 									placeholder="Username"
 									onChange={(e) => setUsername(e.target.value)}
+									required
 								/>
 								<input
 									type="text"
@@ -58,20 +59,23 @@ const Register = () => {
 									name="email"
 									placeholder="Email"
 									onChange={(e) => setEmail(e.target.value)}
+									required
 								/>
 								<input
 									type="password"
 									id="password"
-									name="email"
+									name="password"
 									placeholder="Password"
 									onChange={(e) => setPassword(e.target.value)}
+									required
 								/>
 								<input
 									type="password"
 									id="confirm-password"
-									name="email"
+									name="confirm-password"
 									placeholder="Confirm Password"
 									onChange={(e) => setConfirmedPassword(e.target.value)}
+									required
 								/>
 							</form>
 						</div>
