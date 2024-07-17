@@ -1,57 +1,143 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Brainstorm.css';
-import dropdown_icon from "../../assets/png/dropdown_icon.png"
-import bookmark_inactive_icon from "../../assets/png/bookmark_inactive.png";
-import bookmark_active_icon from "../../assets/png/bookmark_active.png";
 import IdeaCard from './IdeaCard/IdeaCard';
+import IdeationModal from './IdeationModal/IdeationModal';
 
 const Brainstorm = () => {
-
-  function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
-  }
-  
-  // Close the dropdown if the user clicks outside of it
-  window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
+  const ideaDummyData = [
+    {
+      id: 1,
+      title: "Smart Home Automation",
+      description: "Automate various home devices and appliances using IoT technology.",
+      projectFeatures: [
+        "Motion detection lights",
+        "Temperature control",
+        "Smart locks"
+      ],
+      dayGenerated: "2023-07-15", // Date generated in ISO format
+      impact: 4,
+      feasibility: 3,
+      difficulty: 2,
+      category: "Technology",
+      bookmarked: false
+    },
+    {
+      id: 2,
+      title: "Community Garden Initiative",
+      description: "Create a community garden to promote sustainable living and local food production.",
+      projectFeatures: [
+        "Raised beds",
+        "Compost station",
+        "Education workshops"
+      ],
+      dayGenerated: "2023-07-14",
+      impact: 5,
+      feasibility: 4,
+      difficulty: 3,
+      category: "Environment",
+      bookmarked: true
+    },
+    {
+      id: 3,
+      title: "Mobile App for Senior Citizens",
+      description: "Develop an intuitive mobile app catering to the needs of elderly people.",
+      projectFeatures: [
+        "Large font size",
+        "Voice navigation",
+        "Emergency contacts"
+      ],
+      dayGenerated: "2023-07-13",
+      impact: 3,
+      feasibility: 5,
+      difficulty: 2,
+      category: "Healthcare",
+      bookmarked: false
+    },
+    {
+      id: 4,
+      title: "Online Learning Platform",
+      description: "Build a platform offering courses and tutorials in various subjects.",
+      projectFeatures: [
+        "Video lectures",
+        "Interactive quizzes",
+        "Progress tracking"
+      ],
+      dayGenerated: "2023-07-12",
+      impact: 4,
+      feasibility: 4,
+      difficulty: 3,
+      category: "Education",
+      bookmarked: true
+    },
+    {
+      id: 5,
+      title: "Local Artisan Marketplace",
+      description: "Create an online marketplace to support local artisans and craftsmen.",
+      projectFeatures: [
+        "Seller profiles",
+        "Product listings",
+        "Secure payment gateway"
+      ],
+      dayGenerated: "2023-07-11",
+      impact: 3,
+      feasibility: 4,
+      difficulty: 2,
+      category: "Commerce",
+      bookmarked: false
+    },
+    {
+      id: 6,
+      title: "Green Energy Solutions",
+      description: "Implement renewable energy solutions to reduce carbon footprint in urban areas.",
+      projectFeatures: [
+        "Solar panel installations",
+        "Wind turbine farms",
+        "Energy-efficient buildings"
+      ],
+      dayGenerated: "2023-07-10",
+      impact: 5,
+      feasibility: 3,
+      difficulty: 4,
+      category: "Environment",
+      bookmarked: true
     }
-  }
+  ];
+
+  // Modal Functionality (Open ideation modal)
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <>
-      <h2>My Ideas</h2>
-      {/* Mini-Navbar */}
-      <div className="mini-navbar">
-      {/* Dropdown */}
-      <div class="dropdown">
-      <button onClick={myFunction} className="dropbtn">Sort by...</button>
-      <div id="myDropdown" class="dropdown-content">
-        <p>Most Recent</p>
-        <p>Most Impact</p>
-        <p>Most Feasible</p>
-        <p>Most Difficult</p>
-        <p>Easiest</p>
+      <div className="user-idea-container">
+        <p onClick={openModal} style={{ cursor: 'pointer' }}>My ideas +</p>
+        <h2>My Ideas</h2>
+        <hr />
+        <div className="idea-card-container">
+          {ideaDummyData.map((idea) => (
+            <IdeaCard 
+              key={idea.id}
+              title={idea.title}
+              description={idea.description}
+              projectFeatures={idea.projectFeatures}
+              dayGenerated={idea.dayGenerated}
+              impact={idea.impact}
+              feasibility={idea.feasibility}
+              difficulty={idea.difficulty}
+              category={idea.category}
+              bookmarked={idea.bookmarked}
+            />
+          ))}
+        </div>
+        {modalOpen && <IdeationModal closeModal={closeModal} />}
       </div>
-    </div>
-
-
-      {/* Add a new idea */}
-      <p>New idea +</p>
-      </div>
-    <div className="idea-card-container">
-      <IdeaCard/>
-      <IdeaCard/>
-      <IdeaCard/>
-      <IdeaCard/>
-    </div>
     </>
   );
 };
