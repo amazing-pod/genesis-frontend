@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Brainstorm.css';
 import IdeaCard from './IdeaCard/IdeaCard';
 import IdeationModal from './IdeationModal/IdeationModal';
-
+import ViewIdeaModal from './ViewIdeaModal/ViewIdeaModal';
 const Brainstorm = () => {
   const ideaDummyData = [
     {
@@ -103,27 +103,26 @@ const Brainstorm = () => {
     }
   ];
 
-  // Modal Functionality (Open ideation modal)
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpenForId, setModalOpenForId] = useState(null);
 
-  const openModal = () => {
-    setModalOpen(true);
+  const openModalForId = (ideaId) => {
+    setModalOpenForId(ideaId);
   };
 
   const closeModal = () => {
-    setModalOpen(false);
+    setModalOpenForId(null);
   };
 
   return (
     <>
       <div className="user-idea-container">
-        <p onClick={openModal} style={{ cursor: 'pointer' }}>My ideas +</p>
         <h2>My Ideas</h2>
         <hr />
         <div className="idea-card-container">
           {ideaDummyData.map((idea) => (
             <IdeaCard 
               key={idea.id}
+              id={idea.id} // Pass id to IdeaCard
               title={idea.title}
               description={idea.description}
               projectFeatures={idea.projectFeatures}
@@ -133,10 +132,16 @@ const Brainstorm = () => {
               difficulty={idea.difficulty}
               category={idea.category}
               bookmarked={idea.bookmarked}
+              openModal={openModalForId} // Pass openModal function
             />
           ))}
         </div>
-        {modalOpen && <IdeationModal closeModal={closeModal} />}
+        {modalOpenForId && (
+          <ViewIdeaModal 
+            idea={ideaDummyData.find(idea => idea.id === modalOpenForId)} // Pass the specific idea
+            closeModal={closeModal} 
+          />
+        )}
       </div>
     </>
   );

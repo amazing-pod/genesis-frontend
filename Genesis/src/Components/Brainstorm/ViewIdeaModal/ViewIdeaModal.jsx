@@ -1,43 +1,48 @@
 import React from 'react';
 import './ViewIdeaModal.css';
 import edit_icon from "../../../assets/png/edit.png";
+import close_icon from "../../../assets/png/close.png"
 
-const ViewIdeaModal = ({ closeModal }) => {
+const ViewIdeaModal = ({ idea, closeModal }) => {
+  const projectFeatures = idea.projectFeatures;
+
+  const handleEditClick = () => {
+    // Implement edit functionality here
+    console.log('Edit icon clicked');
+    // Add your logic for handling edit action
+  };
+
   return (
     <div className="modal">
-      <div className="modal-content">
-        <span className="close" onClick={closeModal}>&times;</span>
-        <h2>View Idea</h2>
-        {/* Add modal content here */}
+      <div className="idea-modal-content">
+      <div className="view-idea-container">
+      <div className="view-idea-header">
+        <h2>{idea.title}</h2>
+        <img src={edit_icon} alt="edit icon" onClick={handleEditClick}/>
+      </div>
+        <hr />
+        
+        <h3>Description</h3>
+        <p>{idea.description}</p>
+        {/* Additional content here */}
+        <h3>Project Features</h3>
+        {projectFeatures.map((feature, index) => (
+          <p key={index}>{index+1}. {feature}</p>
+        ))}
+        <h3>Category</h3>
+        <p className='idea-tag'>{idea.category}</p>
+      </div>
+
+      <div className="view-idea-footer">
+          <div className="button-container">
+            <button>Delete</button>
+            <button onClick={closeModal}>Cancel</button>
+          </div>
+        </div>
+
       </div>
     </div>
   );
 };
 
 export default ViewIdeaModal;
-
-
-
-
-
-// <div className="idea-modal-container">
-// <div className="view-idea-header">
-//     <h2>Password Manager</h2>
-//     <img src={edit_icon} alt="Pencil/Edit icon" />
-//     <hr/>
-// </div>
-// <h4>Description</h4>
-// <p>The purpose of our this project is to provide a highly secure and user-friendly solution for storing, managing, and accessing passwords and sensitive information, ensuring peace of mind and convenience for our users in their digital interactions.</p>
-// <h4>Project Features</h4>
-// <ol>
-//     <li>Register/Login Page</li>
-//     <li>Strong password generator</li>
-//     <li>Manage passwords into database (use hashing to secure info)</li>
-// </ol>
-// <h4>Tag</h4>
-// <div className="idea-tag">security</div>
-// <div className="button-container">
-//     <button>Delete</button>
-//     <button>Cancel</button>
-// </div>
-// </div>

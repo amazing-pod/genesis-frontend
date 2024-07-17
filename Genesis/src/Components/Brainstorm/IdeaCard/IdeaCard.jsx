@@ -1,82 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './IdeaCard.css';
 import bookmark_inactive_icon from "../../../assets/png/bookmark_inactive.png";
 import bookmark_active_icon from "../../../assets/png/bookmark_active.png";
 
-const IdeaCard = ({ title, description, projectFeatures, impact, feasibility, difficulty, category, bookmarked }) => {
-    // Conditional rendering for bookmark
-    let bookmarkSource = bookmark_inactive_icon;
+const IdeaCard = ({ id, title, description, projectFeatures, impact, feasibility, difficulty, category, bookmarked, openModal }) => {
+    const [bookmarkToggle, setBookmarkToggle] = useState(bookmarked);
 
-    if (bookmarked == false) {
-        bookmarkSource = bookmark_inactive_icon;
-    } else {
-        bookmarkSource = bookmark_active_icon;
-    }
-
-    // Determine if each dot is active (pink) or inactive (gray) based on ratings
     let ratingGenerator = (rating) => {
         let result = [];
         for (let i = 0; i < 5; i++) {
-            if (i < rating) {
-                result.push("circle-active")
-            } else {
-                result.push("circle-empty");
-            }
+            result.push(i < rating ? "circle-active" : "circle-empty");
         }
         return result;
-    }
+    };
+    
     const feasibilityArray = ratingGenerator(feasibility);
     const impactArray = ratingGenerator(impact);
     const difficultyArray = ratingGenerator(difficulty);
 
-    
-    return (
-        <>
-            <div className="idea-card">
-                <div className="idea-header">
-                    <h3>{title}</h3>
-                </div>
-                <h3>Description</h3>
-                <p className="idea-description">{description}</p>
+    const handleClick = () => {
+        // Don't open modal if user clicks on bookmark icon
+        if (!event.target.classList.contains('bookmark-icon')) {
+            openModal(id);
+        }
+    };
 
-                <div className="idea-rating-container">
+    return (
+        <div className="idea-card" onClick={handleClick}>
+            <div className="idea-header">
+                <h3>{title}</h3>
+            </div>
+            <h3>Description</h3>
+            <p className="idea-description">{description}</p>
+
+            <div className="idea-rating-container">
                 <div className="idea-rating">
                     <p>Impact</p>
                     <div className="rating-circles">
-                    {/* Based on the impact array, display rating */}
-                    {impactArray.map((impactRating) => (
-                        <div className={impactRating}></div>
-                    ))}
+                        {impactArray.map((rating, index) => (
+                            <div key={index} className={rating}></div>
+                        ))}
                     </div>
                 </div>
 
                 <div className="idea-rating">
                     <p>Feasibility</p>
                     <div className="rating-circles">
-                    {/* Based on the impact array, display rating */}
-                    {feasibilityArray.map((feasibilityRating) => (
-                        <div className={feasibilityRating}></div>
-                    ))}
+                        {feasibilityArray.map((rating, index) => (
+                            <div key={index} className={rating}></div>
+                        ))}
                     </div>
                 </div>
 
                 <div className="idea-rating">
                     <p>Difficulty</p>
                     <div className="rating-circles">
-                    {/* Based on the difficulty array, display difficulty */}
-                    {difficultyArray.map((difficultyRating) => (
-                        <div className={difficultyRating}></div>
-                    ))}
+                        {difficultyArray.map((rating, index) => (
+                            <div key={index} className={rating}></div>
+                        ))}
                     </div>
                 </div>
 
                 <div className="idea-extra-info">
                     <div className="idea-tag">{category}</div>
-                    <img className="bookmark-icon" src={bookmarkSource} alt="Bookmark status" />
+                    <img className="bookmark-icon" onClick={() => setBookmarkToggle(!bookmarkToggle)} src={bookmarkToggle ? bookmark_active_icon : bookmark_inactive_icon} alt="Bookmark status" />
                 </div>
-            </div>                    
+            </div>
         </div>
-        </>
     );
 };
 

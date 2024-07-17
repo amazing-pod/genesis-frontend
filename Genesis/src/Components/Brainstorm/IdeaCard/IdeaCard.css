@@ -94,3 +94,18 @@ h3 {
 .idea-rating-container {
     margin: 10px 0px;
 }
+
+/* Responsive adjustments */
+@media (max-width: 350px) {
+    .idea-card {
+        width: 300px;
+    }
+    .circle-active, .circle-empty {
+        width: 20px;
+        height: 20px;
+    }
+
+    .rating-circles {
+        gap: 15px;
+    }
+}

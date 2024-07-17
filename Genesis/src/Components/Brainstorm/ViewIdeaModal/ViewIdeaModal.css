@@ -1,0 +1,73 @@
+.idea-modal-content {
+    background-color: white;
+    width: 1000px;
+    border-radius: 10px;
+    
+}
+.view-idea-container {
+    margin: 15px;
+    padding: 1em;
+}
+
+/* Header Styles */
+.view-idea-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.view-idea-header > img {
+    height: 50px;
+    width: 50px;
+}
+
+.view-idea-header > h2 {
+    margin: 0px;
+    font-size: 40px;
+    font-weight: 350;
+}
+
+hr {
+    margin: 15px 0px;
+}
+
+/* Main Content Styles */
+.view-idea-container > h3 {
+    margin: 10px 0px;
+    color: #FF6584;
+    font-size: 30px;
+    font-weight: 300;
+}
+
+.view-idea-container > p {
+    text-align: start;
+    line-height: 1.8;
+}
+
+.view-idea-footer {
+    background-color: #F5F2F2;
+    border-top: 1px solid #C0C0C0;
+    border-radius: 0px 0px 10px 10px;
+}
+
+/* Button Styling */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.button-container > button {
+    padding: 1em;
+    background-color: #FF6584;
+    color: white;
+    border-radius: 10px;
+    height: 40px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    font-size: 20px;
+    font-weight: 500;
+
+}
