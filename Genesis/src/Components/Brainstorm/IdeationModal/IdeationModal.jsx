@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './IdeationModal.css';
 import close_icon from "../../../assets/png/close.png";
 import brainstorm_ideation from "../../../assets/png/brainstorm_ideation.png";
-//Importing Related Components
 import IdeationProject from './IdeationProject/IdeationProject';
 import IdeationFeature from './IdeationFeature/IdeationFeature';
 import AddIdea from './AddIdea/AddIdea';
@@ -17,11 +16,11 @@ const IdeationModal = ({ closeModal }) => {
     const renderModalContent = () => {
         switch (modalSelect) {
             case 'project':
-                return <IdeationProject closeModal={closeModal} />;
+                return <IdeationProject closeModal={() => setModalSelect(null)} />;
             case 'feature':
-                return <IdeationFeature closeModal={closeModal} />;
+                return <IdeationFeature closeModal={() => setModalSelect(null)} />;
             case 'addIdea':
-                return <AddIdea closeModal={closeModal} />;
+                return <AddIdea closeModal={() => setModalSelect(null)} />;
             default:
                 return (
                     <>
