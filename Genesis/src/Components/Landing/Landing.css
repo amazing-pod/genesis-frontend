@@ -75,7 +75,7 @@ header {
   gap: 60px;
 }
 
-span {
+.emphasis-text {
   background: #7272FF;
   background: linear-gradient(to right, #7272FF 0%, #FF6584 81%);
   -webkit-background-clip: text;
@@ -105,7 +105,7 @@ p {
   font-size: 20px;
 }
 
-h3 {
+.landing-transition-text {
   text-align: center;
   font-size: 36px;
   

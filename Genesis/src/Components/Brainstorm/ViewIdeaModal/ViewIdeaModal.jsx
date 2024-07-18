@@ -131,15 +131,26 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
           <h3>Category</h3>
           {editing ? (
             <select value={selectedTag} onChange={handleTagChange}>
+              <option value="" disabled hidden>Choose a category</option>
               <option value="security">Security</option>
               <option value="travel">Travel</option>
               <option value="healthcare">Healthcare</option>
               <option value="environment">Environment</option>
+              <option value="technology">Technology</option>
             </select>
+
+            
           ) : (
             <p className='idea-tag'>{idea.category}</p>
           )}
         </div>
+
+        {/* <select>
+        <option hidden>Sex</option>
+        <option>Male</option>
+        <option>Female</option>
+      </select> */}
+
 
         <div className="view-idea-footer">
           <div className="button-container">

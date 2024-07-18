@@ -10,7 +10,8 @@
 
 
 .idea-card-container {
-  width: 100%;
+  justify-content: center;
+  margin: auto;
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;

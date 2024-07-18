@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import './Brainstorm.css';
 import IdeaCard from './IdeaCard/IdeaCard';
 import ViewIdeaModal from './ViewIdeaModal/ViewIdeaModal';
+import IdeationModal from './IdeationModal/IdeationModal';
+
 
 const Brainstorm = () => {
   const [ideaDummyData, setIdeaDummyData] = useState([
@@ -14,7 +16,7 @@ const Brainstorm = () => {
         "Temperature control",
         "Smart locks"
       ],
-      dayGenerated: "2023-07-15", // Date generated in ISO format
+      dayGenerated: "2023-07-15",
       impact: 4,
       feasibility: 3,
       difficulty: 2,
@@ -102,12 +104,17 @@ const Brainstorm = () => {
       bookmarked: true
     }
   ]);
-
   const [selectedIdea, setSelectedIdea] = useState(null);
+  const [openIdeationModal, setOpenIdeationModal] = useState(false);
+
+  const toggleIdeationModal = () => {
+    setOpenIdeationModal(!openIdeationModal);
+  };
 
   const openModalForId = (ideaId) => {
     setSelectedIdea(ideaId);
   };
+
 
   const closeModal = () => {
     setSelectedIdea(null);
@@ -121,7 +128,7 @@ const Brainstorm = () => {
       return idea;
     });
     setIdeaDummyData(updatedIdeas);
-    closeModal(); // Close modal after saving
+    closeModal();
   };
 
   return (
@@ -138,6 +145,8 @@ const Brainstorm = () => {
         <>
           <h2>My Ideas</h2>
           <hr/>
+          <p onClick={toggleIdeationModal} className="my-ideas-plus">My ideas +</p>
+
           <div className="idea-card-container">
             {ideaDummyData.map((idea) => (
               <IdeaCard
@@ -152,10 +161,13 @@ const Brainstorm = () => {
                 difficulty={idea.difficulty}
                 category={idea.category}
                 bookmarked={idea.bookmarked}
-                openModal={openModalForId} // Pass openModal function
+                openModal={openModalForId}
               />
             ))}
           </div>
+          {/* Based on state, conditionally render itationModal: */}
+          {openIdeationModal && <IdeationModal closeModal={toggleIdeationModal} />}
+
         </>
         )}
       </div>

@@ -215,3 +215,9 @@ select {
     padding: 1em;
     font-size: 20px;
 }
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-overflow: '';
+}
