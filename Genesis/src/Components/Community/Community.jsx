@@ -61,9 +61,18 @@ const samplePosts = [
 
 const Community = () => {
   return (
-    <>
-      <p>Community Works!</p>
-    </>
+      <>
+          <Header />
+          <div className="community-page-container">
+              <MiniNavbar />
+              <h3>Most Recent Posts</h3>
+              <hr />
+              {/* Display posts */}
+              {samplePosts.map(post => (
+                  <ForumPost key={post.id} post={post} />
+              ))}
+          </div>
+      </>
   );
 };
 
