@@ -9,7 +9,8 @@ import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
 import Home from "./Components/Home/Home";
 import Community from "./Components/Community/Community";
-import Brainstorm from "./Components/Brainstorm/Brainstorm"
+import Brainstorm from "./Components/Brainstorm/Brainstorm";
+import PostDetails from './Components/Community/ForumPost/PostDetails';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
 			<Route path="/register" element={<Register />} />
 			<Route path="/home" element={<Home />} />
 			<Route path="/community" element={<Community />} />
+			<Route path="/community/post/:id" element={<PostDetails />} />
 			<Route path="/brainstorm" element={<Brainstorm />} />
 		</Routes>
 	</BrowserRouter>

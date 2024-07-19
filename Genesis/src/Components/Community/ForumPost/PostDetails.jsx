@@ -7,7 +7,6 @@ import message_icon from "../../../assets/png/reply_icon.png";
 import delete_icon from "../../../assets/png/delete_icon.png";
 import back_icon from "../../../assets/png/back_icon.png";
 
-// Sample posts data
 const samplePosts = [
     {
         id: 1,
@@ -67,12 +66,6 @@ const PostDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const post = samplePosts.find(post => post.id === parseInt(id));
-    
-    // Ensure post exists before proceeding
-    if (!post) {
-        return <div>Post not found</div>;
-    }
-
     const [likes, setLikes] = useState(post.likes);
     const [liked, setLiked] = useState(false);
     const [comments, setComments] = useState(post.comments);

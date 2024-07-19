@@ -23,7 +23,6 @@ const CreatePost = ({ onCreatePost }) => {
       <h4>Create New Post</h4>
       <form className="create-post-form" onSubmit={handleSubmit}>
         <div className="form-group">
-          
         </div>
         <div className="form-group">
           <input
