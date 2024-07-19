@@ -4,6 +4,7 @@ import add_idea_graphic from "../../../../assets/png/add_idea.png"
 // Import main modal
 import IdeationModal from '../IdeationModal';
 
+
 const AddIdea = ( {closeModal}) => {
     const [newFeatureText, setNewFeatureText] = useState('');
     const [editedFeatures, setEditedFeatures] = useState([]);

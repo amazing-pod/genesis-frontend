@@ -5,7 +5,7 @@ import IdeationModal from '../IdeationModal';
 
 
 const IdeationFeature = ( {closeModal} ) => {
-    const [step, setStep] = useState(1);
+    const [step, setStep] = useState(0);
 
     const addStep = () => {
         setStep(step + 1);
