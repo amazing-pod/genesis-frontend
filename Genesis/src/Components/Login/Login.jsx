@@ -3,6 +3,7 @@ import "./Login.css";
 import login_image from "../../assets/png/login.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { SignIn } from "@clerk/clerk-react";
 
 const Login = () => {
 	const [username, setUsername] = useState("");
@@ -26,7 +27,7 @@ const Login = () => {
 		<>
 			<div className="login-page">
 				<div className="login-container">
-					<div className="login-info">
+					{/* <div className="login-info">
 						<div className="login-user-info">
 							<h2 className="login-header">Login</h2>
 							<p className="login-to-register">
@@ -54,7 +55,8 @@ const Login = () => {
 						<p onClick={handleLogin} className="login-button">
 							Login
 						</p>
-					</div>
+					</div> */}
+					<SignIn />
 					<img
 						className="register-image"
 						src={login_image}

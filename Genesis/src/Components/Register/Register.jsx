@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import landing_image from "../../assets/svg/organizing_projects.png";
 import axios from "axios";
+import { SignUp } from "@clerk/clerk-react";
 
 const Register = () => {
 	const [username, setUsername] = useState("");
@@ -38,7 +39,7 @@ const Register = () => {
 		<>
 			<div className="register-page">
 				<div className="register-container">
-					<div className="register-info">
+					{/* <div className="register-info">
 						<div className="register-user-info">
 							<h2 className="register-header">Sign up</h2>
 							<p className="register-to-login">
@@ -82,7 +83,8 @@ const Register = () => {
 						<p onClick={handleRegister} className="register-button">
 							Sign up
 						</p>
-					</div>
+					</div> */}
+					<SignUp />
 					<img
 						className="register-image"
 						src={landing_image}
