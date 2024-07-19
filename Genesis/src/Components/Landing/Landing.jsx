@@ -1,10 +1,10 @@
-import React from 'react';
 import "./Landing.css";
-import community_image from "../../assets/png/landing_community.png"
-import project_collaboration_image from "../../assets/svg/landing_project_collaboration.svg"
-import project_ideation_image from "../../assets/png/landing_project_ideation.png"
-import project_management_image from "../../assets/svg/landing_project_management.svg"
-import { Link } from 'react-router-dom';
+import community_image from "../../assets/png/landing_community.png";
+import project_collaboration_image from "../../assets/svg/landing_project_collaboration.svg";
+import project_ideation_image from "../../assets/png/landing_project_ideation.png";
+import project_management_image from "../../assets/svg/landing_project_management.svg";
+import { Link } from "react-router-dom";
+import { SignIn, SignInButton, SignUp, SignUpButton } from "@clerk/clerk-react";
 
 const Landing = () => {
   return (
@@ -15,6 +15,9 @@ const Landing = () => {
       <div className="button-container">
         <Link to="/login" className="landing-login-button">Login</Link>
         <Link to="/register" className="landing-register-button">Register</Link>
+        {/* Clerk Buttons */}
+				{/* <SignInButton className="landing-login-button" />
+				<SignUpButton className="landing-register-button" /> */}
       </div>
     </header>
 
@@ -84,12 +87,3 @@ const Landing = () => {
 };
 
 export default Landing;
-
-
-
-
-
-
-
-
-

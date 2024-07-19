@@ -1,78 +1,76 @@
 /* Navbar CSS */
 header {
-  border: 1px solid black;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 30px;
-  padding: 1em;
-
+	border: 1px solid black;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 30px;
+	padding: 1em;
 }
 .genesis-text {
-  color: #FF6584;
-  margin: 0px;
-  margin-left: 20px;
-  font-size: 26px;
+	color: #ff6584;
+	margin: 0px;
+	margin-left: 20px;
+	font-size: 26px;
 }
 
 .button-container {
-  display: flex;
-  gap: 30px;
-  margin-right: 20px;
-  height: 60px;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-
+	display: flex;
+	gap: 30px;
+	margin-right: 20px;
+	height: 60px;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
 }
 
 .landing-login-button {
-  border: 5px solid #6C63FF;
-  padding: 1em;
-  background-color: white;
-  border-radius: 20px;
-  width: 200px;
-  font-size: 20px;
-  color: #6C63FF;
+	border: 5px solid #6c63ff;
+	padding: 1em;
+	background-color: white;
+	border-radius: 20px;
+	width: 200px;
+	font-size: 20px;
+	color: #6c63ff;
+	cursor: pointer;
 }
 
 .landing-register-button {
-  border: 5px solid #6C63FF;
-  padding: 1em;
-  background-color: #6C63FF;
-  border-radius: 20px;
-  width: 200px;
-  font-size: 20px;
-  color: white;
-  text-align: center;
+	border: 5px solid #6c63ff;
+	padding: 1em;
+	background-color: #6c63ff;
+	border-radius: 20px;
+	width: 200px;
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	cursor: pointer;
 }
 
 /* Navbar Media Queries */
 @media screen and (max-width: 650px) {
-  header {
-    flex-direction: column;
-    align-items: center;
-  }
-  .button-container {
-    flex-direction: column;
-    align-items: center;
-    margin-right: 0px;
-  }
+	header {
+		flex-direction: column;
+		align-items: center;
+	}
+	.button-container {
+		flex-direction: column;
+		align-items: center;
+		margin-right: 0px;
+	}
 
-  .genesis-text {
-    margin-left: 0px;
-  }
-
+	.genesis-text {
+		margin-left: 0px;
+	}
 }
-
 
 /* Landing Page Content */
 .page-container {
-  width: 1200px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 60px;
+	width: 1200px;
+	margin: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 60px;
 }
 
 .emphasis-text {
@@ -82,237 +80,230 @@ header {
   -webkit-text-fill-color: transparent;
 }
 
-
 .landing-item-container {
-  display: flex;
-  align-items: center;
-  margin: 100px 0px;
+	display: flex;
+	align-items: center;
+	margin: 100px 0px;
 }
 
 .landing-info {
-  width: 500px;
+	width: 500px;
 }
 
 img {
-  margin-left: auto;
+	margin-left: auto;
 }
 
 h2 {
-  font-size: 50px;
+	font-size: 50px;
 }
 
 p {
-  font-size: 20px;
+	font-size: 20px;
 }
-
+  
 .landing-transition-text {
   text-align: center;
   font-size: 36px;
-  
 }
 
 .landing-end {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  align-items: center;
-  margin: 200px 0px;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	align-items: center;
+	margin: 200px 0px;
 }
-
 
 /* Media Queries For Mobile Screens */
 @media screen and (max-width: 1300px) {
-  .page-container {
-    width: 95%;
-  }
-  h2 {
-    font-size: 40px;
-  }
-
+	.page-container {
+		width: 95%;
+	}
+	h2 {
+		font-size: 40px;
+	}
 }
-
 
 /* Media Queries For Mobile Screens */
 @media screen and (max-width: 1000px) {
-  .page-container {
-    margin: auto;
-    text-align: center;
-    gap: 30px;
-    width: 100%;
-  }
-  .landing-item-container {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-  }
-  img {
-    width: 100px;
-    height: 200px;
-  }
+	.page-container {
+		margin: auto;
+		text-align: center;
+		gap: 30px;
+		width: 100%;
+	}
+	.landing-item-container {
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+	}
+	img {
+		width: 100px;
+		height: 200px;
+	}
 
-  .landing-info {
-    width: 100%;
-  }
-  .page-container {
-    width: 90%;
-  }
+	.landing-info {
+		width: 100%;
+	}
+	.page-container {
+		width: 90%;
+	}
 
-  .project-collaboration-image {
-    width: 598px;
-    height: 560px;
-    margin: 0px;
-  }
+	.project-collaboration-image {
+		width: 598px;
+		height: 560px;
+		margin: 0px;
+	}
 
-  .project-management-image {
-    width: 530px;
-    height: 530px;
-    margin: 20px 0px 0px 0px;
-  }
-  
-  .project-ideation-image {
-    width: 584px;
-    height: 510px;
-    margin: 30px 0px 0px 0px;
-  }
+	.project-management-image {
+		width: 530px;
+		height: 530px;
+		margin: 20px 0px 0px 0px;
+	}
 
-  .community-image {
-    width: 588px;
-    height: 530px;
-    margin: 30px 0px 0px 0px;
-  }
+	.project-ideation-image {
+		width: 584px;
+		height: 510px;
+		margin: 30px 0px 0px 0px;
+	}
 
-  .landing-item-container {
-    margin: 50px 0px;
-  }
+	.community-image {
+		width: 588px;
+		height: 530px;
+		margin: 30px 0px 0px 0px;
+	}
+
+	.landing-item-container {
+		margin: 50px 0px;
+	}
 }
 
 @media screen and (max-width: 750px) {
-  .page-container {
-    margin: auto;
-    text-align: center;
-    gap: 30px;
-    width: 100%;
-  }
-  .landing-item-container {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-  }
-  img {
-    width: 100px;
-    height: 200px;
-  }
-  h2 {
-    font-size: 23px;
-  }
-  p {
-    font-size: 20px;
-  }
-  h3 {
-    font-size: 23px;
-    text-align: start;
-    text-align: center;
-  }
+	.page-container {
+		margin: auto;
+		text-align: center;
+		gap: 30px;
+		width: 100%;
+	}
+	.landing-item-container {
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+	}
+	img {
+		width: 100px;
+		height: 200px;
+	}
+	h2 {
+		font-size: 23px;
+	}
+	p {
+		font-size: 20px;
+	}
+	h3 {
+		font-size: 23px;
+		text-align: start;
+		text-align: center;
+	}
 
+	.landing-info {
+		width: 100%;
+	}
+	.page-container {
+		width: 90%;
+	}
 
-  .landing-info {
-    width: 100%;
-  }
-  .page-container {
-    width: 90%;
-  }
+	.project-collaboration-image {
+		width: 398px;
+		height: 360px;
+		margin: 0px;
+	}
 
-  .project-collaboration-image {
-    width: 398px;
-    height: 360px;
-    margin: 0px;
-  }
+	.project-management-image {
+		width: 330px;
+		height: 330px;
+		margin: 20px 0px 0px 0px;
+	}
 
-  .project-management-image {
-    width: 330px;
-    height: 330px;
-    margin: 20px 0px 0px 0px;
-  }
-  
-  .project-ideation-image {
-    width: 384px;
-    height: 310px;
-    margin: 30px 0px 0px 0px;
-  }
+	.project-ideation-image {
+		width: 384px;
+		height: 310px;
+		margin: 30px 0px 0px 0px;
+	}
 
-  .community-image {
-    width: 388px;
-    height: 330px;
-    margin: 30px 0px 0px 0px;
-  }
+	.community-image {
+		width: 388px;
+		height: 330px;
+		margin: 30px 0px 0px 0px;
+	}
 
-  .landing-item-container {
-    margin: 50px 0px;
-  }
+	.landing-item-container {
+		margin: 50px 0px;
+	}
 }
 
 /* Media Queries For Mobile Screens */
 @media screen and (max-width: 500px) {
-  .page-container {
-    margin: auto;
-    text-align: center;
-    gap: 30px;
-    width: 100%;
-  }
-  .landing-item-container {
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-  }
-  img {
-    width: 100px;
-    height: 200px;
-  }
-  h2 {
-    font-size: 20px;
-  }
-  p {
-    font-size: 16px;
-  }
-  h3 {
-    font-size: 20px;
-    text-align: start;
-    text-align: center;
-  }
+	.page-container {
+		margin: auto;
+		text-align: center;
+		gap: 30px;
+		width: 100%;
+	}
+	.landing-item-container {
+		width: 100%;
+		flex-direction: column;
+		align-items: center;
+	}
+	img {
+		width: 100px;
+		height: 200px;
+	}
+	h2 {
+		font-size: 20px;
+	}
+	p {
+		font-size: 16px;
+	}
+	h3 {
+		font-size: 20px;
+		text-align: start;
+		text-align: center;
+	}
 
+	.landing-info {
+		width: 100%;
+	}
+	.page-container {
+		width: 90%;
+	}
 
-  .landing-info {
-    width: 100%;
-  }
-  .page-container {
-    width: 90%;
-  }
+	.project-collaboration-image {
+		width: 288px;
+		height: 250px;
+		margin: 0px;
+	}
 
-  .project-collaboration-image {
-    width: 288px;
-    height: 250px;
-    margin: 0px;
-  }
+	.project-management-image {
+		width: 230px;
+		height: 230px;
+		margin: 20px 0px 0px 0px;
+	}
 
-  .project-management-image {
-    width: 230px;
-    height: 230px;
-    margin: 20px 0px 0px 0px;
-  }
-  
-  .project-ideation-image {
-    width: 288px;
-    height: 240px;
-    margin: 30px 0px 0px 0px;
-  }
+	.project-ideation-image {
+		width: 288px;
+		height: 240px;
+		margin: 30px 0px 0px 0px;
+	}
 
-  .community-image {
-    width: 288px;
-    height: 230px;
-    margin: 30px 0px 0px 0px;
-  }
+	.community-image {
+		width: 288px;
+		height: 230px;
+		margin: 30px 0px 0px 0px;
+	}
 
-  .landing-item-container {
-    margin: 50px 0px;
-  }
+	.landing-item-container {
+		margin: 50px 0px;
+	}
 }
