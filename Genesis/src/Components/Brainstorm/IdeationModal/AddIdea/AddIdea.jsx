@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import './AddIdea.css';
+import "./AddIdea.css";
+import add_idea_graphic from "../../../../assets/png/add_idea.png"
 // Import main modal
 import IdeationModal from '../IdeationModal';
 
@@ -28,15 +29,21 @@ const AddIdea = ( {closeModal}) => {
 
     return (
         <>
-            <h2>Add a new project idea</h2>
-            <p>Enter the information below to add a new project to your list</p>
+        <div className="modal">
+            <div className="add-idea-content">
+                <div className="add-idea-info-container">
+                <h2>Add a new project idea</h2>
+                <p>Enter the information below to add a new project to your list</p>
             <input type="text" placeholder='Project Name' />
             <p>Enter your intended project features below</p>
-            <button onClick={addProjectIdea} >Finish</button>
-            <button onClick={closeModal}>Go Back</button>
-            <h2>Category</h2>
-            <select name="option" id="" placeholder="Choose a category">
+            <h2>Project Category:</h2>
+            <select name="option" id="add-idea-dropdown" placeholder="Choose a category">
                 <option value="Environment">Environment</option>
+                <option value="Environment">Technology</option>
+                <option value="Environment">Healthcare</option>
+                <option value="Environment">News</option>
+                <option value="Environment">Gaming</option>
+                <option value="Environment">Education</option>
             </select>
             {/* Add respective items heree */}
             <h2>Features list</h2>
@@ -48,7 +55,7 @@ const AddIdea = ( {closeModal}) => {
                 placeholder="Enter new feature"
                 className="new-feature-add"
                 />
-                <div className="modal-feature-container">
+                <div className="add-feature-buttons">
                     <button onClick={handleFeatureAdd}>Save</button>
                     <button onClick={() => setNewFeatureText('')}>Clear</button>
                 </div>
@@ -59,6 +66,18 @@ const AddIdea = ( {closeModal}) => {
                 <p key={index}>{index + 1}. {feature}</p>
                 ))}
             </>
+            <div className="add-feature-buttons">
+            <button onClick={addProjectIdea} >Finish</button>
+            <button onClick={closeModal}>Go Back</button>
+            </div>
+
+            </div>
+            
+            <img src={add_idea_graphic} alt="Add Idea Graphic" />
+        </div>
+        </div>
+
+
 
 
         </>
