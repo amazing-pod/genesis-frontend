@@ -2,6 +2,11 @@ import React from 'react';
 import './Header.css';
 import { Link } from 'react-router-dom';
 import profile_photo from "../../../assets/png/profile_photo.png"
+import {
+    NovuProvider,
+    PopoverNotificationCenter,
+    NotificationBell,
+} from '@novu/notification-center';
 
 const Header = () => {
     return (
@@ -12,7 +17,16 @@ const Header = () => {
                 <Link to="/brainstorm">Brainstorm</Link>
                 <Link to="/community">Community</Link>
             </div>
-            <img className="profile-icon" src={profile_photo} alt="User profile photo" />
+            <div className="header-item-container">
+                <NovuProvider subscriberId={'on-boarding-subscriber-id-123'} applicationIdentifier={'6shjFasFADUI'}>
+                    <PopoverNotificationCenter colorScheme={'light'}>
+                        {({ unseenCount }) => (
+                            <NotificationBell unseenCount={unseenCount} />
+                        )}
+                    </PopoverNotificationCenter>
+                </NovuProvider>
+                <img className="profile-icon" src={profile_photo} alt="User profile photo" />
+            </div>            
         </header>
     </>
     );
