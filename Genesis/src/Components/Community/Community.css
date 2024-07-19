@@ -1,0 +1,20 @@
+.community-page-container {
+    width:90%;
+    margin: auto;
+}
+
+.community-page-container > h3 {
+    text-align: start;
+    font-weight: normal;
+}
+
+
+.user-profile-photo {
+    height: 50px;
+    width: 50px;
+}
+
+.forum-user-profile {
+    display: flex;
+    align-items: center;
+}
