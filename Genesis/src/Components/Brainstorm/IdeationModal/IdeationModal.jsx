@@ -25,7 +25,7 @@ const IdeationModal = ({ closeModal }) => {
                 return (
                     <>
                         <div className="ideation-modal-header">
-                            <span className="ideation-user-welcome">Welcome, <b>Username</b></span>
+                            <span className="ideation-user-welcome">Welcome, <b>Username</b>.</span>
                             <img src={close_icon} alt="close icon" onClick={closeModal} />
                         </div>
                         <hr />
