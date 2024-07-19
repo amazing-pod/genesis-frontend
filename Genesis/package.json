@@ -14,6 +14,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.16.1",
+    "@novu/notification-center": "^2.0.0-canary.0",
     "@supabase/supabase-js": "^2.44.4",
     "axios": "^1.7.2",
     "react": "^18.3.1",
