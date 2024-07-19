@@ -1,0 +1,95 @@
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* semi-transparent black background */
+    overflow: auto;
+}
+
+/* Modal Container (holds all modal items) */
+.ideation-modal-content {
+    width: 965px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe; /* white background */
+    padding: 2em;
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* shadow effect */
+    text-align: center; /* center content inside modal */
+}
+
+.ideation-modal-content > img {
+    width: 700px;
+    height: 454.95;
+    margin: 20px auto;
+}
+
+.ideation-modal-content > p {
+    font-size: 26px;
+}
+
+/* Header Styling */
+.ideation-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ideation-modal-header > img {
+    margin: none;
+    height: 60px;
+    width: 60px;
+}
+
+
+.ideation-user-welcome {
+    font-size: 40px;
+}
+
+.ideation-button-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.ideation-button-container > button {
+    margin: 20px 0px;
+    padding: 1em;
+    font-size: 20px;
+    max-width: 30%;
+    color: #6C63FF;
+    outline: 1px solid #6C63FF;
+    border: none;
+    background-color: transparent;
+    border-radius: 10px;
+
+}
+
+
+
+
+
+
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 90%;
+        }
+    }
+    
+    @media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+    }
+    }
+    
