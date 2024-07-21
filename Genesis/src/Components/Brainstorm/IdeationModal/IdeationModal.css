@@ -15,6 +15,7 @@
 /* Modal Container (holds all modal items) */
 .ideation-modal-content {
     width: 965px;
+    height: 880px;
     gap: 15px;
     display: flex;
     flex-direction: column;

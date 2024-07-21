@@ -1,6 +1,7 @@
 /* Modal Container (holds all modal items) */
 .add-idea-content {
     width: 965px;
+    height: 880px;
     gap: 15px;
     display: flex;
     background-color: #fefefe; /* white background */
@@ -27,6 +28,14 @@
 
 #add-idea-dropdown {
     width: 250px;
+    background-color: #6C63FF;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    padding: 0px 0px 0px 20px;
+    color: white;
+    border-radius: 10px;
+    
 }
 
 

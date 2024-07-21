@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import "./AddIdea.css";
 import add_idea_graphic from "../../../../assets/png/add_idea.png"
+import dropdown_icon from "../../../../assets/png/dropdown_icon.png"
 // Import main modal
 import IdeationModal from '../IdeationModal';
 
@@ -47,7 +48,7 @@ const AddIdea = ( {closeModal}) => {
                 <option value="Environment">Education</option>
             </select>
             {/* Add respective items heree */}
-            <h2>Features list</h2>
+            <h2>Add New Features:</h2>
             <div className="add-item-container">
                 <input
                 type="text"
@@ -62,7 +63,7 @@ const AddIdea = ( {closeModal}) => {
                 </div>
                 </div>
                 <>
-                
+                <h2>My Features</h2>
                 {editedFeatures.map((feature, index) => (
                 <p key={index}>{index + 1}. {feature}</p>
                 ))}
