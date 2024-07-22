@@ -15,6 +15,10 @@ export default function RootLayout() {
 			routerReplace={(to) => navigate(to, { replace: true })}
 			publishableKey={PUBLISHABLE_KEY}
 			afterSignOutUrl="/"
+			signInForceRedirectUrl="/home"
+			signUpForceRedirectUrl="/home"
+			signInUrl="/login"
+			signUpUrl="/register"
 		>
 			<main>
 				<Outlet />
