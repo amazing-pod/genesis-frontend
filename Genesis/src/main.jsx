@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Landing from "./components/Landing/Landing.jsx";
-import Login from "./components/Login/Login.jsx";
-import Register from "./components/Register/Register.jsx";
-import Home from "./components/Home/Home.jsx";
-import Community from "./components/Community/Community.jsx";
-import Brainstorm from "./components/Brainstorm/Brainstorm.jsx";
+import Landing from "./Components/Landing/Landing.jsx";
+import Login from "./Components/Login/Login.jsx";
+import Register from "./Components/Register/Register.jsx";
+import Home from "./Components/Home/Home.jsx";
+import Community from "./Components/Community/Community.jsx";
+import Brainstorm from "./Components/Brainstorm/Brainstorm.jsx";
 import ProtectedLayout from "./layouts/ProtectedLayout.jsx";
 import RootLayout from "./layouts/RootLayout.jsx";
 
