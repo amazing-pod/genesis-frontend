@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './IdeationProject.css';
-import logo from "../../../../assets/png/close.png"
+import help_icon from "../../../../assets/png/help_icon.png"
+import generate_projects_image from "../../../../assets/png/generate_projects.png"
+
+
 // Import main modal
 import IdeationModal from '../IdeationModal';
 
@@ -22,9 +25,9 @@ const IdeationProject = ( {closeModal}) => {
                 return (
                     <>
                         <h2>Create Project Ideas</h2>
+                        <hr />
                         <p>To generate project ideas, complete the following steps below:</p>
-                        <p>Step 0: Generate ideation project works!</p>
-                        <h2>Choose a category</h2>
+                        <p>1. Choose a category</p>
                         <select name="option" id="add-idea-dropdown" placeholder="Choose a category">
                             <option value="Environment">Environment</option>
                             <option value="Environment">Technology</option>
@@ -33,7 +36,7 @@ const IdeationProject = ( {closeModal}) => {
                             <option value="Environment">Gaming</option>
                             <option value="Environment">Education</option>
                         </select>
-                        <p>Based on your chosen category, describe any issues you would like your project to address</p>
+                        <p>2. Based on your chosen category, describe any issues you would like your project to address</p>
 
                         {/* Take user to main modal */}
                         <button onClick={addStep}>Proceed</button>

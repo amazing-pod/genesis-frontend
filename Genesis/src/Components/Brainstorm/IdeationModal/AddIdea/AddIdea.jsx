@@ -35,7 +35,9 @@ const AddIdea = ( {closeModal}) => {
             <div className="add-idea-content">
                 <div className="add-idea-info-container">
                 <h2>Add a new project idea</h2>
+                <hr />
                 <p>Enter the information below to add a new project to your list</p>
+            <h2>Title:</h2>
             <input type="text" placeholder='Project Name' />
             <p>Enter your intended project features below</p>
             <h2>Project Category:</h2>
@@ -48,7 +50,12 @@ const AddIdea = ( {closeModal}) => {
                 <option value="Environment">Education</option>
             </select>
             {/* Add respective items heree */}
-            <h2>Add New Features:</h2>
+            <h2>Project Features:</h2>
+            {/* List of Project Features */}
+            {editedFeatures.map((feature, index) => (
+            <p key={index}>{index + 1}. {feature}</p>
+            ))}
+            {/* Add a new project feature */}
             <div className="add-item-container">
                 <input
                 type="text"
@@ -63,10 +70,6 @@ const AddIdea = ( {closeModal}) => {
                 </div>
                 </div>
                 <>
-                <h2>My Features</h2>
-                {editedFeatures.map((feature, index) => (
-                <p key={index}>{index + 1}. {feature}</p>
-                ))}
             </>
             <div className="add-feature-buttons">
             <button onClick={addProjectIdea} >Finish</button>
