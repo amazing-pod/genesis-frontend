@@ -3,16 +3,16 @@ import './UserProfile.css';
 import profile_photo from "../../../assets/png/profile_photo.png";
 
 const ImgUpload = ({ onChange, src }) => (
-  <label htmlFor="photo-upload" className="custom-file-upload fas">
-    <div className="img-wrap img-upload">
-      <img htmlFor="photo-upload" src={src} alt="User" />
+  <div className="custom-file-upload fas">
+    <div className="img-wrap img-upload" onClick={() => document.getElementById('photo-upload').click()}>
+      <img src={src} alt="User" />
     </div>
-    <input id="photo-upload" type="file" onChange={onChange} />
-  </label>
+    <input id="photo-upload" type="file" onChange={onChange} style={{ display: 'none' }} />
+  </div>
 );
 
 const Name = ({ onChange, value }) => (
-  <div className="field">
+  <div className="user-info-field">
     <label htmlFor="name">Name:</label>
     <input
       id="name"
@@ -27,7 +27,7 @@ const Name = ({ onChange, value }) => (
 );
 
 const Bio = ({ onChange, value }) => (
-  <div className="field">
+  <div className="user-info-field">
     <label htmlFor="bio">Bio:</label>
     <input
       id="bio"
@@ -42,14 +42,14 @@ const Bio = ({ onChange, value }) => (
 );
 
 const Profile = ({ onSubmit, src, name, bio }) => (
-  <div className="card">
-    <form onSubmit={onSubmit}>
-      <h1>Profile Card</h1>
-      <label className="custom-file-upload fas">
+  <div className="user-profile-card">
+    <form className='user-profile-form' onSubmit={onSubmit}>
+      <h2>Profile Card</h2>
+      <div className="custom-file-upload fas">
         <div className="img-wrap">
-          <img htmlFor="photo-upload" src={src} alt="User" />
+          <img src={src} alt="User" />
         </div>
-      </label>
+      </div>
       <div className="name">{name}</div>
       <div className="bio">{bio}</div>
       <button type="submit" className="edit">Edit Profile</button>
@@ -58,11 +58,11 @@ const Profile = ({ onSubmit, src, name, bio }) => (
 );
 
 const Edit = ({ onSubmit, children }) => (
-  <div className="card">
+  <div className="user-profile-card">
     <form onSubmit={onSubmit}>
-      <h1>Edit Profile</h1>
-      {children}
-      <button type="submit" className="save">Save</button>
+      <h2>Edit Profile</h2>
+      <p> {children} </p>
+      <button type="submit" className="save-user-profile">Save</button>
     </form>
   </div>
 );
@@ -95,26 +95,24 @@ const UserProfile = () => {
   };
 
   return (
-    <>
     <div className="user-profile-page-container">
-    <div className='user-profile-page'>
-      {active === 'edit' ? (
-        <Edit onSubmit={handleSubmit}>
-          <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />
-          <Name onChange={editName} value={name} />
-          <Bio onChange={editBio} value={bio} />
-        </Edit>
-      ) : (
-        <Profile
-          onSubmit={handleSubmit}
-          src={imagePreviewUrl}
-          name={name}
-          bio={bio}
-        />
-      )}
+      <div className='user-profile-page'>
+        {active === 'edit' ? (
+          <Edit onSubmit={handleSubmit}>
+            <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />
+            <Name onChange={editName} value={name} />
+            <Bio onChange={editBio} value={bio} />
+          </Edit>
+        ) : (
+          <Profile
+            onSubmit={handleSubmit}
+            src={imagePreviewUrl}
+            name={name}
+            bio={bio}
+          />
+        )}
+      </div>
     </div>
-    </div>
-    </>
   );
 };
 
