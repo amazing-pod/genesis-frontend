@@ -139,3 +139,32 @@ span > p {
 .ideation-project-all-results:hover {
     outline: 2px solid #6C63FF;
 }
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-container .tooltip-text {
+    visibility: hidden;
+    width: 250px; /* Adjust width as needed */
+    background-color: #f9f9f9; /* Light background for the text box */
+    color: #333; /* Dark text color for readability */
+    text-align: left;
+    border: 1px solid #ccc; /* Light border around the text box */
+    border-radius: 4px; /* Rounded corners */
+    padding: 10px; /* Space inside the text box */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position above the icon */
+    left: 50%;
+    margin-left: -125px; /* Center the text box */
+    opacity: 0;
+    transition: opacity 0.3s;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.tooltip-container:hover .tooltip-text,
+.tooltip-container .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}

@@ -13,7 +13,8 @@ const IdeationProject = ( {closeModal}) => {
     const [step, setStep] = useState(0);
     const [newFeatureText, setNewFeatureText] = useState('');
     const [editedFeatures, setEditedFeatures] = useState([]);
-
+    const [icons, setIcons] = useState({});
+    const [showTooltip, setShowTooltip] = useState(false);
 
     const ideationProjectDummyData = [
         {
@@ -66,7 +67,12 @@ const IdeationProject = ( {closeModal}) => {
         setStep(step - 1);
     }
 
-    
+    const handleIconClick = (id) => {
+        setIcons((prevIcons) => ({
+            ...prevIcons,
+            [id]: prevIcons[id] === add_inactive_icon ? add_active_icon : add_inactive_icon,
+        }));
+    };
 
     const renderModalContent = () => {
         switch (step) {
@@ -81,10 +87,17 @@ const IdeationProject = ( {closeModal}) => {
                         <span><p>1.</p><Dropdown dropdownOptions={['Education', 'Environment', 'Healthcare', 'News',  'Technology',]}/></span>
                         <span>
                         <p>2. Based on your chosen category, describe any issues you would like your project to address</p>
-                        <img src={help_icon} alt="help icon" />
-
                         </span>
-                    
+                        <div 
+                        className="tooltip-container"
+                        onMouseEnter={() => setShowTooltip(true)}
+                     onMouseLeave={() => setShowTooltip(false)}
+                         >
+                        <img src={help_icon} alt="help icon" />
+                         {showTooltip && (
+                             <div className="tooltip-text">Struggling? Think and research any issues you observe within your local, school or other personal communities</div>
+                            )}
+                         </div>
                 {/* Add respective items here */}
                 <h2>Issues:</h2>
                 {editedFeatures.map((feature, index) => (
@@ -137,7 +150,12 @@ const IdeationProject = ( {closeModal}) => {
                             <h2>{index+1}. {feature.name}</h2>
                             <p>{feature.description}</p>
                             </div>
-                            <img src={add_inactive_icon} alt="add-inactive-icon" />      
+                            <img 
+                           src={icons[feature.id] || add_inactive_icon} 
+                           alt="add-inactive-icon" 
+                           onClick={() => handleIconClick(feature.id)} 
+                           style={{ cursor: 'pointer' }} /> 
+                                 
                         </div>
                         </>
                         ))}

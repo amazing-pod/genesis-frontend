@@ -141,3 +141,9 @@
 .add-feature-buttons > button {
     width: 100px;
 }
+
+.error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
