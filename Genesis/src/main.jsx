@@ -10,6 +10,8 @@ import Community from "./Components/Community/Community.jsx";
 import Brainstorm from "./Components/Brainstorm/Brainstorm.jsx";
 import ProtectedLayout from "./layouts/ProtectedLayout.jsx";
 import RootLayout from "./layouts/RootLayout.jsx";
+import UserProfile from "./Components/Shared/UserProfile/UserProfile.jsx";
+import PostDetails from "./Components/Community/ForumPost/PostDetails.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -28,7 +30,9 @@ const router = createBrowserRouter([
 				element: <ProtectedLayout />,
 				children: [
 					{ path: "/home", element: <Home /> },
+					{ path: "/user-profile", element: <UserProfile /> },
 					{ path: "/community", element: <Community /> },
+					{ path: "/community/post/:id", element: <PostDetails /> },
 					{ path: "/brainstorm", element: <Brainstorm /> },
 				],
 			},

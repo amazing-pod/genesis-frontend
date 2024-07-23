@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./PostDetails.css";
 import upvote_inactive_icon from "../../../assets/png/upvote_inactive.png";
