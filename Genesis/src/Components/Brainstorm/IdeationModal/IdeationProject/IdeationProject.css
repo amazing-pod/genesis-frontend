@@ -1,0 +1,141 @@
+.ideation-project-modal-container {
+    width: 965px;
+    height: 850px;
+    gap: 15px;
+    display: flex;
+    background-color: #fefefe;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);    
+}
+
+.generate-projects-image {
+    width: 455px;
+    height: 576px;
+    margin: auto;
+}
+
+.ideation-project-user-info {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.ideation-project-user-info > h2 {
+    font-size: 40px;
+}
+
+.project-ideation-button-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    height: 100%;
+}
+
+.project-ideation-button-container > button {
+    width: 200px;
+    padding: 0.5em;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.generate {
+    background-color: #6C63FF;
+    color: white;
+    border: 2px solid #6C63FF;
+    margin-right: auto;
+    margin: 0px;
+    height: 50px;
+}
+
+.backtrack {
+    background-color: white;
+    color: #6C63FF;
+    border: 2px solid #6C63FF;
+    margin-left: auto;
+    margin: 0px;
+    height: 50px;
+}
+
+.ideation-project-user-info > p {
+    margin: 15px 0px;
+}
+
+.category-choice {
+    margin-bottom: 30px;
+}
+
+span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+span > p {
+    font-size: 20px;
+}
+
+
+.add-project-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+}
+.add-project-buttons > button {
+    font-size: 20px;
+    width: 70px;
+    color: #6C63FF;
+    background-color: transparent;
+    border: 1px solid #6C63FF;
+    border-radius: 10px;
+    padding: 0.5em;
+
+}
+
+
+.add-project-buttons > button:hover {
+    font-size: 20px;
+    width: 70px;
+    color: white;
+    background-color: #6C63FF;
+    border: 1px solid #6C63FF;
+    border-radius: 10px;
+    padding: 0.5em;
+
+}
+
+
+
+.add-item-container > textarea {
+    height: 100%;
+    max-height: 100%;
+    resize: none;
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-size: 16px;
+
+}
+
+.add-item-container > textarea:hover {
+    outline: 2px solid #6C63FF;
+}
+
+
+.ideation-project-results {
+    display: flex;
+    flex-direction: column;
+}
+
+.ideation-project-all-results {
+    height: 2700px;
+    overflow: scroll;
+    padding: 1em;
+}
+
+
+.ideation-project-all-results:hover {
+    outline: 2px solid #6C63FF;
+}

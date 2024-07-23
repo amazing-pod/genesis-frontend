@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import "./AddIdea.css";
 import add_idea_graphic from "../../../../assets/png/add_idea.png"
-// Import main modal
+// Import relevant modals
 import IdeationModal from '../IdeationModal';
+import Dropdown from "../../../Shared/Dropdown/Dropdown";
 
 
 const AddIdea = ( {closeModal}) => {
@@ -11,7 +12,6 @@ const AddIdea = ( {closeModal}) => {
 
 
     const addProjectIdea = () => {
-        // Update database here, before modal closes.
         closeModal();
     }
 
@@ -20,7 +20,7 @@ const AddIdea = ( {closeModal}) => {
         if (newFeatureText.trim() !== '') {
         const updatedFeatures = [...editedFeatures, newFeatureText];
         setEditedFeatures(updatedFeatures);
-          setNewFeatureText(''); // Clear the input after adding
+            setNewFeatureText('');
         }
     };
 
@@ -30,56 +30,46 @@ const AddIdea = ( {closeModal}) => {
 
     return (
         <>
-        <div className="modal">
-            <div className="add-idea-content">
-                <div className="add-idea-info-container">
+        <>
+        <div className="ideation-add-project">
+            <div className="ideation-feature-user-info">
                 <h2>Add a new project idea</h2>
                 <p>Enter the information below to add a new project to your list</p>
-            <input type="text" placeholder='Project Name' />
-            <p>Enter your intended project features below</p>
-            <h2>Project Category:</h2>
-            <select name="option" id="add-idea-dropdown" placeholder="Choose a category">
-                <option value="Environment">Environment</option>
-                <option value="Environment">Technology</option>
-                <option value="Environment">Healthcare</option>
-                <option value="Environment">News</option>
-                <option value="Environment">Gaming</option>
-                <option value="Environment">Education</option>
-            </select>
-            {/* Add respective items heree */}
-            <h2>Features list</h2>
-            <div className="add-item-container">
-                <input
-                type="text"
-                value={newFeatureText}
-                onChange={handleNewFeatureChange}
-                placeholder="Enter new feature"
-                className="new-feature-add"
-                />
-                <div className="add-feature-buttons">
-                    <button onClick={handleFeatureAdd}>Save</button>
-                    <button onClick={() => setNewFeatureText('')}>Clear</button>
-                </div>
-                </div>
-                <>
-                
+                {/* Add respective items here */}
+                <h2>Project Name:</h2>
+                <input type="text" placeholder='Project Title...'/>
+                <h2>Features:</h2>
                 {editedFeatures.map((feature, index) => (
-                <p key={index}>{index + 1}. {feature}</p>
+                    <p key={index}>{index + 1}. {feature}</p>
                 ))}
-            </>
-            <div className="add-feature-buttons">
-            <button onClick={addProjectIdea} >Finish</button>
-            <button onClick={closeModal}>Go Back</button>
-            </div>
+                <div className="add-item-container">
+                    {/* <textarea name="" id=""></textarea> */}
+                    <textarea
+                    type="text"
+                    value={newFeatureText}
+                    onChange={handleNewFeatureChange}
+                    placeholder="Enter new issue"
+                    className="user-idea-info"
+                    >
+                    </textarea>
+                    <div className="add-project-buttons">
+                        <button onClick={handleFeatureAdd}>Save</button>
+                        <button onClick={() => setNewFeatureText('')}>Clear</button>
+                    </div>
 
-            </div>
-            
-            <img src={add_idea_graphic} alt="Add Idea Graphic" />
-        </div>
-        </div>
+                    </div>
+                    {/* Take user to main modal */}
+                    <div className="project-ideation-button-container">
+                        <button className="generate" onClick={closeModal}>Finish</button>
+                        <button className="backtrack" onClick={closeModal}>Go Back</button>
+                    </div>
+                </div>
 
-
-
+                <>
+                </>
+                <img className="add-ideas-image" src={add_idea_graphic} alt="Project Ideation Image" />                
+                </div>
+                </>                
 
         </>
     );

@@ -1,0 +1,143 @@
+.ideation-feature-modal-container {
+    width: 965px;
+    height: 850px;
+    gap: 15px;
+    display: flex;
+    background-color: white;
+    padding: 2em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);    
+}
+
+.ideation-feature-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    width: 50%;
+}
+
+/* Title (Add New Features) */
+.ideation-feature-user-info > h2 {
+    font-weight: 400;
+    font-size: 40px;
+    margin: 5px 0px 15px 0px;
+}
+
+.ideation-feature-user-info > h3 {
+    font-weight: 400;
+    font-size: 30px;
+    margin: 5px 0px 15px 0px;
+}
+
+/* hr { 
+    border: 1px solid #C0C0C0;
+} */
+
+.generate-features-image {
+    width: 460px;
+    height: 483px;
+    margin: auto;
+}
+
+
+.ideation-feature-user-info > textarea {
+    padding: 10px;
+    font-size: 20px;
+    flex: 1;
+    max-width: 100%;
+    width: 100%;
+    resize: none;
+    border: none;
+    outline: 2px solid #C0C0C0;
+    border-radius: 10px;
+    box-sizing: border-box; 
+}
+
+.user-idea-feature-info {
+    padding: 1em;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 2px solid #C0C0C0;
+
+}
+
+.user-idea-feature-info:focus {
+    border: 2px solid #6C63FF;
+    outline: none;
+
+}
+
+.ideation-feature-user-info > input:focus, .ideation-feature-user-info > input:hover {
+    outline: 2px solid #6C63FF;
+}
+
+.ideation-feature-user-info > textarea:focus, .ideation-feature-user-info > textarea:hover {
+    outline: 2px solid #6C63FF;
+}
+
+.ideation-feature-button-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-end;
+    margin-top: auto;
+}
+
+.ideation-feature-button-container > button {
+    width: 200px;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+
+
+
+/* Step 2 CSS */
+.ideation-results-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.ideation-result-title {
+    margin-right: auto;
+}
+
+.ideation-result-title > h2 {
+    font-size: 26px;
+    margin: 15px 0px 0px 0px;
+}
+
+
+.ideation-result-container {
+    display: flex;
+}
+
+.ideation-feature-result {
+    display: flex;
+    align-items: center;
+}
+
+.ideation-feature-info > h2 {
+    font-size: 30px;
+}
+
+.ideation-feature-result > img {
+    height: 50px;
+    width: 50px;
+}
+
+.user-added-features {
+    max-height: 750px;
+    overflow: scroll;
+}
+
+
+
+.add-feature-buttons {
+    display: flex;
+    flex-direction: column !important;
+}
+
+.add-feature-buttons > button {
+    width: 100px;
+}

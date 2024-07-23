@@ -1,13 +1,38 @@
 /* Modal Container (holds all modal items) */
-.add-idea-content {
+.ideation-add-project {
     width: 965px;
+    height: 850px;
     gap: 15px;
     display: flex;
-    background-color: #fefefe; /* white background */
+    /* flex-direction: column; */
+    background-color: #fefefe;
     padding: 2em;
     border: 1px solid #888;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* shadow effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ideation-feature-user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    height: 100%;
+    width: 50%;
+}
+
+
+.add-idea-container {
+    display: flex;
+}
+/* .add-idea-content {
+    width: 965px;
+    gap: 15px;
+    display: flex;
+    background-color: #fefefe;
+    padding: 2em;
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     justify-content: flex-start;
     text-align: start;
     gap: 60px;
@@ -21,8 +46,12 @@
 
 
 .add-idea-info-container > h2 {
-    font-size: 30px;
+    font-size: 40p;
     width: 450px;
+}
+
+.add-idea-info-container > h3 {
+    font-size: 30px;
 }
 
 #add-idea-dropdown {
@@ -30,36 +59,41 @@
 }
 
 
-.add-feature-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
-}
-
-.add-feature-buttons > button, .add-feature-buttons > button {
-    padding: 1em;
-    width: 120px;
-    font-size: 20px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #6C63FF;
-    border: 1px solid #6C63FF;
-    background-color: transparent;
-    border-radius: 10px;
-
-}
-
-.add-feature-buttons {
-    display: flex;
-    justify-content: flex-start;
-}
-
 .add-item-container {
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 50px;
 }
 
+
+/* Input Modifications */
+.user-idea-info {
+    width: 450px;
+}
+
+.add-item-container > input {
+    width: 450px;
+}
+
+/* Button styling */
+.add-feature-buttons {
+    padding: 1em;
+    display: flex;
+    gap: 30px;
+    flex-direction: row;
+}
+
+.add-feature-buttons > button {
+    width: 200px;
+    font-size: 20px;
+    padding: 0.5em;
+    border-radius: 10px;
+    border: 2px solid #6C63FF;
+    background-color: white;
+}
+
+.add-ideas-image {
+    width: 400px;
+    height: 400px;
+    margin: auto;
+}
