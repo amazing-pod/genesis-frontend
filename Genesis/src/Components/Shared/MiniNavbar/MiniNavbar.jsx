@@ -146,9 +146,7 @@ const MiniNavbar = () => {
       </div>
 
       {showCreatePost && (
-        <div className="create-post-container">
           <CreatePost />
-        </div>
       )}
 
       <div className="posts-container">

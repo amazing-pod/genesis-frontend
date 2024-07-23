@@ -19,13 +19,9 @@ const CreatePost = ({ onCreatePost }) => {
   };
 
   return (
-    <div className="create-post-container">
-      <h4>Create New Post</h4>
       <form className="create-post-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-        </div>
-        <div className="form-group">
-          <input
+        <div className="create-post-form-content">
+        <input
             type="text"
             name="title"
             placeholder="Title"
@@ -33,19 +29,20 @@ const CreatePost = ({ onCreatePost }) => {
             onChange={(e) => setTitle(e.target.value)}
             required
           />
-        </div>
-        <div className="form-group">
+          <hr />
           <textarea
             name="content"
-            placeholder="Content"
+            placeholder="Enter content here..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
           />
         </div>
-        <button type="submit" className="submit-button">Create Post</button>
+        <div className="create-post-footer">
+          <button type="submit" className="submit-button">Post</button>
+          <button className='cancel-button'>Cancel</button>
+      </div>
       </form>
-    </div>
   );
 };
 
