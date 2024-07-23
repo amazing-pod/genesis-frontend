@@ -6,13 +6,6 @@
     align-items: center;
 }
 
-/* 
-.post-items {
-    max-height: 1000px;
-    overflow: scroll;
-} */
-
-
 .post-details {
     max-width: 800px;
     margin: 0 auto;
@@ -47,6 +40,11 @@
 
 .post-user-profile > img {
     margin: 0px;
+}
+
+.post-user-profile > p {
+    font-size: 26px;
+    font-weight: bold;
 }
 
 
@@ -130,11 +128,6 @@
     font-size: 24px;
 }
 
-.post-details-content p {
-    font-size: 16px;
-    line-height: 1.5;
-    color: #333;
-}
 
 /* Post interactions section */
 .post-details-interactions {
@@ -157,23 +150,26 @@
 }
 
 /* Comments section styling */
-.comments-section {
-
-    padding: 1em;
-}
-
-.comments-section h5 {
-    margin-bottom: 10px;
-    font-size: 20px;
-    color: #333;
-}
 
 .comment {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
+    margin: 10px 0px;
+    flex-direction: column;
+}
+
+
+.user-comment-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-right: auto;
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+.user-comment-header > h3 {
+    margin: 10px auto;
+    font-size: 26px;
+    font-weight: bold;
 }
 
 .comment p {
@@ -196,8 +192,7 @@
 
 /* Comment form styling */
 .comment-form {
-    display: flex;
-    flex-direction: column;
+    width: 100%;
 }
 
 .comment-form textarea {
@@ -208,7 +203,9 @@
     border-radius: 4px;
     margin-bottom: 10px;
     font-size: 16px;
-    resize: vertical;
+    resize: none;
+    padding: 1em;
+    box-sizing: border-box;
 }
 
 .comment-form button {
@@ -220,6 +217,8 @@
     cursor: pointer;
     font-size: 16px;
     font-weight: bold;
+    width: 200px;
+    margin: auto;
 }
 
 .comment-form button:hover {

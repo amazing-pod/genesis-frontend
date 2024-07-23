@@ -60,17 +60,15 @@ const samplePosts = [
 ];
 
 const Community = () => {
-  return (
-      <>
-          <Header />
-          <div className="community-page-container">
-              <MiniNavbar />
-              
-              <hr />
-              
-          </div>
-      </>
-  );
+    return (
+    <>
+    <Header />
+    <div className="community-page-container">
+        <MiniNavbar />
+        <hr />
+    </div>
+    </>
+    );
 };
 
 export default Community;

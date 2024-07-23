@@ -34,16 +34,12 @@ const ForumPost = ({ post }) => {
             <div className="forum-content">
                 <h4>{post.title}</h4>
                 <p>{post.content}</p>
-
-                <div className="forum-post-interactions">
-                    <div className="likes" onClick={handleLikeClick}>
-                        <p>{likes}</p>
-                        <img className="forum-icon" src={liked ? upvote_active_icon : upvote_inactive_icon} alt="upvote status" />
-                    </div>
-                    <div className="messages">
-                        <p>{post.comments.length}</p>
-                        <img className="forum-icon" src={message_icon} alt="Message Icon" />
-                    </div>
+                {/* Post Interactions: Likes and Messages */}
+                <div className="post-interactions">
+                    <p>{likes}</p>
+                    <img onClick={handleLikeClick} className="forum-icon" src={liked ? upvote_active_icon : upvote_inactive_icon} alt="upvote status" />
+                    <p>{post.comments.length}</p>
+                    <img className="forum-icon" src={message_icon} alt="Message Icon" />
                 </div>
             </div>
         </div>
