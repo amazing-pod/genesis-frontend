@@ -1,19 +1,100 @@
 /* Container for the entire post details page */
-.post-details-container {
-    padding: 20px;
+.post-detail-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 
+.post-items {
+    max-height: 1000px;
+    overflow: scroll;
+} */
+
+
+.post-details {
     max-width: 800px;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1em;
+
 }
+
+.post-content {
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+}
+
+
+.post-details > h2, .post-content > h2 {
+    font-weight: 400;
+}
+
+.post-user-info {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+
+.post-user-profile {
+    display: flex;
+    gap: 20px;
+}
+
+
+.post-user-profile > img {
+    margin: 0px;
+}
+
+
+.post-details-interactions > p {
+    font-size: 26px;
+}
+
+
+.post-interactions {
+    display: flex;
+    font-size: 26px;
+    align-items: center;
+}
+
+.post-interactions > img {
+    margin-right: 10px;
+    height: 30px;
+    width: 30px;
+}
+
+.post-separator {
+    background-color: #F5F2F2;
+    height: 60px;
+    outline: 1px solid #C0C0C0;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.post-backtrack {
+    display: flex;
+    margin-right: auto;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.post-backtrack > h2 {
+    font-weight: 400;
+    font-size: 30px;
+}
+
 
 /* Back button icon */
 .back-icon {
-    width: 24px;
-    height: 24px;
+    height: 50px;
+    width: 50px;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin: 0px;
 }
 
 /* Header section styling */
@@ -77,7 +158,8 @@
 
 /* Comments section styling */
 .comments-section {
-    margin-top: 20px;
+
+    padding: 1em;
 }
 
 .comments-section h5 {

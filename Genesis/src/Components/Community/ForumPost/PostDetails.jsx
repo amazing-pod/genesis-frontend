@@ -5,7 +5,7 @@ import upvote_inactive_icon from "../../../assets/png/upvote_inactive.png";
 import upvote_active_icon from "../../../assets/png/upvote_active.png";
 import message_icon from "../../../assets/png/reply_icon.png";
 import delete_icon from "../../../assets/png/delete_icon.png";
-import back_icon from "../../../assets/png/back_icon.png";
+import back_icon from "../../../assets/png/backtrack_icon.png";
 
 const samplePosts = [
     {
@@ -97,35 +97,46 @@ const PostDetails = () => {
     };
 
     return (
-        <div className="post-details-container">
-            <img
-                src={back_icon}
-                alt="Back"
-                className="back-icon"
-                onClick={handleBackClick}
-            />
-            <div className="post-details-header">
-                <div className="forum-user-profile">
-                    <img className="user-profile-photo" src={post.userProfilePhoto} alt="User profile photo" />
-                    <p className="forum-post-username">{post.username}</p>
+    <div className="post-detail-container">
+        <div className="post-items">
+            {/* "Go back text", where a user returns back to the community page */}
+            <span className="post-backtrack">
+                <img src={back_icon} alt="Back" className="back-icon" onClick={handleBackClick}/>
+                <h2>Go Back</h2>
+            </span>
+        <div className="post-content">
+            <div className="post-details">
+                <h2>{post.title}</h2>
+                <hr />
+                {/* Post content */}
+                <div className="post-user-info">
+                    <div className="post-user-profile">
+                        <img src={post.userProfilePhoto} alt="user profile photo" />
+                        <p>{post.username}</p>
+                    </div>
+                    <p>{post.timeAgo}</p>
                 </div>
-                <p>{post.timeAgo}</p>
+            <p>{post.content}</p>
+            {/* Post Interactions: likes and comments */}
+            <div className="post-interactions">
+                <p>{likes}</p>
+                <img onClick={handleLikeClick} className="forum-icon" src={liked ? upvote_active_icon : upvote_inactive_icon} alt="upvote status" />
+                <p>{comments.length}</p>
+                <img className="forum-icon" src={message_icon} alt="Message Icon" />
+                </div>
             </div>
-            <div className="post-details-content">
-                <h4>{post.title}</h4>
-                <p>{post.content}</p>
+            {/* If the user made the post, put a delete button here */}
+            <div className="post-separator">
 
-                <div className="post-details-interactions">
-                    <div className="likes" onClick={handleLikeClick}>
-                        <p>{likes}</p>
-                        <img className="forum-icon" src={liked ? upvote_active_icon : upvote_inactive_icon} alt="upvote status" />
-                    </div>
-                    <div className="messages">
-                        <p>{comments.length}</p>
-                        <img className="forum-icon" src={message_icon} alt="Message Icon" />
-                    </div>
-                </div>
             </div>
+
+            <div className="post-details">
+            <h2>Discussion</h2>
+            <hr />
+
+            </div>
+
+
             <div className="comments-section">
                 <h5>Comments</h5>
                 {comments.map((comment) => (
@@ -151,7 +162,12 @@ const PostDetails = () => {
                     <button type="submit">Post Comment</button>
                 </form>
             </div>
+        
         </div>
+        </div>
+
+
+    </div>
     );
 };
 
