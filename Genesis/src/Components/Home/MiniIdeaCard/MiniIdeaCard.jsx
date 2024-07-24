@@ -10,7 +10,9 @@ const MiniIdeaCard = () => {
         </div>
         <div className="mini-idea-body">
             <h3>Project Name</h3>
-            <p>A simple password manager to help with...</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+              Fusce imperdiet tellus nec augue mattis, et interdum elit cursus. 
+            </p>
         </div>
     </div>
     </>

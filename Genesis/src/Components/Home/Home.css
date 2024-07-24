@@ -1,86 +1,101 @@
-.home-page-main-content-container {
-    width: -webkit-fill-available;
-    background-color: #F0F0F0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.home-page-container > p {
-    font-size: 26px;
-}
-
+.home-sidebar-container { grid-area: sidebar}
+.item2 { grid-area: main;}
 
 .home-page-container {
-    /* outline: 2px solid red; */
-    display: flex;
+    display: grid;
+    grid-template-areas:
+    'sidebar main'
+    'sidebar main'
+    'sidebar main';
+    grid-template-columns: 450px auto;
+    outline: 3px solid #2196F3;
 }
 
-.home-sidebar-container {
-    min-width: 450px;
-    /* outline: 2px solid purple; */
-    padding: 2em;
-    max-width: 30%;
-}
-
-.home-main-container {
+.home-page-container > div {
     background-color: white;
-    width: 90%;
-    border-radius: 10px;
-}
-
-.home-sidebar-container > h3, .home-main-container > h3 {
-    color: #FF6584;
+    /* outline: 1px solid blue; */
     font-size: 30px;
 }
 
-.home-sidebar-container > hr, .home-main-container > hr  {
-    border: 2px solid #FF6584;
+/* Mini Sidebar Container */
+.mini-idea-container {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    margin: 50px 0px;
 }
 
-.home-main-container > hr {
-    width: 300px;
-    margin: 16px;
+
+.home-page-container > .home-main-content-container {
+    background-color: #F0F0F0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
 }
 
-.home-main-container {
-    padding: 2em;
+.home-main-content {
+    padding: 1em;
+    margin: 1em;
+    background-color: white;
+    border-radius: 10px;
+    text-align: start;
+    width: 95%;
 }
 
-.home-main-container > h2 {
+.home-main-content > h2 {
     color: #FF6584;
     font-weight: 400;
 }
 
-.mini-idea-container {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    margin: 20px 0px;
+.home-main-content > h3, .home-sidebar-container > h3 {
+    color: #FF6584;
+    margin: 0px;
+    font-size: 36px;
 }
 
+.home-main-content > hr, .home-sidebar-container > hr {
+    border: 1px solid #FF6584;
+    width: 330px;
+}
+
+.home-main-content > p {
+    font-size: 30px;
+}
+
+.home-sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 0em;
+}
+
+/* Bookmarked Ideas Container */
 .bookmark-card-container {
     display: flex;
     gap: 50px;
     padding: 1em;
-    /* outline: 1px solid black; */
+    margin: 20px 0px 40px 0px;
     overflow: scroll;
-    margin: 20px 0px;
+    outline: 2px solid #FF6584;
+    border-radius: 10px;
 }
 
-.bookmark-card-container > * {
-    /* flex: 1 1 300px; Each item should have a flexible width of 300px */
+.bookmark-card-container > *, .bookmark-main-container > * {
     min-width: 450px;
     max-width: 450px;
 }
 
+.bookmark-main-container {
+    display: flex;
+    gap: 50px;
+}
+
+.home-main-content-container {
+    width: auto;
+}
+
 .recent-post-container {
-    padding: 1em;
+    margin-top: 30px;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    margin: 20px 0px;
-
-    /* outline: 1px solid black; */
 }

@@ -90,67 +90,60 @@ const Home = () => {
     },
   ];
 
-  const ideaHighlightsDummyData = [
-    {
-      
-    }
-  ]
 
   return (
     <>
       <Header />
       <div className="home-page-container">
-        {/* Sidebar Content */}
+        {/* Sidebar Items */}
         <div className="home-sidebar-container">
-          <h3>Idea Highilights</h3>
+          <h3>Idea Highlights</h3>
           <hr />
           <div className="mini-idea-container">
             <MiniIdeaCard/>
             <MiniIdeaCard/>
             <MiniIdeaCard/>
             <MiniIdeaCard/>
-          </div>
-
+          </div>      
         </div>
-        <div className="home-page-main-content-container">
-        <div className="home-main-container">
-          <h2>Good morning, Username.</h2>
-          <p>Here, you can find a quick summary of your bookmarked and standout-ideas, along
-          with the newest forum posts</p>
-
-          <h3>Bookmarked Ideas</h3>
-          <hr />
-
-          <div className="bookmark-card-container">
-          {ideaDummyData.map((idea) => (
-              <IdeaCard
-                key={idea.id}
-                id={idea.id}
-                title={idea.title}
-                description={idea.description}
-                projectFeatures={idea.projectFeatures}
-                dayGenerated={idea.dayGenerated}
-                impact={idea.impact}
-                feasibility={idea.feasibility}
-                difficulty={idea.difficulty}
-                category={idea.category}
-                bookmarked={idea.bookmarked}
-              />
-            ))}
+        
+        {/* Main Content */}
+        <div className="home-main-content-container">  
+          <div className="home-main-content">
+            <h2>Good morning, <b>Username</b>.</h2>
+            <p>Welcome back. Here, you can find a quick summary of your bookmarked and standout-ideas, 
+              while staying up to date with the newest forum posts</p>
+            <h3>Bookmarked Ideas</h3>
+            <hr />
+            <div className="bookmark-card-container">
+              <div className="bookmark-main-container">
+              {ideaDummyData.map((idea) => (
+                <IdeaCard
+                  key={idea.id}
+                  id={idea.id}
+                  title={idea.title}
+                  description={idea.description}
+                  projectFeatures={idea.projectFeatures}
+                  dayGenerated={idea.dayGenerated}
+                  impact={idea.impact}
+                  feasibility={idea.feasibility}
+                  difficulty={idea.difficulty}
+                  category={idea.category}
+                  bookmarked={idea.bookmarked}
+                />
+              ))}                
+              </div>
+            </div>
+            <h3>New Posts</h3>
+            <hr />
+            <div className="recent-post-container">
+              <MiniPostCard/>
+              <MiniPostCard/>
+            </div>
           </div>
-
-          {/* Replace with 1st and 2nd bookmarked items?  */}
-          <h3>New Posts</h3>
-          <hr />
-          <div className="recent-post-container">
-            <MiniPostCard/>
-            <MiniPostCard/>
-          </div>
-          
         </div>
-      
       </div>
-        </div>
+      
     </>
   );
 };
