@@ -9,7 +9,7 @@ const MiniIdeaCard = () => {
             <h3>Most Feasibile</h3>
         </div>
         <div className="mini-idea-body">
-            <h3>Title</h3>
+            <h3>Project Name</h3>
             <p>A simple password manager to help with...</p>
         </div>
     </div>

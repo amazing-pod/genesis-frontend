@@ -1,0 +1,70 @@
+.home-page-main-content-container {
+    min-width: 70%;
+    max-width: 70%;
+    background-color: red;
+}
+
+.home-page-container {
+    outline: 2px solid red;
+    display: flex;
+}
+
+.home-sidebar-container {
+    width: 30%;
+    outline: 2px solid purple;
+    padding: 2em;
+}
+
+.home-main-container {
+    background-color: white;
+}
+
+.home-sidebar-container > h3, .home-main-container > h3 {
+    color: #FF6584;
+    font-size: 30px;
+}
+
+.home-sidebar-container > hr, .home-main-container > hr  {
+    border: 2px solid #FF6584;
+}
+
+.home-main-container > hr {
+    width: 300px;
+}
+
+.home-main-container {
+    padding: 2em;
+}
+
+.home-main-container > h2 {
+    color: #FF6584;
+    font-weight: 400;
+}
+
+.mini-idea-container {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.bookmark-card-container {
+    display: flex;
+    gap: 50px;
+    padding: 1em;
+    outline: 1px solid black;
+    overflow: scroll;
+}
+
+.bookmark-card-container > * {
+    /* flex: 1 1 300px; Each item should have a flexible width of 300px */
+    min-width: 450px;
+    max-width: 450px;
+}
+
+.recent-post-container {
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    outline: 1px solid black;
+}
