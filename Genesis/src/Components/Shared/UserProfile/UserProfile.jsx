@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './UserProfile.css';
 import profile_photo from "../../../assets/png/profile_photo.png";
+import close_icon from "../../../assets/png/close.png";
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const ImgUpload = ({ onChange, src }) => (
   <div className="custom-file-upload fas">
@@ -73,6 +75,15 @@ const UserProfile = () => {
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
   const [active, setActive] = useState('edit');
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { previousPath } = location.state || { previousPath: null };
+
+  useEffect(() => {
+    // You can use `previousPath` here if needed
+    console.log('Previous Path:', previousPath);
+  }, [previousPath]);
 
   const photoUpload = (e) => {
     e.preventDefault();
@@ -94,9 +105,18 @@ const UserProfile = () => {
     setActive(active === 'edit' ? 'profile' : 'edit');
   };
 
+  const handleBack = () => {
+    if (previousPath) {
+      navigate(previousPath); // Navigate back to the previous path
+    } else {
+      navigate('/home'); // Default fallback route if no previousPath is found
+    }
+  };
+
   return (
     <div className="user-profile-page-container">
       <div className='user-profile-page'>
+        <img src={close_icon} alt="close" onClick={handleBack} />
         {active === 'edit' ? (
           <Edit onSubmit={handleSubmit}>
             <ImgUpload onChange={photoUpload} src={imagePreviewUrl} />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Header.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import profile_photo from "../../../assets/png/profile_photo.png";
 import {
     NovuProvider,
@@ -9,6 +9,12 @@ import {
 } from '@novu/notification-center';
 
 const Header = () => {
+    const location = useLocation();
+    console.log('Current Route:', location.pathname);
+
+    // Optionally, you can log the full location object for more details
+    console.log('Location Object:', location);
+
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
 
@@ -17,13 +23,13 @@ const Header = () => {
     };
 
     const handleSignOut = () => {
-        // Logic for signing out, such as clearing authentication tokens
-       navigate('/'); // Redirect to login/register page
+        navigate('/'); // Redirect to login/register page
     };
 
     const handleProfilePage = () => {
-        navigate('/user-profile'); // Redirect to user profile page
-    };
+        // Pass the current path to the UserProfile component
+        navigate('/user-profile', { state: { previousPath: location.pathname } });
+    }; 
 
     return (
         <>
@@ -44,9 +50,9 @@ const Header = () => {
                     <div className="profile-container" onClick={handleProfileClick}>
                         <img className="profile-icon" src={profile_photo} alt="User profile photo" />
                         {showDropdown && (
-                            <div className="dropdown-menu">
-                                <div onClick={handleProfilePage}>Profile</div>
-                                <div onClick={handleSignOut}>Sign Out</div>
+                            <div className="profile-dropdown-menu">
+                                <p onClick={handleProfilePage}>Profile</p>
+                                <p onClick={handleSignOut}>Sign Out</p>
                             </div>
                         )}
                     </div>
