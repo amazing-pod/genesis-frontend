@@ -2,7 +2,7 @@ import React from "react";
 import "./Community.css";
 import Header from '../Shared/Header/Header';
 import MiniNavbar from "../Shared/MiniNavbar/MiniNavbar";
-import ForumPost from './ForumPost/ForumPost';
+
 
 const samplePosts = [
     {
@@ -70,9 +70,7 @@ const Community = () => {
             <div className="community-page-container">
                 <MiniNavbar />
                 <hr />
-                {samplePosts.map(post => (
-                    <ForumPost key={post.id} post={post} />
-                ))}
+                
             </div>
         </>
     );
