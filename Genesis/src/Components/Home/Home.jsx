@@ -58,6 +58,12 @@ const Home = () => {
     }
   ];
 
+  const ideaHighlightsDummyData = [
+    {
+      
+    }
+  ]
+
   return (
     <>
       <Header />
@@ -100,7 +106,6 @@ const Home = () => {
               />
             ))}
           </div>
-
 
           {/* Replace with 1st and 2nd bookmarked items?  */}
           <h3>New Posts</h3>
