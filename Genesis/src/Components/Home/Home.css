@@ -1,22 +1,33 @@
 .home-page-main-content-container {
-    min-width: 70%;
-    max-width: 70%;
-    background-color: red;
+    width: -webkit-fill-available;
+    background-color: #F0F0F0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.home-page-container > p {
+    font-size: 26px;
+}
+
+
 .home-page-container {
-    outline: 2px solid red;
+    /* outline: 2px solid red; */
     display: flex;
 }
 
 .home-sidebar-container {
-    width: 30%;
-    outline: 2px solid purple;
+    min-width: 450px;
+    /* outline: 2px solid purple; */
     padding: 2em;
+    max-width: 30%;
 }
 
 .home-main-container {
     background-color: white;
+    width: 90%;
+    border-radius: 10px;
 }
 
 .home-sidebar-container > h3, .home-main-container > h3 {
@@ -30,6 +41,7 @@
 
 .home-main-container > hr {
     width: 300px;
+    margin: 16px;
 }
 
 .home-main-container {
@@ -45,14 +57,16 @@
     display: flex;
     flex-direction: column;
     gap: 50px;
+    margin: 20px 0px;
 }
 
 .bookmark-card-container {
     display: flex;
     gap: 50px;
     padding: 1em;
-    outline: 1px solid black;
+    /* outline: 1px solid black; */
     overflow: scroll;
+    margin: 20px 0px;
 }
 
 .bookmark-card-container > * {
@@ -66,5 +80,7 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    outline: 1px solid black;
+    margin: 20px 0px;
+
+    /* outline: 1px solid black; */
 }

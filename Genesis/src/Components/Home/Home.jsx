@@ -55,7 +55,39 @@ const Home = () => {
       difficulty: 4,
       category: "Environment",
       bookmarked: true
-    }
+    },
+    {
+      id: 4,
+      title: "Green Energy Solutions",
+      description: "Implement renewable energy solutions to reduce carbon footprint in urban areas.",
+      projectFeatures: [
+        "Solar panel installations",
+        "Wind turbine farms",
+        "Energy-efficient buildings"
+      ],
+      dayGenerated: "2023-07-10",
+      impact: 5,
+      feasibility: 3,
+      difficulty: 4,
+      category: "Environment",
+      bookmarked: true
+    },
+    {
+      id: 5,
+      title: "Green Energy Solutions",
+      description: "Implement renewable energy solutions to reduce carbon footprint in urban areas.",
+      projectFeatures: [
+        "Solar panel installations",
+        "Wind turbine farms",
+        "Energy-efficient buildings"
+      ],
+      dayGenerated: "2023-07-10",
+      impact: 5,
+      feasibility: 3,
+      difficulty: 4,
+      category: "Environment",
+      bookmarked: true
+    },
   ];
 
   const ideaHighlightsDummyData = [

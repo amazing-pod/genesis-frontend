@@ -7,6 +7,7 @@ import {
     PopoverNotificationCenter,
     NotificationBell,
 } from '@novu/notification-center';
+import { UserButton } from '@clerk/clerk-react';
 
 const Header = () => {
     const location = useLocation();
@@ -48,13 +49,14 @@ const Header = () => {
                         </PopoverNotificationCenter>
                     </NovuProvider>
                     <div className="profile-container" onClick={handleProfileClick}>
-                        <img className="profile-icon" src={profile_photo} alt="User profile photo" />
+                        {/* <img className="profile-icon" src={profile_photo} alt="User profile photo" />
                         {showDropdown && (
                             <div className="profile-dropdown-menu">
                                 <p onClick={handleProfilePage}>Profile</p>
                                 <p onClick={handleSignOut}>Sign Out</p>
                             </div>
-                        )}
+                        )} */}
+                        <UserButton />
                     </div>
                 </div>
             </header>
