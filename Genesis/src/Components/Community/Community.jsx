@@ -16,7 +16,8 @@ const samplePosts = [
         comments: [
             { user: "User1", text: "Congratulations!" },
             { user: "User2", text: "Well done team!" }
-        ]
+        ],
+        tags: ["Team", "Achievement"]
     },
     {
         id: 2,
@@ -29,7 +30,8 @@ const samplePosts = [
         comments: [
             { user: "User3", text: "I second this!" },
             { user: "User4", text: "Dark mode would be awesome!" }
-        ]
+        ],
+        tags: ["Feature", "Suggestion"]
     },
     {
         id: 3,
@@ -42,7 +44,8 @@ const samplePosts = [
         comments: [
             { user: "User5", text: "Yes, I'm having the same problem." },
             { user: "User6", text: "It works fine for me. Maybe try reinstalling?" }
-        ]
+        ],
+        tags: ["Bug", "Help"]
     },
     {
         id: 4,
@@ -55,19 +58,23 @@ const samplePosts = [
         comments: [
             { user: "User7", text: "Got it!" },
             { user: "User8", text: "Thanks for the reminder." }
-        ]
+        ],
+        tags: ["Reminder", "Meeting"]
     }
 ];
 
 const Community = () => {
     return (
-    <>
-    <Header />
-    <div className="community-page-container">
-        <MiniNavbar />
-        <hr />
-    </div>
-    </>
+        <>
+            <Header />
+            <div className="community-page-container">
+                <MiniNavbar />
+                <hr />
+                {samplePosts.map(post => (
+                    <ForumPost key={post.id} post={post} />
+                ))}
+            </div>
+        </>
     );
 };
 
