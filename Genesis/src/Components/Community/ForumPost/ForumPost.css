@@ -64,4 +64,44 @@ h4 {
 p {
     line-height: 1.8;
 }
+.forum-user-profile {
+    display: flex;
+    align-items: center;
+}
 
+.user-profile-photo {
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.forum-post-username {
+    font-weight: bold;
+}
+
+.forum-content {
+    margin-top: 10px;
+}
+
+.tags {
+    margin: 10px 0;
+}
+
+.tag {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.post-interactions {
+    display: flex;
+    align-items: center;
+}
+
+.forum-icon {
+    cursor: pointer;
+    margin-left: 5px;
+}
