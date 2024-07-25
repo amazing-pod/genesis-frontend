@@ -96,8 +96,8 @@ const MiniNavbar = ({ filter, setFilter, toggleCreatePost, dropdownOpen, toggleD
                     </button>
                 </div>
                 <div id="myDropdown" className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
-                    <p onClick={() => handleDropdownItemClick('Newest')}>Newest</p>
                     <p onClick={() => handleDropdownItemClick('Oldest')}>Oldest</p>
+                    <p onClick={() => handleDropdownItemClick('Newest')}>Newest</p>
                     <p onClick={() => handleDropdownItemClick('Most Liked')}>Most Liked</p>
                 </div>
             </div>
