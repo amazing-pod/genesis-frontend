@@ -1,3 +1,4 @@
+/* Universal Styles (For All Screens) */
 .login-page {
 	height: 100vh;
 	display: flex;
@@ -7,156 +8,63 @@
 }
 
 .login-container {
-	height: 600px;
-	width: 1100px;
 	background-color: white;
-	padding: 2em;
 	display: flex;
 	align-items: center;
 	gap: 30px;
 	border-radius: 20px;
 }
 
-.login-info {
-	height: 500px;
-	gap: 20px;
-	width: 450px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+.login-image {
+	width: 500px;
+	height: 375.26px;
+	margin: auto;
+	padding: 0em;
 }
 
-form {
-	display: flex;
-	flex-direction: column;
-	gap: 30px;
-}
-
-input {
-	width: 400px;
-	font-size: 20px;
-	padding: 0.5em;
-}
-
-h2 {
-	margin: 20px 0px;
-}
-
-a {
-	text-decoration: none;
-	color: #6c63ff;
-}
-
-.login-button {
-	margin: 0px auto;
-	width: 200px;
-	background-color: #6c63ff;
-	padding: 1em;
-	color: white;
-	border-radius: 10px;
-	border: none;
-	font-size: 20px;
-	height: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-}
-
-@media screen and (max-width: 1200px) {
+/* Desktop View (1051+) Styles */
+@media screen and (max-width: 1030px) {
 	.login-container {
-		width: 85%;
-		gap: 25px;
-		height: 500px;
+		width: 800px;
 	}
+	.login-image {
+		width: 400px;
+		height: 275px;
+	}
+} 
 
-	input {
-		font-size: 16px;
-		width: 100%;
-	}
-	form {
-		width: 90%;
-	}
-	.login-to-register {
-		font-size: 16px;
+/* Larger Screens (Laptop/Tablet) Styles */
+@media screen and (max-width: 830px) {
+	.login-container {
+		flex-direction: column;
+		width: auto;
+		height: auto;
 	}
 
 	.login-image {
-		width: 400px;
-		height: 350px;
-		margin: 0px auto;
+		width: 350px;
+		height: 250px;
+		padding: 1em;
 	}
-}
+	.cl-internal-qk5yrq {
+		border-radius: 10px 10px 0px 0px;
+	}
+} 
 
-@media screen and (max-width: 1000px) {
+/* Phone Screen Styles */
+@media screen and (max-width: 450px) {
 	.login-container {
-		width: 85%;
-		gap: 25px;
+		height: 90%;
+		overflow: scroll;
 	}
-
-	input {
-		font-size: 16px;
-		width: 100%;
-	}
-	form {
-		width: 90%;
-	}
-	.login-to-register {
-		font-size: 16px;
+	
+	.login-page {
+		overflow: scroll;
 	}
 
 	.login-image {
 		width: 300px;
-		height: 250px;
-		margin: 0px auto;
-	}
-}
-
-/* Media Queries for Phone Screens */
-@media screen and (max-width: 600px) {
-	.login-container {
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		width: 80%;
-		height: 700px;
+		height: 230px;	
 		padding: 1em;
-		scroll-behavior: auto;
-	}
-
-	.login-info {
-		width: 270px;
-	}
-
-	.page-container {
-		width: 95%;
-	}
-
-	input {
-		width: 250px;
-		font-size: 16px;
-		padding: 0.5em;
-	}
-
-	h2 {
-		font-size: 26px;
-	}
-
-	.login-image {
-		width: 250px;
-		height: 200px;
-		margin: 0px;
-	}
-
-	form {
-		align-items: center;
-		gap: 20px;
-	}
-
-	.login-button {
-		height: 20px;
-		font-size: 16px;
-		width: 150px;
-		margin: 0px auto;
 	}
 }

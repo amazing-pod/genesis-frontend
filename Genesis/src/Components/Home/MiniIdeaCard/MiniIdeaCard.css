@@ -1,0 +1,27 @@
+.mini-idea-card-container {
+    width: 90%;
+    margin: auto;
+    outline: 1px solid #C0C0C0;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+}
+
+.mini-idea-header {
+    background-color: #F5F2F2;
+}
+
+.mini-idea-header > h3, .mini-idea-body > h3 {
+    padding: 10px;
+    margin: 0px;
+}
+
+
+.mini-idea-body > p {
+    padding: 10px;
+    margin: 0px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2; /* Number of lines to display */
+}
