@@ -5,166 +5,131 @@
 	align-items: center;
 	background-color: #aca7ff;
 }
-
 .register-container {
-	height: fit-content;
-	width: 1100px;
 	background-color: white;
-	padding: 2em;
+	display: flex;
+	align-items: center;
+	border-radius: 20px;
+}
+.register-image {
+	width: 563px;
+	height: 402px;
+	margin: auto;
+	padding: 0em 2em;
+}
+
+/* Clerk Styles */
+.cl-internal-2iusy0 > svg {
+	height: 10px !important;
+	width: 10px !important;
+}
+.cl-internal-1r7rnyr > svg {
+	height: 20px !important;
+	width: 20px !important;
+}
+
+@media screen and (max-width: 1050px) {
+	.register-image {
+		width: 400px;
+		height: 291.4px;
+		margin: auto;
+		padding: 0em 2em;
+	}
+	
+}
+
+@media screen and (max-width: 880px) {
+	.register-container {
+		flex-direction: column;
+		height: 90%;
+		overflow: scroll;
+		scroll-behavior: smooth;
+		width: auto;
+	}
+	.register-image {
+		width: 300px;
+		height: 218.55px;
+		margin: auto;
+		padding: 2em;
+	}
+}
+
+@media screen and (max-width: 470px) {
+
+}
+
+
+/* 
+
+.login-container {
+	height: 600px;
+	width: 1000px;
+	background-color: white;
 	display: flex;
 	align-items: center;
 	gap: 30px;
 	border-radius: 20px;
 }
 
+.login-image {
+	width: 500px;
+	height: 375.26px;
+	margin: auto;
+}
 
-.register-button {
-	margin: 0px auto;
-	width: 200px;
-	background-color: #6c63ff;
-	padding: 1em;
-	color: white;
-	border-radius: 10px;
-	border: none;
-	font-size: 20px;
-	height: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
+.cl-internal-phfxlr {
+	height: 100%;
+}
+
+.cl-internal-qk5yrq {
+	height: 100%;
+}
+
+.cl-internal-1p733cp {
+	height: -webkit-fill-available;
 }
 
 
-@media screen and (max-width: 1200px) {
-	.register-container {
-		width: 85%;
-		gap: 25px;
-		height: 500px;
+@media screen and (max-width: 1030px) {
+	.login-container {
+		width: 800px;
 	}
-
-	input {
-		font-size: 16px;
-		width: 100%;
-	}
-	form {
-		width: 90%;
-	}
-	.register-to-login {
-		font-size: 16px;
-	}
-
-	.register-image {
+	.login-image {
 		width: 400px;
-		height: 350px;
-		margin: 0px auto;
+		height: 275px;
 	}
-}
+} 
 
-@media screen and (max-width: 1000px) {
-	.register-container {
-		width: 85%;
-		gap: 25px;
-	}
-
-	input {
-		font-size: 16px;
-		width: 100%;
-	}
-	form {
-		width: 90%;
-	}
-	.register-to-login {
-		font-size: 16px;
-	}
-
-	.register-image {
-		width: 300px;
-		height: 250px;
-		margin: 0px auto;
-	}
-}
-
-/* Media Queries for Phone Screens */
-@media screen and (max-width: 600px) {
-	.register-container {
+@media screen and (max-width: 830px) {
+	.login-container {
 		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		width: 80%;
-		height: 700px;
+		width: auto;
+		height: auto;
+	}
+
+	.login-image {
+		width: 350px;
+		height: 250px;
 		padding: 1em;
-		scroll-behavior: auto;
+	}
+	.cl-internal-qk5yrq {
+		border-radius: 10px 10px 0px 0px;
+	}
+} 
+
+@media screen and (max-width: 450px) {
+	.login-container {
+		height: 90%;
+		overflow: scroll;
+	}
+	
+	.login-page {
+		overflow: scroll;
 	}
 
-	.register-info {
-		width: 270px;
+	.login-image {
+		width: 300px;
+		height: 230px;	
+		padding: 1em;
 	}
-
-	.page-container {
-		width: 95%;
-	}
-
-	input {
-		width: 250px;
-		font-size: 16px;
-		padding: 0.5em;
-	}
-
-	h2 {
-		font-size: 26px;
-	}
-
-	.register-image {
-		width: 250px;
-		height: 200px;
-		margin: 0px;
-	}
-
-	form {
-		align-items: center;
-		gap: 20px;
-	}
-
-	.register-button {
-		height: 20px;
-		font-size: 16px;
-		width: 150px;
-		margin: 0px auto;
-	}
-}
-
-
-/* Clerk Styles */
-
-.cl-internal-2iusy0 > svg {
-	height: 10px !important;
-	width: 10px !important;
-}
-
-.cl-internal-1r7rnyr > svg {
-	height: 20px !important;
-	width: 20px !important;
-}
-
-/* .cl-internal-qk5yrq {
-	justify-content: center !important;
-}
-
-.cl-formButtonPrimary .cl-button {
-	height: 30px !important;
-}
-
-.cl-internal-ttumny[data-variant="solid"][data-color="primary"] {
-	height: 30px !important;
-	margin: auto !important;
-}
-
-.cl-internal-1c4ikgf > svg {
-	background-color: white !important;
-} */
-
-/* 
-.cl-internal-ttumny[data-variant="solid"][data-color="primary"] {
-	height: 30px !important;
-	width: 100% !important;
 } */
