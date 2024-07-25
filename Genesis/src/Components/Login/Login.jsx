@@ -27,40 +27,8 @@ const Login = () => {
 		<>
 			<div className="login-page">
 				<div className="login-container">
-					{/* <div className="login-info">
-						<div className="login-user-info">
-							<h2 className="login-header">Login</h2>
-							<p className="login-to-register">
-								Not a member? <a href="/register">Register now</a>
-							</p>
-							<form autoComplete="off">
-								<input
-									type="text"
-									id="username"
-									name="username"
-									placeholder="Username"
-									onChange={(e) => setUsername(e.target.value)}
-									required
-								/>
-								<input
-									type="password"
-									id="password"
-									name="password"
-									placeholder="Password"
-									onChange={(e) => setPassword(e.target.value)}
-									required
-								/>
-							</form>
-						</div>
-						<p onClick={handleLogin} className="login-button">
-							Login
-						</p>
-					</div> */}
 					<SignIn />
-					<img
-						className="register-image"
-						src={login_image}
-						alt="Project Action"
+					<img className="login-image" src={login_image} alt="Project Action"
 					/>
 				</div>
 			</div>
