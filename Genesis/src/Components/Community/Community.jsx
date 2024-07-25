@@ -5,9 +5,9 @@ import dropdown_icon from "../../assets/png/dropdown_icon.png";
 import CreatePost from '../Community/ForumPost/CreatePost';
 import ForumPost from './ForumPost/ForumPost';
 
-const samplePosts = [
+const samplePosts = [   
     {
-        id: 1,
+        id: 4,
         userProfilePhoto: "https://placehold.co/50x50",
         username: "Brenda Aceves",
         timeAgo: "1 day ago",
@@ -18,10 +18,10 @@ const samplePosts = [
             { user: "User1", text: "Congratulations!" },
             { user: "User2", text: "Well done team!" }
         ],
-        tags: ["Team", "Achievement"]
+        
     },
     {
-        id: 2,
+        id: 3,
         userProfilePhoto: "https://placehold.co/50x50",
         username: "John Doe",
         timeAgo: "2 days ago",
@@ -32,10 +32,10 @@ const samplePosts = [
             { user: "User3", text: "I second this!" },
             { user: "User4", text: "Dark mode would be awesome!" }
         ],
-        tags: ["Feature", "Suggestion"]
+      
     },
     {
-        id: 3,
+        id: 2,
         userProfilePhoto: "https://placehold.co/50x50",
         username: "Alice Smith",
         timeAgo: "3 days ago",
@@ -46,10 +46,10 @@ const samplePosts = [
             { user: "User5", text: "Yes, I'm having the same problem." },
             { user: "User6", text: "It works fine for me. Maybe try reinstalling?" }
         ],
-        tags: ["Bug", "Help"]
+       
     },
     {
-        id: 4,
+        id: 1,
         userProfilePhoto: "https://placehold.co/50x50",
         username: "Bob Johnson",
         timeAgo: "4 days ago",
@@ -60,122 +60,111 @@ const samplePosts = [
             { user: "User7", text: "Got it!" },
             { user: "User8", text: "Thanks for the reminder." }
         ],
-        tags: ["Reminder", "Meeting"]
+        
     }
 ];
-const MiniNavbar = () => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [filter, setFilter] = useState('Category');
-    const [showCreatePost, setShowCreatePost] = useState(false);
-    const [posts, setPosts] = useState(samplePosts);
-    const [sortedPosts, setSortedPosts] = useState([]);
-  
-    // Toggle dropdown visibility
-    const toggleDropdown = () => {
-      setDropdownOpen(!dropdownOpen);
-    };
-  
-    // Handle item clicks within dropdown, then close dropdown
-    const handleDropdownItemClick = (filterName) => {
-      setFilter(filterName);
-      setDropdownOpen(false);
-      sortPosts(filterName);
-    };
-  
-    // Close dropdown after clicking outside it
-    const handleOutsideClick = (event) => {
-      if (!event.target.closest('.dropdown') && dropdownOpen) {
-        setDropdownOpen(false);
-      }
-    };
-  
-    // Add event listener for clicking outside dropdown
-    useEffect(() => {
-      window.addEventListener('click', handleOutsideClick);
-  
-      // Cleanup function to remove event listener when component unmounts
-      return () => {
-        window.removeEventListener('click', handleOutsideClick);
-      };
-    }, [dropdownOpen]);
-  
-    useEffect(() => {
-      sortPosts(filter);
-    }, [filter, posts]);
-  
-    const sortPosts = (filter) => {
-      let sorted = [...posts];
-      if (filter === 'Oldest') {
-        // Sorting by "timeAgo" as a proxy for date
-        sorted.sort((a, b) => {
-          const timeA = parseInt(a.timeAgo.split(' ')[0]);
-          const timeB = parseInt(b.timeAgo.split(' ')[0]);
-          return timeB - timeA;
-        });
-      } else if (filter === 'Newest') {
-        sorted.sort((a, b) => {
-          const timeA = parseInt(a.timeAgo.split(' ')[0]);
-          const timeB = parseInt(b.timeAgo.split(' ')[0]);
-          return timeA - timeB;
-        });
-      } else if (filter === 'Most Liked') {
-        sorted.sort((a, b) => b.likes - a.likes);
-      }
-      setSortedPosts(sorted);
-    };
-  
-    return (
-      <>
-        <div className="mini-navbar">
-  
-          {/* Dropdown */}
-          <div className="dropdown">
-            <div className="dropdown-view">
-              <button onClick={toggleDropdown} className="dropbtn">
-                {filter}
-                <img className="dropdown-icon" src={dropdown_icon} alt="dropdown icon" />
-              </button>
-            </div>
-  
-            <div id="myDropdown" className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
-              <p onClick={() => handleDropdownItemClick('Newest')}>Newest</p>
-              <p onClick={() => handleDropdownItemClick('Oldest')}>Oldest</p>
-              <p onClick={() => handleDropdownItemClick('Most Liked')}>Most Liked</p>
-            </div>
-          </div>
-        
-          {/* New Post Section */}
-          <p className="new-post" onClick={() => setShowCreatePost(!showCreatePost)}>New Post +</p>
-        </div>
-  
-        {showCreatePost && (
-            <CreatePost />
-        )}
-  
-        <div className="posts-container">
-          {sortedPosts.map(post => (
-            <ForumPost key={post.id} post={post} />
-          ))}
-        </div>
-      </>
-    );
-  };
-  
 
-  
+const MiniNavbar = ({ filter, setFilter, toggleCreatePost, dropdownOpen, toggleDropdown }) => {
+
+    const handleDropdownItemClick = (filterName) => {
+        setFilter(filterName);
+        toggleDropdown();
+    };
+
+    const handleOutsideClick = (event) => {
+        if (!event.target.closest('.dropdown') && dropdownOpen) {
+            toggleDropdown();
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('click', handleOutsideClick);
+        return () => {
+            window.removeEventListener('click', handleOutsideClick);
+        };
+    }, [dropdownOpen]);
+   
+    
+
+    return (
+        <div className="mini-navbar">
+            <div className="dropdown">
+                <div className="dropdown-view">
+                    <button onClick={toggleDropdown} className="dropbtn">
+                        {filter}
+                        <img className="dropdown-icon" src={dropdown_icon} alt="dropdown icon" />
+                    </button>
+                </div>
+                <div id="myDropdown" className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
+                    <p onClick={() => handleDropdownItemClick('Newest')}>Newest</p>
+                    <p onClick={() => handleDropdownItemClick('Oldest')}>Oldest</p>
+                    <p onClick={() => handleDropdownItemClick('Most Liked')}>Most Liked</p>
+                </div>
+            </div>
+            <p className="new-post" onClick={toggleCreatePost}>New Post +</p>
+        </div>
+    );
+};
+
 const Community = () => {
+    const [ posts, setPosts] = useState(samplePosts);
+    const [filter, setFilter] = useState('Newest');
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [showCreatePost, setShowCreatePost] = useState(false);
+
+    const handleCreatePost = (newPost) => {
+            setPosts(posts => [newPost, ...posts]);
+    };
+
+    useEffect(() => {
+        sortPosts(filter);
+    }, [posts, filter]);
+
+    const sortPosts = (filter) => {
+        let sorted = [...posts];
+        if (filter === 'Newest') {
+            sorted.sort((a, b) => a.id - b.id);
+        } else if (filter === 'Oldest') {
+            sorted.sort((a, b) => b.id - a.id);
+        } else if (filter === 'Most Liked') {
+            sorted.sort((a, b) => b.likes - a.likes);
+        }
+        setPosts(sorted);
+    };
+
+    const toggleCreatePost = () => {
+        setShowCreatePost(!showCreatePost);
+    };
+
+    const toggleDropdown = () => {
+        setDropdownOpen(!dropdownOpen);
+    };
+   
+
     return (
         <>
             <Header />
             <div className="community-page-container">
-                <MiniNavbar />
+                <MiniNavbar 
+                    filter={filter}
+                    setFilter={setFilter}
+                    toggleCreatePost={toggleCreatePost}
+                    dropdownOpen={dropdownOpen}
+                    toggleDropdown={toggleDropdown}
+                />
                 <hr />
-                {samplePosts.map(post => (
-                    <ForumPost key={post.id} post={post} />
-                ))}
+                {showCreatePost && (
+                    <CreatePost onCreatePost={handleCreatePost} />
+                )}
+                <div className="posts-container">
+                    {posts.map(post => (
+                        <ForumPost key={post.id} post={post} />
+                    ))}
+                </div>
             </div>
         </>
     );
 };
 
 export default Community;
+
