@@ -5,12 +5,14 @@
 	align-items: center;
 	background-color: #aca7ff;
 }
+
 .register-container {
 	background-color: white;
 	display: flex;
 	align-items: center;
 	border-radius: 20px;
 }
+
 .register-image {
 	width: 563px;
 	height: 402px;
@@ -18,67 +20,9 @@
 	padding: 0em 2em;
 }
 
-/* Clerk Styles */
-.cl-internal-2iusy0 > svg {
-	height: 10px !important;
-	width: 10px !important;
-}
-.cl-internal-1r7rnyr > svg {
-	height: 20px !important;
-	width: 20px !important;
-}
-
-@media screen and (max-width: 1050px) {
-	.register-image {
-		width: 400px;
-		height: 291.4px;
-		margin: auto;
-		padding: 0em 2em;
-	}
-	
-}
-
-@media screen and (max-width: 880px) {
-	.register-container {
-		flex-direction: column;
-		height: 90%;
-		overflow: scroll;
-		scroll-behavior: smooth;
-		width: auto;
-	}
-	.register-image {
-		width: 300px;
-		height: 218.55px;
-		margin: auto;
-		padding: 2em;
-	}
-}
-
-@media screen and (max-width: 470px) {
-
-}
-
-
-/* 
-
-.login-container {
-	height: 600px;
-	width: 1000px;
-	background-color: white;
-	display: flex;
-	align-items: center;
-	gap: 30px;
-	border-radius: 20px;
-}
-
-.login-image {
-	width: 500px;
-	height: 375.26px;
-	margin: auto;
-}
-
-.cl-internal-phfxlr {
-	height: 100%;
+/* Clerk Style Modifications */
+.cl-internal-qk5yrq {
+	height: auto !important;
 }
 
 .cl-internal-qk5yrq {
@@ -89,47 +33,65 @@
 	height: -webkit-fill-available;
 }
 
+.cl-internal-2iusy0 > svg {
+	height: 10px !important;
+	width: 10px !important;
+}
+.cl-internal-1r7rnyr > svg {
+	height: 20px !important;
+	width: 20px !important;
+}
 
-@media screen and (max-width: 1030px) {
-	.login-container {
-		width: 800px;
-	}
-	.login-image {
+/* Desktop View (1051+) Styles */
+@media screen and (max-width: 1050px) {
+	.register-image {
 		width: 400px;
-		height: 275px;
-	}
-} 
-
-@media screen and (max-width: 830px) {
-	.login-container {
-		flex-direction: column;
-		width: auto;
-		height: auto;
-	}
-
-	.login-image {
-		width: 350px;
-		height: 250px;
-		padding: 1em;
-	}
-	.cl-internal-qk5yrq {
-		border-radius: 10px 10px 0px 0px;
-	}
-} 
-
-@media screen and (max-width: 450px) {
-	.login-container {
-		height: 90%;
-		overflow: scroll;
+		height: 291.4px;
+		margin: auto;
+		padding: 0em 2em;
 	}
 	
-	.login-page {
+}
+
+/* Larger Screens (Laptop/Tablet) Styles */
+@media screen and (max-width: 880px) {
+	.register-container {
+		flex-direction: column;
+		height: 90%;
 		overflow: scroll;
+		scroll-behavior: smooth;
+		width: auto;
 	}
 
-	.login-image {
+	.register-image {
 		width: 300px;
-		height: 230px;	
-		padding: 1em;
+		height: 218.55px;
+		margin: 8em 0em 4em 0em;
+		padding: 2em;
+		
 	}
-} */
+}
+
+/* Phone Screen Styles */
+@media screen and (max-width: 480px) {
+	.cl-internal-qk5yrq {
+		height: auto !important;
+	}
+
+	.cl-internal-phfxlr {
+		height: auto !important;
+	}
+
+	.register-image {
+		margin: 3em auto;
+		height: 182.12px;
+		width: 250px;
+	}
+}
+
+@media screen and (max-width: 360px) {
+	.register-image {
+		height: 152.98px;
+		width: 210px;
+	}
+}
