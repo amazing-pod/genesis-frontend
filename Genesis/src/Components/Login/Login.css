@@ -7,8 +7,6 @@
 }
 
 .login-container {
-	height: 600px;
-	width: 1000px;
 	background-color: white;
 	display: flex;
 	align-items: center;
@@ -20,21 +18,8 @@
 	width: 500px;
 	height: 375.26px;
 	margin: auto;
+	padding: 0em;
 }
-
-/* Clerk Styling */
-.cl-internal-phfxlr {
-	height: 100%;
-}
-
-.cl-internal-qk5yrq {
-	height: 100%;
-}
-
-.cl-internal-1p733cp {
-	height: -webkit-fill-available;
-}
-
 
 @media screen and (max-width: 1030px) {
 	.login-container {
