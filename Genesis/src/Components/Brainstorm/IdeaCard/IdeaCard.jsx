@@ -5,6 +5,7 @@ import bookmark_active_icon from "../../../assets/png/bookmark_active.png";
 
 const IdeaCard = ({ id, title, description, projectFeatures, impact, feasibility, difficulty, category, bookmarked, openModal }) => {
     const [bookmarkToggle, setBookmarkToggle] = useState(bookmarked);
+    const tagClass = `${category.toLowerCase()}-tag`;
 
     let ratingGenerator = (rating) => {
         let result = [];
@@ -62,7 +63,7 @@ const IdeaCard = ({ id, title, description, projectFeatures, impact, feasibility
                 </div>
 
                 <div className="idea-extra-info">
-                    <div className="idea-tag">{category}</div>
+                    <div className={tagClass}>{category}</div>
                     <img className="bookmark-icon" onClick={() => setBookmarkToggle(!bookmarkToggle)} src={bookmarkToggle ? bookmark_active_icon : bookmark_inactive_icon} alt="Bookmark status" />
                 </div>
             </div>
