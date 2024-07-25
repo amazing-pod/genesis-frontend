@@ -13,17 +13,18 @@
 }
 
 /* Modal Container (holds all modal items) */
-.ideation-modal-content {
+.ideation-modal {
     width: 965px;
+    height: 850px;
     gap: 15px;
     display: flex;
     flex-direction: column;
-    background-color: #fefefe; /* white background */
+    background-color: #fefefe;
     padding: 2em;
     border: 1px solid #888;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* shadow effect */
-    text-align: center; /* center content inside modal */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
 }
 
 .ideation-modal-content > img {
@@ -72,13 +73,6 @@
     border-radius: 10px;
 
 }
-
-
-
-
-
-
-
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

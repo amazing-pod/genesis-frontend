@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Brainstorm.css';
+import dropdown_icon from '../../assets/png/dropdown_icon.png';
+// Components
+import Header from '../Shared/Header/Header';
 import IdeaCard from './IdeaCard/IdeaCard';
 import ViewIdeaModal from './ViewIdeaModal/ViewIdeaModal';
 import IdeationModal from './IdeationModal/IdeationModal';
-
 
 const Brainstorm = () => {
   const [ideaDummyData, setIdeaDummyData] = useState([
@@ -11,166 +13,190 @@ const Brainstorm = () => {
       id: 1,
       title: "Smart Home Automation",
       description: "Automate various home devices and appliances using IoT technology.",
-      projectFeatures: [
-        "Motion detection lights",
-        "Temperature control",
-        "Smart locks"
-      ],
+      projectFeatures: ["Motion detection lights", "Temperature control", "Smart locks"],
       dayGenerated: "2023-07-15",
       impact: 4,
       feasibility: 3,
       difficulty: 2,
       category: "Technology",
-      bookmarked: false
+      bookmarked: false,
     },
     {
       id: 2,
       title: "Community Garden Initiative",
       description: "Create a community garden to promote sustainable living and local food production.",
-      projectFeatures: [
-        "Raised beds",
-        "Compost station",
-        "Education workshops"
-      ],
+      projectFeatures: ["Raised beds", "Compost station", "Education workshops"],
       dayGenerated: "2023-07-14",
       impact: 5,
       feasibility: 4,
       difficulty: 3,
       category: "Environment",
-      bookmarked: true
+      bookmarked: true,
     },
     {
       id: 3,
       title: "Mobile App for Senior Citizens",
       description: "Develop an intuitive mobile app catering to the needs of elderly people.",
-      projectFeatures: [
-        "Large font size",
-        "Voice navigation",
-        "Emergency contacts"
-      ],
+      projectFeatures: ["Large font size", "Voice navigation", "Emergency contacts"],
       dayGenerated: "2023-07-13",
       impact: 3,
       feasibility: 5,
       difficulty: 2,
       category: "Healthcare",
-      bookmarked: false
+      bookmarked: false,
     },
     {
       id: 4,
       title: "Online Learning Platform",
       description: "Build a platform offering courses and tutorials in various subjects.",
-      projectFeatures: [
-        "Video lectures",
-        "Interactive quizzes",
-        "Progress tracking"
-      ],
+      projectFeatures: ["Video lectures", "Interactive quizzes", "Progress tracking"],
       dayGenerated: "2023-07-12",
       impact: 4,
       feasibility: 4,
       difficulty: 3,
       category: "Education",
-      bookmarked: true
+      bookmarked: true,
     },
     {
       id: 5,
       title: "Local Artisan Marketplace",
       description: "Create an online marketplace to support local artisans and craftsmen.",
-      projectFeatures: [
-        "Seller profiles",
-        "Product listings",
-        "Secure payment gateway"
-      ],
+      projectFeatures: ["Seller profiles", "Product listings", "Secure payment gateway"],
       dayGenerated: "2023-07-11",
       impact: 3,
       feasibility: 4,
       difficulty: 2,
       category: "Commerce",
-      bookmarked: false
+      bookmarked: false,
     },
     {
       id: 6,
       title: "Green Energy Solutions",
       description: "Implement renewable energy solutions to reduce carbon footprint in urban areas.",
-      projectFeatures: [
-        "Solar panel installations",
-        "Wind turbine farms",
-        "Energy-efficient buildings"
-      ],
+      projectFeatures: ["Solar panel installations", "Wind turbine farms", "Energy-efficient buildings"],
       dayGenerated: "2023-07-10",
       impact: 5,
       feasibility: 3,
       difficulty: 4,
       category: "Environment",
-      bookmarked: true
-    }
+      bookmarked: true,
+    },
   ]);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [filter, setFilter] = useState('Category');
+  const [sortedIdeas, setSortedIdeas] = useState([]);
   const [selectedIdea, setSelectedIdea] = useState(null);
   const [openIdeationModal, setOpenIdeationModal] = useState(false);
 
+  const toggleDropdown = () => {
+    setDropdownOpen(prev => !prev);
+  };
+
+  const handleDropdownItemClick = (filterName) => {
+    setFilter(filterName);
+    setDropdownOpen(false);
+    sortIdeas(filterName);
+  };
+
+  const handleOutsideClick = (event) => {
+    if (!event.target.closest('.brainstorm-mini-dropdown') && dropdownOpen) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleOutsideClick);
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  }, [dropdownOpen]);
+
+  useEffect(() => {
+    sortIdeas(filter);
+  }, [filter, ideaDummyData]);
+
+  const sortIdeas = (filter) => {
+    let sorted = [...ideaDummyData];
+    if (filter === 'Oldest') {
+      sorted.sort((a, b) => new Date(a.dayGenerated) - new Date(b.dayGenerated));
+    } else if (filter === 'Newest') {
+      sorted.sort((a, b) => new Date(b.dayGenerated) - new Date(a.dayGenerated));
+    } else if (filter === 'Bookmarked') {
+      sorted.sort((a, b) => {
+        if (a.bookmarked === b.bookmarked) {
+          return 0;
+        }
+        return (a.bookmarked ? -1 : 1);
+      });
+    }
+    setSortedIdeas(sorted);
+  };
+  
   const toggleIdeationModal = () => {
-    setOpenIdeationModal(!openIdeationModal);
+    setOpenIdeationModal(prev => !prev);
   };
 
   const openModalForId = (ideaId) => {
     setSelectedIdea(ideaId);
   };
 
-
   const closeModal = () => {
     setSelectedIdea(null);
   };
 
   const handleSave = (updatedIdea) => {
-    const updatedIdeas = ideaDummyData.map(idea => {
-      if (idea.id === updatedIdea.id) {
-        return updatedIdea;
-      }
-      return idea;
-    });
+    const updatedIdeas = ideaDummyData.map(idea => idea.id === updatedIdea.id ? updatedIdea : idea);
     setIdeaDummyData(updatedIdeas);
     closeModal();
   };
 
   return (
     <>
-      <div className="user-idea-container">
-      {/* If an idea is selected, open the corresponding modal */}
-        {selectedIdea !== null ? (
-          <ViewIdeaModal
-            idea={ideaDummyData.find(idea => idea.id === selectedIdea)}
-            closeModal={closeModal}
-            onSave={handleSave}
-          />
-        ) : (
-        <>
-          <h2>My Ideas</h2>
-          <hr/>
-          <p onClick={toggleIdeationModal} className="my-ideas-plus">My ideas +</p>
-
-          <div className="idea-card-container">
-            {ideaDummyData.map((idea) => (
-              <IdeaCard
-                key={idea.id}
-                id={idea.id}
-                title={idea.title}
-                description={idea.description}
-                projectFeatures={idea.projectFeatures}
-                dayGenerated={idea.dayGenerated}
-                impact={idea.impact}
-                feasibility={idea.feasibility}
-                difficulty={idea.difficulty}
-                category={idea.category}
-                bookmarked={idea.bookmarked}
-                openModal={openModalForId}
-              />
-            ))}
+    <Header/>
+    <div className="user-idea-container">
+      <div className="mini-navbar">
+        <div className="brainstorm-mini-dropdown">
+          <button onClick={toggleDropdown} className="brainstorm-dropbtn">
+            {filter}
+            <img className="dropdown-icon" src={dropdown_icon} alt="dropdown icon" />
+          </button>
+          <div className={`dropdown-brainstorm-content ${dropdownOpen ? 'show' : ''}`}>
+            <p onClick={() => handleDropdownItemClick('Newest')}>Newest</p>
+            <p onClick={() => handleDropdownItemClick('Oldest')}>Oldest</p>
+            <p onClick={() => handleDropdownItemClick('Bookmarked')}>Bookmarked</p>
           </div>
-          {/* Based on state, conditionally render itationModal: */}
-          {openIdeationModal && <IdeationModal closeModal={toggleIdeationModal} />}
-
-        </>
-        )}
+        </div>
+        <p className="new-post" onClick={toggleIdeationModal}>Add/Generate Ideas +</p>
       </div>
+      {selectedIdea !== null && (
+        <ViewIdeaModal
+          idea={ideaDummyData.find(idea => idea.id === selectedIdea)}
+          closeModal={closeModal}
+          onSave={handleSave}
+        />
+      )}
+      <h2>My Ideas</h2>
+      <hr />
+      {openIdeationModal && <IdeationModal closeModal={toggleIdeationModal} />}
+      <div className="idea-card-container">
+        {sortedIdeas.map((idea) => (
+          <IdeaCard
+            key={idea.id}
+            id={idea.id}
+            title={idea.title}
+            description={idea.description}
+            projectFeatures={idea.projectFeatures}
+            dayGenerated={idea.dayGenerated}
+            impact={idea.impact}
+            feasibility={idea.feasibility}
+            difficulty={idea.difficulty}
+            category={idea.category}
+            bookmarked={idea.bookmarked}
+            openModal={openModalForId}
+          />
+        ))}
+      </div>
+    </div>
     </>
   );
 };
