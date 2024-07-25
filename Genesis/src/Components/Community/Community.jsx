@@ -96,8 +96,8 @@ const MiniNavbar = ({ filter, setFilter, toggleCreatePost, dropdownOpen, toggleD
                     </button>
                 </div>
                 <div id="myDropdown" className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
-                    <p onClick={() => handleDropdownItemClick('Oldest')}>Oldest</p>
                     <p onClick={() => handleDropdownItemClick('Newest')}>Newest</p>
+                    <p onClick={() => handleDropdownItemClick('Oldest')}>Oldest</p>
                     <p onClick={() => handleDropdownItemClick('Most Liked')}>Most Liked</p>
                 </div>
             </div>
@@ -122,9 +122,9 @@ const Community = () => {
 
     const sortPosts = (filter) => {
         let sorted = [...posts];
-        if (filter === 'Newest') {
+        if (filter === 'Oldest') {
             sorted.sort((a, b) => a.id - b.id);
-        } else if (filter === 'Oldest') {
+        } else if (filter === 'Newest') {
             sorted.sort((a, b) => b.id - a.id);
         } else if (filter === 'Most Liked') {
             sorted.sort((a, b) => b.likes - a.likes);
