@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Brainstorm.css';
+import dropdown_icon from '../../assets/png/dropdown_icon.png';
+// Components
+import Header from '../Shared/Header/Header';
 import IdeaCard from './IdeaCard/IdeaCard';
 import ViewIdeaModal from './ViewIdeaModal/ViewIdeaModal';
-import dropdown_icon from '../../assets/png/dropdown_icon.png';
-import CreatePost from '../Community/ForumPost/CreatePost';
 import IdeationModal from './IdeationModal/IdeationModal';
 
 const Brainstorm = () => {
@@ -81,87 +82,58 @@ const Brainstorm = () => {
       bookmarked: true,
     },
   ]);
-
-  const MiniNavbar = () => {
-    const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [filter, setFilter] = useState('Category');
-    const [showCreatePost, setShowCreatePost] = useState(false);
-    const [ideas, setIdeas] = useState(ideaDummyData);
-    const [sortedIdeas, setSortedIdeas] = useState([]);
-
-    const toggleDropdown = () => {
-      setDropdownOpen(!dropdownOpen);
-    };
-
-    const handleDropdownItemClick = (filterName) => {
-      setFilter(filterName);
-      setDropdownOpen(false);
-      sortIdeas(filterName);
-    };
-
-    const handleOutsideClick = (event) => {
-      if (!event.target.closest('.dropdown') && dropdownOpen) {
-        setDropdownOpen(false);
-      }
-    };
-
-    useEffect(() => {
-      window.addEventListener('click', handleOutsideClick);
-      return () => {
-        window.removeEventListener('click', handleOutsideClick);
-      };
-    }, [dropdownOpen]);
-
-    useEffect(() => {
-      sortIdeas(filter);
-    }, [filter, ideas]);
-
-    const sortIdeas = (filter) => {
-      let sorted = [...ideas];
-      if (filter === 'Oldest') {
-        sorted.sort((a, b) => new Date(a.dayGenerated) - new Date(b.dayGenerated));
-      } else if (filter === 'Newest') {
-        sorted.sort((a, b) => new Date(b.dayGenerated) - new Date(a.dayGenerated));
-      } else if (filter === 'Most Liked') {
-        sorted.sort((a, b) => b.impact - a.impact); // Assuming 'impact' is a proxy for likes
-      }
-      setSortedIdeas(sorted);
-    };
-
-    return (
-      <>
-        <div className="mini-navbar">
-          <div className="dropdown">
-            <div className="dropdown-view">
-              <button onClick={toggleDropdown} className="dropbtn">
-                {filter}
-                <img className="dropdown-icon" src={dropdown_icon} alt="dropdown icon" />
-              </button>
-            </div>
-            <div id="myDropdown" className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
-              <p onClick={() => handleDropdownItemClick('Newest')}>Newest</p>
-              <p onClick={() => handleDropdownItemClick('Oldest')}>Oldest</p>
-              <p onClick={() => handleDropdownItemClick('Most Liked')}>Most Liked</p>
-            </div>
-          </div>
-          <p className="new-post" onClick={() => setShowCreatePost(!showCreatePost)}> +</p>
-        </div>
-        {showCreatePost && <CreatePost />}
-        <div className="posts-container">
-          {sortedIdeas.map(idea => (
-            <IdeaCard key={idea.id} idea={idea} />
-          ))}
-           
-        </div>
-      </>
-    );
-  };
-
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [filter, setFilter] = useState('Category');
+  const [sortedIdeas, setSortedIdeas] = useState([]);
   const [selectedIdea, setSelectedIdea] = useState(null);
   const [openIdeationModal, setOpenIdeationModal] = useState(false);
 
+  const toggleDropdown = () => {
+    setDropdownOpen(prev => !prev);
+  };
+
+  const handleDropdownItemClick = (filterName) => {
+    setFilter(filterName);
+    setDropdownOpen(false);
+    sortIdeas(filterName);
+  };
+
+  const handleOutsideClick = (event) => {
+    if (!event.target.closest('.brainstorm-mini-dropdown') && dropdownOpen) {
+      setDropdownOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('click', handleOutsideClick);
+    return () => {
+      window.removeEventListener('click', handleOutsideClick);
+    };
+  }, [dropdownOpen]);
+
+  useEffect(() => {
+    sortIdeas(filter);
+  }, [filter, ideaDummyData]);
+
+  const sortIdeas = (filter) => {
+    let sorted = [...ideaDummyData];
+    if (filter === 'Oldest') {
+      sorted.sort((a, b) => new Date(a.dayGenerated) - new Date(b.dayGenerated));
+    } else if (filter === 'Newest') {
+      sorted.sort((a, b) => new Date(b.dayGenerated) - new Date(a.dayGenerated));
+    } else if (filter === 'Bookmarked') {
+      sorted.sort((a, b) => {
+        if (a.bookmarked === b.bookmarked) {
+          return 0;
+        }
+        return (a.bookmarked ? -1 : 1);
+      });
+    }
+    setSortedIdeas(sorted);
+  };
+  
   const toggleIdeationModal = () => {
-    setOpenIdeationModal(!openIdeationModal);
+    setOpenIdeationModal(prev => !prev);
   };
 
   const openModalForId = (ideaId) => {
@@ -173,52 +145,59 @@ const Brainstorm = () => {
   };
 
   const handleSave = (updatedIdea) => {
-    const updatedIdeas = ideaDummyData.map(idea => {
-      if (idea.id === updatedIdea.id) {
-        return updatedIdea;
-      }
-      return idea;
-    });
+    const updatedIdeas = ideaDummyData.map(idea => idea.id === updatedIdea.id ? updatedIdea : idea);
     setIdeaDummyData(updatedIdeas);
     closeModal();
   };
 
   return (
+    <>
+    <Header/>
     <div className="user-idea-container">
-      <MiniNavbar />
-      {selectedIdea !== null ? (
+      <div className="mini-navbar">
+        <div className="brainstorm-mini-dropdown">
+          <button onClick={toggleDropdown} className="brainstorm-dropbtn">
+            {filter}
+            <img className="dropdown-icon" src={dropdown_icon} alt="dropdown icon" />
+          </button>
+          <div className={`dropdown-brainstorm-content ${dropdownOpen ? 'show' : ''}`}>
+            <p onClick={() => handleDropdownItemClick('Newest')}>Newest</p>
+            <p onClick={() => handleDropdownItemClick('Oldest')}>Oldest</p>
+            <p onClick={() => handleDropdownItemClick('Bookmarked')}>Bookmarked</p>
+          </div>
+        </div>
+        <p className="new-post" onClick={toggleIdeationModal}>Add/Generate Ideas +</p>
+      </div>
+      {selectedIdea !== null && (
         <ViewIdeaModal
           idea={ideaDummyData.find(idea => idea.id === selectedIdea)}
           closeModal={closeModal}
           onSave={handleSave}
         />
-      ) : (
-        <>
-          <h2>My Ideas</h2>
-          <hr />
-          <p onClick={toggleIdeationModal} className="my-ideas-plus">My ideas +</p>
-          <div className="idea-card-container">
-            {ideaDummyData.map((idea) => (
-              <IdeaCard
-                key={idea.id}
-                id={idea.id}
-                title={idea.title}
-                description={idea.description}
-                projectFeatures={idea.projectFeatures}
-                dayGenerated={idea.dayGenerated}
-                impact={idea.impact}
-                feasibility={idea.feasibility}
-                difficulty={idea.difficulty}
-                category={idea.category}
-                bookmarked={idea.bookmarked}
-                openModal={openModalForId}
-              />
-            ))}
-          </div>
-          {openIdeationModal && <IdeationModal closeModal={toggleIdeationModal} />}
-        </>
       )}
+      <h2>My Ideas</h2>
+      <hr />
+      {openIdeationModal && <IdeationModal closeModal={toggleIdeationModal} />}
+      <div className="idea-card-container">
+        {sortedIdeas.map((idea) => (
+          <IdeaCard
+            key={idea.id}
+            id={idea.id}
+            title={idea.title}
+            description={idea.description}
+            projectFeatures={idea.projectFeatures}
+            dayGenerated={idea.dayGenerated}
+            impact={idea.impact}
+            feasibility={idea.feasibility}
+            difficulty={idea.difficulty}
+            category={idea.category}
+            bookmarked={idea.bookmarked}
+            openModal={openModalForId}
+          />
+        ))}
+      </div>
     </div>
+    </>
   );
 };
 
