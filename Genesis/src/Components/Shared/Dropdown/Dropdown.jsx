@@ -21,7 +21,7 @@ const Dropdown = ( { dropdownPlaceholder, dropdownOptions } ) => {
 
   // Close dropdown after clicking outside it
     const handleOutsideClick = (event) => {
-    if (!event.target.closest('.dropdown') && dropdownOpen) {
+    if (!event.target.closest('.shared-dropdown') && dropdownOpen) {
         setDropdownOpen(false);
     }
     };
@@ -38,18 +38,18 @@ const Dropdown = ( { dropdownPlaceholder, dropdownOptions } ) => {
 
 return (
     <>
-    <div className="dropdown-option-container">
+    <div className="shared-dropdown-option-container">
 
         {/* Dropdown */}
-        <div className="dropdown">
-        <div className="dropdown-view">
+        <div className="shared-dropdown">
+        <div className="shared-dropdown-view">
             <button onClick={toggleDropdown} className="dropbtn">
             {option}
             <img className="dropdown-icon" src={dropdown_icon_purple} alt="dropdown icon" />
             </button>
         </div>
 
-        <div id="myDropdown" className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
+        <div className={`shared-dropdown-content ${dropdownOpen ? 'show' : ''}`}>
         {dropdownOptions.map((option, index) => (
             <p key={index} onClick={() => handleDropdownItemClick(option)}>{option}</p>
         ))}

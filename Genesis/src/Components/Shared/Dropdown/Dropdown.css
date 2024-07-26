@@ -1,4 +1,4 @@
-.dropdown-option-container {
+.shared-dropdown-option-container {
     margin: 0px;
     width: fit-content;
     background-color: white;
@@ -8,7 +8,7 @@
 }
 
 
-.dropdown-view {
+.shared-dropdown-view {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,7 +60,7 @@
     outline: 2px solid #6C63FF;
 }
 
-.dropdown {
+.shared-dropdown {
     position: relative;
     display: inline-block;
 }
@@ -70,7 +70,7 @@
 }
 
 
-.dropdown-content {
+.shared-dropdown-content {
     border-radius: 10px;
     display: none;
     position: absolute;
@@ -85,14 +85,14 @@
     font-weight: 600;
 }
 
-.dropdown-content p {
+.shared-dropdown-content p {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown p:hover {background-color: #F5F2F2;}
+.shared-dropdown p:hover {background-color: #F5F2F2;}
 
 .show {
     display: block;

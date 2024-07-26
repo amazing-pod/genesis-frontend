@@ -68,15 +68,14 @@
 	}
 }
 
-/* Delete all code above to show as  */
-
 .idea-modal-content {
 	background-color: white;
-	width: 1000px;
+	width: 80%;
 	border-radius: 10px;
 	overflow: scroll;
 	scrollbar-width: smooth;
 	max-height: 95vh;
+	max-width: 1000px;
 }
 .view-idea-container {
 	margin: 15px;
@@ -214,3 +213,38 @@ select {
 	-moz-appearance: none;
 	text-overflow: "";
 }
+
+/* Responsive adjustments */
+@media (max-width: 750px) {
+    .modal-content {
+        width: 90%;
+    }
+
+	.view-idea-header > h2 {
+		font-size: 26px;
+	}
+
+	.view-idea-container > h3 {
+		font-size: 20px;
+	}
+
+	.view-idea-container > p {
+		font-size: 16px;
+	}
+
+	.idea-tag {
+		width: 150px;
+		font-size: 16px;
+	}
+
+
+
+
+}
+    
+    /* @media (max-width: 480px) {
+    .modal-content {
+        width: 95%;
+    }
+    } */
+    
