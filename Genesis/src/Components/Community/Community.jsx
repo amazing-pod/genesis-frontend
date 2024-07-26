@@ -90,12 +90,12 @@ const MiniNavbar = ({ filter, setFilter, toggleCreatePost, dropdownOpen, toggleD
         <div className="mini-navbar">
             <div className="dropdown">
                 <div className="dropdown-view">
-                    <button onClick={toggleDropdown} className="dropbtn">
+                    <button onClick={toggleDropdown} className="community-dropbtn">
                         {filter}
                         <img className="dropdown-icon" src={dropdown_icon} alt="dropdown icon" />
                     </button>
                 </div>
-                <div id="myDropdown" className={`dropdown-content ${dropdownOpen ? 'show' : ''}`}>
+                <div className={`community-dropdown-content ${dropdownOpen ? 'show' : ''}`}>
                     <p onClick={() => handleDropdownItemClick('Newest')}>Newest</p>
                     <p onClick={() => handleDropdownItemClick('Oldest')}>Oldest</p>
                     <p onClick={() => handleDropdownItemClick('Most Liked')}>Most Liked</p>
@@ -107,7 +107,7 @@ const MiniNavbar = ({ filter, setFilter, toggleCreatePost, dropdownOpen, toggleD
 };
 
 const Community = () => {
-    const [ posts, setPosts] = useState(samplePosts);
+    const [posts, setPosts] = useState(samplePosts);
     const [filter, setFilter] = useState('Newest');
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [showCreatePost, setShowCreatePost] = useState(false);

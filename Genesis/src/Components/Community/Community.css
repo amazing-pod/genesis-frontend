@@ -5,7 +5,6 @@
 .mini-navbar {
     margin-top: 30px;
     background-color:#FF6584;
-    /* background-color: #FF6584; */
     border-radius: 10px;
     margin-left: auto;
     margin-right: auto;
@@ -39,12 +38,7 @@
     border-radius: 10px;
 }
 
-
-#myDropdown > p {
-    color: white;
-}
-
-.dropbtn {
+.community-dropbtn {
     background-color: #FF6584;
     color: white;
     padding: 10px 10px 10px 15px;
@@ -60,7 +54,7 @@
     font-weight: 600;
 }
 
-.dropbtn:hover, .dropbtn:focus {
+.community-dropbtn:hover, .community-dropbtn:focus {
     background-color: #FF6584;
 }
 
@@ -74,7 +68,7 @@
 }
 
 
-.dropdown-content {
+.community-dropdown-content {
     border-radius: 10px;
     display: none;
     position: absolute;
@@ -89,14 +83,15 @@
     font-weight: 600;
 }
 
-.dropdown-content p {
-    color: black;
+.community-dropdown-content > p {
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
+    /* background-color: #F04164; */
 }
 
-.dropdown p:hover {background-color: #F04164;}
+.community-dropdown-content > p:hover {background-color: #F04164 !important;}
 
 .show {
     display: block;
@@ -107,7 +102,7 @@
 }
 
 @media screen and (max-width: 450px) {
-    .dropbtn {
+    .community-dropbtn {
         width: 160px;
         font-size: 16px;
     }
