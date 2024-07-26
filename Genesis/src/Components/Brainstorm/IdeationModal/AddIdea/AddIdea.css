@@ -9,6 +9,7 @@
     border: 1px solid #888;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: scroll;
 }
 
 .ideation-feature-user-info {
@@ -19,6 +20,10 @@
     width: 50%;
 }
 
+
+.ideation-feature-user-info > h2 {
+    font-size: 30px;
+}
 
 .ideation-feature-user-info > input {
     width: 450px;
@@ -37,6 +42,12 @@
     width: 450px;
 }
 
+.idea-description-info {
+    min-height: 100px;
+    border: none;
+    outline: 1px solid #fefefe;
+
+}
 .add-item-container > textarea {
     font-size: 20px;
 }

@@ -9,13 +9,17 @@ import Dropdown from "../../../Shared/Dropdown/Dropdown";
 const AddIdea = ( {closeModal}) => {
     const [newFeatureText, setNewFeatureText] = useState('');
     const [editedFeatures, setEditedFeatures] = useState([]);
+    const [newFeatureDescription, setNewFeatureDescription] = useState('');
 
 
     const addProjectIdea = () => {
         closeModal();
     }
 
-
+    const handleNewDescriptionChange = (e) => {
+        setNewFeatureDescription(e.target.value);
+    };
+    
     const handleFeatureAdd = () => {
         if (newFeatureText.trim() !== '') {
         const updatedFeatures = [...editedFeatures, newFeatureText];
@@ -35,9 +39,21 @@ const AddIdea = ( {closeModal}) => {
             <div className="ideation-feature-user-info">
                 <h2>Add a new project idea</h2>
                 <p>Enter the information below to add a new project to your list</p>
+                <span className='ideation-project-text-format'><p>1.</p><Dropdown dropdownPlaceholder="Choose a category:" dropdownOptions={['Education', 'Environment', 'Healthcare', 'News',  'Technology',]}/></span>
                 {/* Add respective items here */}
                 <h2>Project Name:</h2>
                 <input type="text" placeholder='Project Title...'/>
+                <h2>Description:</h2>
+                <textarea
+                    type="text"
+                    value={newFeatureDescription}
+                    onChange={handleNewDescriptionChange}
+                    placeholder="Enter new issue"
+                    className="idea-description-info"
+                    >
+                    </textarea>
+
+                
                 <h2>Features:</h2>
                 {editedFeatures.map((feature, index) => (
                     <p key={index}>{index + 1}. {feature}</p>

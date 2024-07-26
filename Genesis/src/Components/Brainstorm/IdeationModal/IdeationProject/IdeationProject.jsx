@@ -83,8 +83,7 @@ const IdeationProject = ( {closeModal}) => {
                     <div className="ideation-project-user-info">
                     <h2>Create Project Ideas</h2>
                         <p>To generate project ideas, complete the following steps below:</p>
-                        {/* <h2 className="category-choice">Choose a category</h2> */}
-                        <span className='ideation-project-text-format'><p>1.</p><Dropdown dropdownPlaceholder="Choose a category" dropdownOptions={['Education', 'Environment', 'Healthcare', 'News',  'Technology',]}/></span>
+                        <span className='ideation-project-text-format'><p>1.</p><Dropdown dropdownPlaceholder="Choose a category:" dropdownOptions={['Education', 'Environment', 'Healthcare', 'News',  'Technology',]}/></span>
                         <span>
                         <p>2. Based on your chosen category, describe any issues you would like your project to address</p>
                         </span>
@@ -92,10 +91,10 @@ const IdeationProject = ( {closeModal}) => {
                         className="tooltip-container"
                         onMouseEnter={() => setShowTooltip(true)}
                      onMouseLeave={() => setShowTooltip(false)}
-                         >
+                        >
                         <img src={help_icon} alt="help icon" />
                          {showTooltip && (
-                             <div className="tooltip-text">Struggling? Think and research any issues you observe within your local, school or other personal communities</div>
+                            <div className="tooltip-text">Struggling? Think and research any issues you observe within your local, school or other personal communities</div>
                             )}
                          </div>
                 {/* Add respective items here */}

@@ -144,6 +144,13 @@ span > p {
     display: inline-block;
 }
 
+.idea-description-info {
+    width: 450px;
+    height: 200px;
+    padding: 1em;
+    resize: vertical;
+}
+
 .tooltip-container .tooltip-text {
     visibility: hidden;
     width: 250px; /* Adjust width as needed */
