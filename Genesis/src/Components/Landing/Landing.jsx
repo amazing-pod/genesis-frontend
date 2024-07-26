@@ -10,7 +10,7 @@ const Landing = () => {
   return (
     <>
     {/* Landing Navbar */}
-    <header className="navbar">
+    <header className="landing-navbar">
       <h6 className="genesis-text">Genesis</h6>
       <div className="button-container">
         <Link to="/login" className="landing-login-button">Login</Link>
@@ -21,7 +21,7 @@ const Landing = () => {
       </div>
     </header>
 
-    <div className="page-container">
+    <div className="landing-page-container">
       {/* Header */}
       <div className="landing-item-container">
         <div className="landing-info">

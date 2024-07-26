@@ -84,7 +84,7 @@ const IdeationProject = ( {closeModal}) => {
                     <h2>Create Project Ideas</h2>
                         <p>To generate project ideas, complete the following steps below:</p>
                         {/* <h2 className="category-choice">Choose a category</h2> */}
-                        <span><p>1.</p><Dropdown dropdownOptions={['Education', 'Environment', 'Healthcare', 'News',  'Technology',]}/></span>
+                        <span className='ideation-project-text-format'><p>1.</p><Dropdown dropdownOptions={['Education', 'Environment', 'Healthcare', 'News',  'Technology',]}/></span>
                         <span>
                         <p>2. Based on your chosen category, describe any issues you would like your project to address</p>
                         </span>
