@@ -58,7 +58,7 @@ const Brainstorm = () => {
 			impact: 3,
 			feasibility: 5,
 			difficulty: 2,
-			category: "Healthcare",
+			category: "Technology",
 			bookmarked: false,
 		},
 		{

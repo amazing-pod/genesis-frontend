@@ -36,7 +36,7 @@ const AddIdea = ({ closeModal }) => {
 				{
 					title: newFeatureName,
 					description: newFeatureDescription,
-					category: "Healthcare",
+					category: "Education",
 					features: editedFeatures,
 					tags: [],
 					impact,
