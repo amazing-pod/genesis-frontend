@@ -109,7 +109,7 @@ img {
 	margin-left: auto;
 }
 
-h2 {
+.landing-header {
 	font-size: 50px;
 }
 
@@ -135,7 +135,7 @@ p {
 	.landing-page-container {
 		width: 95%;
 	}
-	h2 {
+	.landing-header {
 		font-size: 40px;
 	}
 }
@@ -210,13 +210,13 @@ p {
 		width: 100px;
 		height: 200px;
 	}
-	h2 {
+	.landing-header {
 		font-size: 23px;
 	}
 	p {
 		font-size: 20px;
 	}
-	h3 {
+	.landing-page-container > h3 {
 		font-size: 23px;
 		text-align: start;
 		text-align: center;
@@ -275,13 +275,13 @@ p {
 		width: 100px;
 		height: 200px;
 	}
-	h2 {
+	.landing-header {
 		font-size: 20px;
 	}
 	p {
 		font-size: 16px;
 	}
-	h3 {
+	.landing-page-container > h3 {
 		font-size: 20px;
 		text-align: start;
 		text-align: center;

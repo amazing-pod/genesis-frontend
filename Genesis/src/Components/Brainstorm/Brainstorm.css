@@ -8,13 +8,10 @@
 }
 
 .idea-card-container {
-  justify-content: center;
-  margin: auto;
   display: flex;
   flex-wrap: wrap;
-  margin-top: 20px;
-  outline: 4px solid coral;
   gap: 30px;
+  padding: 20px 0px 30px 0px;
 }
 
 .mini-navbar {
