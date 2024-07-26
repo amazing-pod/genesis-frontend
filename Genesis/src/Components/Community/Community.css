@@ -2,6 +2,11 @@
     width: 95%;
     margin: auto;
 }
+
+.community-page-container > h2 {
+    font-weight: 400;
+}
+
 .mini-navbar {
     margin-top: 30px;
     background-color:#FF6584;

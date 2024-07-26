@@ -152,6 +152,7 @@ const Community = () => {
                     dropdownOpen={dropdownOpen}
                     toggleDropdown={toggleDropdown}
                 />
+                <h2>Community Discussion</h2>
                 <hr />
                 {showCreatePost && (
                     <CreatePost onCreatePost={handleCreatePost} />

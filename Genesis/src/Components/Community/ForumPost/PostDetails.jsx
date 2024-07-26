@@ -140,7 +140,6 @@ const PostDetails = () => {
           </div>
           {/* If the user made the post, put a delete button here */}
           <div className="post-separator"></div>
-
           <div className="post-details">
             <h2>Discussion</h2>
             <hr />
