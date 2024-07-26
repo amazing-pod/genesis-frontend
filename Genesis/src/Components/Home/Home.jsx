@@ -110,7 +110,7 @@ const Home = () => {
         {/* Main Content */}
         <div className="home-main-content-container">  
           <div className="home-main-content">
-            <h2>Good morning, <b>Username</b>.</h2>
+            <h2>Hello, <b>Username</b>.</h2>
             <p>Welcome back. Here, you can find a quick summary of your bookmarked and standout-ideas, 
               while staying up to date with the newest forum posts</p>
             <h3>Bookmarked Ideas</h3>
