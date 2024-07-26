@@ -20,6 +20,14 @@
 }
 
 
+.ideation-feature-user-info > input {
+    width: 450px;
+    padding: 1em;
+    border-radius: 10px;
+    border: 1px solid rgb(118, 118, 118);
+    font-size: 20px;
+}
+
 .add-idea-container {
     display: flex;
 }
@@ -29,8 +37,8 @@
     width: 450px;
 }
 
-.add-item-container > input {
-    width: 450px;
+.add-item-container > textarea {
+    font-size: 20px;
 }
 
 /* Button styling */
