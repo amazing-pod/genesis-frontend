@@ -9,101 +9,10 @@ import back_icon from "../../../assets/png/backtrack_icon.png";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 
-const samplePosts = [
-	{
-		id: 1,
-		userProfilePhoto: "https://placehold.co/50x50",
-		username: "Brenda Aceves",
-		timeAgo: "1 day ago",
-		title: "Appreciation Post",
-		content:
-			"I just wanted to give a HUGE shout out to my team for finishing our first version of our product! If it weren’t for my incredibly talented developers and designers, I couldn’t imagine being where I’m at..",
-		likes: 4,
-		comments: [
-			{
-				user: "User1",
-				text: "Congratulations!",
-				userProfilePhoto: "https://placehold.co/50x50",
-			},
-			{
-				user: "User2",
-				text: "Well done team!",
-				userProfilePhoto: "https://placehold.co/50x50",
-			},
-		],
-	},
-	{
-		id: 2,
-		userProfilePhoto: "https://placehold.co/50x50",
-		username: "John Doe",
-		timeAgo: "2 days ago",
-		title: "Feature Suggestion",
-		content:
-			"I think it would be great if we could add a dark mode to the app. It's becoming a standard feature and our users would appreciate it.",
-		likes: 7,
-		comments: [
-			{
-				user: "User3",
-				text: "I second this!",
-				userProfilePhoto: "https://placehold.co/50x50",
-			},
-			{
-				user: "User4",
-				text: "Dark mode would be awesome!",
-				userProfilePhoto: "https://placehold.co/50x50",
-			},
-		],
-	},
-	{
-		id: 3,
-		userProfilePhoto: "https://placehold.co/50x50",
-		username: "Alice Smith",
-		timeAgo: "3 days ago",
-		title: "Bug Report",
-		content:
-			"I'm experiencing a crash when I try to upload an image. Has anyone else encountered this issue?",
-		likes: 2,
-		comments: [
-			{
-				user: "User5",
-				text: "Yes, I'm having the same problem.",
-				userProfilePhoto: "https://placehold.co/50x50",
-			},
-			{
-				user: "User6",
-				text: "It works fine for me. Maybe try reinstalling?",
-				userProfilePhoto: "https://placehold.co/50x50",
-			},
-		],
-	},
-	{
-		id: 4,
-		userProfilePhoto: "https://placehold.co/50x50",
-		username: "Bob Johnson",
-		timeAgo: "4 days ago",
-		title: "Weekly Standup",
-		content:
-			"Reminder: Our weekly standup meeting is tomorrow at 10 AM. Please make sure to have your updates ready.",
-		likes: 1,
-		comments: [
-			{
-				user: "User7",
-				text: "Got it!",
-				userProfilePhoto: "https://placehold.co/50x50",
-			},
-			{
-				user: "User8",
-				text: "Thanks for the reminder.",
-				userProfilePhoto: "https://placehold.co/50x50",
-			},
-		],
-	},
-];
-
 const PostDetails = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
-	const [post, setPost] = useState(null);
+	const [post, setPost] = useState({});
 	const [likes, setLikes] = useState(0);
 	const [liked, setLiked] = useState(false);
 	const [comments, setComments] = useState([]);
@@ -185,10 +94,10 @@ const PostDetails = () => {
 						<div className="post-user-info">
 							<div className="post-user-profile">
 								<img
-									src={post.author.profile.picture}
+									src={post.author?.profile?.picture || "default-image-url"}
 									alt="user profile photo"
 								/>
-								<p>{post.author.username}</p>
+								<p>{post.author?.username || "default-image-url"}</p>
 							</div>
 							<p>{post.createdAt}</p>
 						</div>
