@@ -49,19 +49,24 @@ const PostDetails = () => {
 	};
 
 	const handleCommentSubmit = (e) => {
-		e.preventDefault();
-		if (newComment.trim()) {
-			const updatedComments = [
-				...comments,
+		const createReply = async () => {
+			const response = await axios.post(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads`,
 				{
-					user: "CurrentUser",
-					text: newComment,
-					userProfilePhoto: "https://placehold.co/50x50",
-					id: comments.length + 1,
-				},
-			];
+					authorId: user.id,
+					content: newComment,
+					replyToId: id,
+				}
+			);
+			console.log(response.data);
+			const updatedComments = [...comments, response.data];
 			setComments(updatedComments);
 			setNewComment("");
+		};
+
+		e.preventDefault();
+		if (newComment.trim()) {
+			createReply();
 		}
 	};
 
@@ -98,7 +103,7 @@ const PostDetails = () => {
 									src={post.author?.profile?.picture || "default-image-url"}
 									alt="user profile photo"
 								/>
-								<p>{post.author?.username || "default-image-url"}</p>
+								<p>{post.author?.username || "default-username"}</p>
 							</div>
 							<p>{post.createdAt}</p>
 						</div>
@@ -131,10 +136,13 @@ const PostDetails = () => {
 								<div className="comment" key={index}>
 									<div className="user-comment-header">
 										<img
-											src={comment.author.profile.picture}
+											className="user-profile-photo"
+											src={
+												comment.author?.profile?.picture || "default-image-url"
+											}
 											alt="user profile photo"
 										/>
-										<h3>{comment.author.username}</h3>
+										<h3>{comment.author?.username || "default-username"}</h3>
 									</div>
 									<p>{comment.content}</p>
 									{comment.user === "CurrentUser" && (
