@@ -94,6 +94,7 @@ const PostDetails = () => {
 						<div className="post-user-info">
 							<div className="post-user-profile">
 								<img
+									className="user-profile-photo"
 									src={post.author?.profile?.picture || "default-image-url"}
 									alt="user profile photo"
 								/>

@@ -87,7 +87,7 @@ const ForumPost = ({ post }) => {
 	};
 
 	const handlePostClick = () => {
-		navigate(`/community/post/${post.id}`); // Navigate to the post details page
+		navigate(`/community/threads/${post.id}`); // Navigate to the post details page
 	};
 
 	return (

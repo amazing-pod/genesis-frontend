@@ -32,7 +32,7 @@ const router = createBrowserRouter([
 					{ path: "/home", element: <Home /> },
 					{ path: "/user-profile", element: <UserProfile /> },
 					{ path: "/community", element: <Community /> },
-					{ path: "/community/post/:id", element: <PostDetails /> },
+					{ path: "/community/threads/:id", element: <PostDetails /> },
 					{ path: "/brainstorm", element: <Brainstorm /> },
 				],
 			},
