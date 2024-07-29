@@ -7,6 +7,7 @@ import Header from "../Shared/Header/Header";
 import IdeaCard from "./IdeaCard/IdeaCard";
 import ViewIdeaModal from "./ViewIdeaModal/ViewIdeaModal";
 import IdeationModal from "./IdeationModal/IdeationModal";
+import { DropdownProvider } from "../../context/DropdownContext";
 
 const Brainstorm = () => {
 	const [ideaDummyData, setIdeaDummyData] = useState([

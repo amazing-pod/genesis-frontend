@@ -12,6 +12,7 @@ import ProtectedLayout from "./layouts/ProtectedLayout.jsx";
 import RootLayout from "./layouts/RootLayout.jsx";
 import UserProfile from "./components/Shared/UserProfile/UserProfile.jsx";
 import PostDetails from "./components/Community/ForumPost/PostDetails.jsx";
+import { DropdownProvider } from "./context/DropdownContext.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -42,6 +43,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<DropdownProvider>
+			<RouterProvider router={router} />
+		</DropdownProvider>
 	</React.StrictMode>
 );

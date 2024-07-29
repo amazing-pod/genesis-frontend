@@ -72,6 +72,13 @@ const PostDetails = () => {
 
 	const handleCommentDelete = (commentId) => {
 		setComments(comments.filter((comment) => comment.id !== commentId));
+		const deleteComment = async () => {
+			const response = await axios.delete(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${commentId}`
+			);
+			console.log(response.data);
+		};
+		deleteComment();
 	};
 
 	const handleBackClick = () => {
@@ -138,14 +145,18 @@ const PostDetails = () => {
 										<img
 											className="user-profile-photo"
 											src={
-												comment.author?.profile?.picture || "default-image-url"
+												comment.deleted
+													? "https://placehold.co/50"
+													: comment.author?.profile?.picture
 											}
 											alt="user profile photo"
 										/>
-										<h3>{comment.author?.username || "default-username"}</h3>
+										<h3>
+											{comment.deleted ? "[deleted]" : comment.author?.username}
+										</h3>
 									</div>
 									<p>{comment.content}</p>
-									{comment.user === "CurrentUser" && (
+									{!comment.deleted && comment.author?.id === user.id && (
 										<img
 											className="delete-icon"
 											src={delete_icon}

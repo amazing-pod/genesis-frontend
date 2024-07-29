@@ -4,14 +4,13 @@ import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 
 const CreatePost = ({ onCreatePost }) => {
-	const [username, setUsername] = useState("");
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const { user } = useUser();
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		if (username && title && content) {
+		if (title && content) {
 			// const newPost = {
 			// 	id: Date.now(),
 			// 	userProfilePhoto: "https://placehold.co/50x50", // Default profile photo
@@ -38,7 +37,6 @@ const CreatePost = ({ onCreatePost }) => {
 				console.log(response.data);
 			};
 			createPost();
-			setUsername("");
 			setTitle("");
 			setContent("");
 		}
@@ -47,14 +45,6 @@ const CreatePost = ({ onCreatePost }) => {
 	return (
 		<form className="create-post-form" onSubmit={handleSubmit}>
 			<div className="create-post-form-content">
-				<input
-					type="text"
-					name="username"
-					placeholder=""
-					value={username}
-					onChange={(e) => setUsername(e.target.value)}
-					required
-				/>
 				<input
 					type="text"
 					name="title"

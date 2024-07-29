@@ -47,6 +47,22 @@ const IdeationProject = ({ closeModal }) => {
 
 	const addProjectIdea = () => {
 		// Update database here, before modal closes.
+		closeModal();
+	};
+
+	const handleFeatureAdd = () => {
+		if (newFeatureText.trim() !== "") {
+			const updatedFeatures = [...editedFeatures, newFeatureText];
+			setEditedFeatures(updatedFeatures);
+			setNewFeatureText(""); // Clear the input after adding
+		}
+	};
+
+	const handleNewFeatureChange = (e) => {
+		setNewFeatureText(e.target.value);
+	};
+
+	const addStep = () => {
 		const createIdea = async () => {
 			const response = await axios.post(
 				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/api/chat`,
@@ -80,23 +96,6 @@ const IdeationProject = ({ closeModal }) => {
 			// console.log(response2.data);
 		};
 		createIdea();
-
-		closeModal();
-	};
-
-	const handleFeatureAdd = () => {
-		if (newFeatureText.trim() !== "") {
-			const updatedFeatures = [...editedFeatures, newFeatureText];
-			setEditedFeatures(updatedFeatures);
-			setNewFeatureText(""); // Clear the input after adding
-		}
-	};
-
-	const handleNewFeatureChange = (e) => {
-		setNewFeatureText(e.target.value);
-	};
-
-	const addStep = () => {
 		setStep(step + 1);
 	};
 

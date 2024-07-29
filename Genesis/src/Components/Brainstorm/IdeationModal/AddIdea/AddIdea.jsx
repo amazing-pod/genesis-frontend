@@ -5,12 +5,14 @@ import add_idea_graphic from "../../../../assets/png/add_idea.png";
 // Import relevant modals
 import IdeationModal from "../IdeationModal";
 import Dropdown from "../../../Shared/Dropdown/Dropdown";
+import { useDropdown } from "../../../../context/DropdownContext";
 
 const AddIdea = ({ closeModal }) => {
 	const [newFeatureText, setNewFeatureText] = useState("");
 	const [editedFeatures, setEditedFeatures] = useState([]);
 	const [newFeatureName, setNewFeatureName] = useState("");
 	const [newFeatureDescription, setNewFeatureDescription] = useState("");
+	const { option } = useDropdown();
 
 	const addProjectIdea = () => {
 		closeModal();
@@ -19,7 +21,7 @@ const AddIdea = ({ closeModal }) => {
 			const response = await axios.post(
 				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/api/chat`,
 				{
-					prompt: `Based on the category: Healthcare, title: ${newFeatureName}, description: ${newFeatureDescription}, and the following features: ${editedFeatures}, provide only a numeric impact, feasibility, and difficulty rating out of 5 for this project idea always in this exact format without any white space: impact:#,feasibility: #,difficulty:#`,
+					prompt: `Based on the category: ${option}, title: ${newFeatureName}, description: ${newFeatureDescription}, and the following features: ${editedFeatures}, provide only a numeric impact, feasibility, and difficulty rating out of 5 for this project idea always in this exact format without any white space: impact:#,feasibility: #,difficulty:#`,
 				}
 			);
 
@@ -36,7 +38,7 @@ const AddIdea = ({ closeModal }) => {
 				{
 					title: newFeatureName,
 					description: newFeatureDescription,
-					category: "Education",
+					category: option,
 					features: editedFeatures,
 					tags: [],
 					impact,
