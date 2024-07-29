@@ -3,6 +3,8 @@ import "./Community.css";
 import Header from '../Shared/Header/Header';
 import MiniNavbar from "../Shared/MiniNavbar/MiniNavbar";
 import ForumPost from './ForumPost/ForumPost';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const samplePosts = [
     {
@@ -73,6 +75,7 @@ const Community = () => {
                 {samplePosts.map(post => (
                     <ForumPost key={post.id} post={post} />
                 ))}
+				<ToastContainer />
             </div>
         </>
     );

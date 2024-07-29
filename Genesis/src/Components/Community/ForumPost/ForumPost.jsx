@@ -4,16 +4,20 @@ import "./ForumPost.css";
 import upvote_inactive_icon from "../../../assets/png/upvote_inactive.png";
 import upvote_active_icon from "../../../assets/png/upvote_active.png";
 import message_icon from "../../../assets/png/reply_icon.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ForumPost = ({ post }) => {
     const [likes, setLikes] = useState(post.likes);
     const [liked, setLiked] = useState(false);
     const navigate = useNavigate();
+    const notify = () => toast("Thank you for liking a post");
 
     const handleLikeClick = (event) => {
         event.stopPropagation(); // Prevents navigating to the post when liking
         setLikes(liked ? likes - 1 : likes + 1);
         setLiked(!liked);
+        notify();
     };
 
     const handlePostClick = () => {
@@ -40,6 +44,7 @@ const ForumPost = ({ post }) => {
                     <img onClick={handleLikeClick} className="forum-icon" src={liked ? upvote_active_icon : upvote_inactive_icon} alt="upvote status" />
                     <p>{post.comments.length}</p>
                     <img className="forum-icon" src={message_icon} alt="Message Icon" />
+                    <ToastContainer/>
                 </div>
             </div>
         </div>

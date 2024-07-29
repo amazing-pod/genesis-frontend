@@ -7,6 +7,7 @@ import message_icon from "../../../assets/png/reply_icon.png";
 import delete_icon from "../../../assets/png/delete_icon.png";
 import back_icon from "../../../assets/png/backtrack_icon.png";
 
+
 const samplePosts = [
   {
     id: 1,
@@ -75,9 +76,11 @@ const PostDetails = () => {
   const [comments, setComments] = useState(post.comments);
   const [newComment, setNewComment] = useState("");
 
+  
   const handleLikeClick = () => {
     setLikes(liked ? likes - 1 : likes + 1);
     setLiked(!liked);
+    
   };
 
   const handleCommentChange = (e) => {
