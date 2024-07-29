@@ -50,13 +50,13 @@ const samplePosts = [
        user: "User3",
        text: "I second this!", 
        userProfilePhoto: "https://placehold.co/50x50",
-       replies: [] 
+       replies: [], 
       },
       { id: 4, 
         user: "User4", 
         text: "Dark mode would be awesome!", 
         userProfilePhoto: "https://placehold.co/50x50",
-        replies: [] 
+        replies: [], 
       },
     ],
   },
@@ -74,13 +74,13 @@ const samplePosts = [
         user: "User5", 
         text: "Yes, I'm having the same problem.", 
         userProfilePhoto: "https://placehold.co/50x50",
-        replies:[] 
+        replies:[], 
       },
       { id: 6, 
         user: "User6", 
         text: "It works fine for me. Maybe try reinstalling?", 
         userProfilePhoto: "https://placehold.co/50x50",
-        replies: [] 
+        replies: [], 
       },
     ],
   },
@@ -98,13 +98,13 @@ const samplePosts = [
         user: "User7", 
         text: "Got it!", 
         userProfilePhoto: "https://placehold.co/50x50",
-        replies: [] 
+        replies: [], 
       },
       { id: 8, 
         user: "User8", 
         text: "Thanks for the reminder.", 
         userProfilePhoto: "https://placehold.co/50x50",
-        replies: [] 
+        replies: [],
       },
     ],
   },
@@ -163,6 +163,24 @@ const PostDetails = () => {
     setComments(comments.filter((comment) => comment.id !== commentId));
   };
 
+  const handleReplyDelete = (commentId, replyId) => {
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === commentId) {
+        return {
+          ...comment,
+          replies: comment.replies.filter((reply) => reply.id !== replyId),
+        };
+      }
+      return comment;
+    });
+    setComments(updatedComments);
+  };
+
+  const handlePostDelete = (postId) => {
+    setPosts(post.filter((post) => post.id !== postId));
+    navigate("/community");
+  };
+
   const handleBackClick = () => {
     navigate("/community");
   };
@@ -196,6 +214,14 @@ const PostDetails = () => {
               />
               <p>{comments.length}</p>
               <img className="forum-icon" src={message_icon} alt="Message Icon" />
+              {post.username === user.username && (
+                <img
+                  className="delete-icon"
+                  src={delete_icon}
+                  alt="Delete Post"
+                  onClick={() => handlePostDelete(post.id)}
+                />
+              )}
             </div>
           </div>
           <div className="post-separator"></div>
@@ -236,6 +262,14 @@ const PostDetails = () => {
                             <h4>{reply.user}</h4>
                           </div>
                           <p>{reply.text}</p>
+                          {reply.user === "CurrentUser" && (
+                            <img
+                              className="delete-icon"
+                              src={delete_icon}
+                              alt="Delete Reply"
+                              onClick={() => handleReplyDelete(comment.id, reply.id)}
+                            />
+                            )}
                         </div>
                       ))}
                   </div>
