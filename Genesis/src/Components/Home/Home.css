@@ -1,0 +1,101 @@
+.home-sidebar-container { grid-area: sidebar}
+.item2 { grid-area: main;}
+
+.home-page-container {
+    display: grid;
+    grid-template-areas:
+    'sidebar main'
+    'sidebar main'
+    'sidebar main';
+    grid-template-columns: 450px auto;
+    outline: 3px solid #2196F3;
+}
+
+.home-page-container > div {
+    background-color: white;
+    /* outline: 1px solid blue; */
+    font-size: 30px;
+}
+
+/* Mini Sidebar Container */
+.mini-idea-container {
+    display: flex;
+    flex-direction: column;
+    gap: 70px;
+    margin: 50px 0px;
+}
+
+
+.home-page-container > .home-main-content-container {
+    background-color: #F0F0F0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.home-main-content {
+    padding: 1em;
+    margin: 1em;
+    background-color: white;
+    border-radius: 10px;
+    text-align: start;
+    width: 95%;
+}
+
+.home-main-content > h2 {
+    color: #FF6584;
+    font-weight: 400;
+}
+
+.home-main-content > h3, .home-sidebar-container > h3 {
+    color: #FF6584;
+    margin: 0px;
+    font-size: 36px;
+}
+
+.home-main-content > hr, .home-sidebar-container > hr {
+    border: 1px solid #FF6584;
+    width: 330px;
+}
+
+.home-main-content > p {
+    font-size: 30px;
+}
+
+.home-sidebar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1em 0em;
+}
+
+/* Bookmarked Ideas Container */
+.bookmark-card-container {
+    display: flex;
+    gap: 50px;
+    padding: 1em;
+    margin: 20px 0px 40px 0px;
+    overflow: scroll;
+    outline: 2px solid #FF6584;
+    border-radius: 10px;
+}
+
+.bookmark-card-container > *, .bookmark-main-container > * {
+    min-width: 450px;
+    max-width: 450px;
+}
+
+.bookmark-main-container {
+    display: flex;
+    gap: 50px;
+}
+
+.home-main-content-container {
+    width: auto;
+}
+
+.recent-post-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}

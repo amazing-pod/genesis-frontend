@@ -24,8 +24,9 @@ const IdeationModal = ({ closeModal }) => {
             default:
                 return (
                     <>
+                    <div className="ideation-modal">
                         <div className="ideation-modal-header">
-                            <span className="ideation-user-welcome">Welcome, <b>Username</b>.</span>
+                            <span className="ideation-user-welcome">Welcome, <b>Username.</b></span>
                             <img src={close_icon} alt="close icon" onClick={closeModal} />
                         </div>
                         <hr />
@@ -37,6 +38,7 @@ const IdeationModal = ({ closeModal }) => {
                             <button onClick={() => handleButtonClick('feature')}>I'm looking to generate new project features</button>
                             <button onClick={() => handleButtonClick('addIdea')}>I would like to add a project idea to my idea list</button>
                         </div>
+                    </div>
                     </>
                 );
         }
@@ -44,9 +46,7 @@ const IdeationModal = ({ closeModal }) => {
 
     return (
         <div className="modal">
-            <div className="ideation-modal-content">
-                {renderModalContent()}
-            </div>
+            {renderModalContent()}
         </div>
     );
 };

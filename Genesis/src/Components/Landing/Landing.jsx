@@ -10,7 +10,7 @@ const Landing = () => {
   return (
     <>
     {/* Landing Navbar */}
-    <header className="navbar">
+    <header className="landing-navbar">
       <h6 className="genesis-text">Genesis</h6>
       <div className="button-container">
         <Link to="/login" className="landing-login-button">Login</Link>
@@ -21,11 +21,11 @@ const Landing = () => {
       </div>
     </header>
 
-    <div className="page-container">
+    <div className="landing-page-container">
       {/* Header */}
       <div className="landing-item-container">
         <div className="landing-info">
-        <h2>Transform Ideas into <span className="emphasis-text">Reality</span></h2>
+        <h2 className="landing-header">Transform Ideas into <span className="emphasis-text">Reality</span></h2>
         <p>At <b>Genesis</b>, we help you turn your ideas into successful projects. 
           Whether you're brainstorming a new concept or managing an ongoing project, our 
           platform provides the tools you need to bring your vision to life.
@@ -39,7 +39,7 @@ const Landing = () => {
       {/* Core Features */}
       <div className="landing-item-container">
         <div className="landing-info">
-        <h2>We’ll take <span className="emphasis-text">you</span> to the finish line</h2>
+        <h2 className="landing-header">We’ll take <span className="emphasis-text">you</span> to the finish line</h2>
         <p>Whether you’re looking to come up with a fresh and new innovative project idea 
           or are in the middle of project development, we’re here to help <b>you</b> stay on track
           towards project completion.
@@ -50,7 +50,7 @@ const Landing = () => {
 
       <div className="landing-item-container">
         <div className="landing-info">
-        <h2>Unleash your project <span className="emphasis-text">potential</span></h2>
+        <h2 className="landing-header">Unleash your project <span className="emphasis-text">potential</span></h2>
         <p>Unleash the power of AI to brainstorm new project features and ideas. Our 
           AI tools provide innovative suggestions, helping you enhance your projects 
           with cutting-edge concepts and solutions. Stay ahead of the curve with 
@@ -62,7 +62,7 @@ const Landing = () => {
 
       <div className="landing-item-container">
         <div className="landing-info">
-        <h2>Find your <span className="emphasis-text">community</span></h2>
+        <h2 className="landing-header">Find your <span className="emphasis-text">community</span></h2>
         <p>Connect with like-minded developers and project managers on our community forum. 
           Share your projects, get feedback on your ideas, and collaborate with others to 
           bring your vision to life. Project managers can also use this space to share 
@@ -75,7 +75,7 @@ const Landing = () => {
 
       {/* Ask user to sign up */}
       <div className="landing-end">
-        <h2>What are you waiting for?</h2>
+        <h2 className="landing-header">What are you waiting for?</h2>
         <p className="landing-register">Register now and get started today</p>
         <Link to="/register" className="landing-register-button">Register</Link>
       </div>

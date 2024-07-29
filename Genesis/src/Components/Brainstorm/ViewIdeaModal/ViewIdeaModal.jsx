@@ -132,7 +132,7 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
           {editing ? (
             <select value={selectedTag} onChange={handleTagChange}>
               <option value="" disabled hidden>Choose a category</option>
-              <option value="security">Security</option>
+              <option value="security"></option>
               <option value="travel">Travel</option>
               <option value="healthcare">Healthcare</option>
               <option value="environment">Environment</option>

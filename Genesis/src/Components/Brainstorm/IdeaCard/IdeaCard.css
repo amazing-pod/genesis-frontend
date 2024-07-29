@@ -1,45 +1,51 @@
 .idea-card {
-    width: 450px;
+    width: 400px;
     display: flex;
     flex-direction: column;
     outline: 1px solid #C0C0C0;
     border-radius: 10px;
 }
 
+.idea-card > * {
+    padding: 0 0.5em;
+}
+
 .idea-header {
-    display: flex;
-    justify-content: space-between;
     background-color: #F5F2F2;
     outline: 1px solid #C0C0C0;
-    align-items: center;
     border-radius: 10px 10px 0px 0px;
     padding: 0em 0.5em;
 }
 
-h3 {
-    text-align: start;
-    margin: 20px 15px;
-    font-size: 26px;
-}
 
-.idea-description {
-    margin: 5px 15px 0px 15px;
+.idea-header > h3 {
+    font-size: 23px;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+.idea-description {
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* Number of lines to show before truncating */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    line-height: 2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 4em; 
+    margin: 0px;
 }
 
 .idea-rating {
-    margin: 0px 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #FF6584;
     font-size: 26px;
     font-weight: 600;
+}
+
+
+.idea-rating > p {
+    margin: 7px 0px;
 }
 
 .rating-circles {
@@ -61,38 +67,96 @@ h3 {
     background-color: #D9D9D9;
 }
 
-.idea-rating > p {
-    margin: 10px 0px;
-}
-
-
+/* Tag and Bookmark */
 .idea-extra-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 30px 15px;
 }
-
-.bookmark-icon {
-    height: 50px;
-    width: 50px;
-}
-
 
 .idea-tag {
     background-color: #9DE2FF;
     color: #4487C4;
-    padding: 1em;
+    padding: 10px;
     border-radius: 10px;
     width: 200px;
     justify-content: center;
-    height: 10px;
     display: flex;
     align-items: center;
+    font-size: 20px;
+    margin: 25px 0px;
 }
 
-.idea-rating-container {
-    margin: 10px 0px;
+/* Tag Colors */
+.technology-tag {
+    background-color: #9DE2FF;
+    color: #4487C4;
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin: 25px 0px;
+}
+
+.environment-tag, .healthcare-tag {
+    background-color: #C2F8C4;
+    color: #1FB13F;
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin: 25px 0px;
+}
+
+.travel-tag, .commerce-tag {
+    background-color: #FF8E8E;
+    color: #E30000;
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin: 25px 0px;
+}
+
+.education-tag {
+    background-color: #F8E5C2;
+    color: #B16E1F;
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin: 25px 0px;
+}
+
+
+.default-tag {
+    background-color: #F5F2F2;
+    color: #C0C0C0;
+    padding: 10px;
+    border-radius: 10px;
+    width: 200px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    margin: 25px 0px;
+}
+
+.idea-extra-info > .bookmark-icon {
+    width: 40px;
+    height: 40px;
 }
 
 /* Responsive adjustments */
