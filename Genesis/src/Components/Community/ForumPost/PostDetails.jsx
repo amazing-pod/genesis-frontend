@@ -6,11 +6,12 @@ import upvote_active_icon from "../../../assets/png/upvote_active.png";
 import message_icon from "../../../assets/png/reply_icon.png";
 import delete_icon from "../../../assets/png/delete_icon.png";
 import back_icon from "../../../assets/png/backtrack_icon.png";
-
+import { useUser } from "@clerk/clerk-react";
+import ReplyForm from "../ForumPost/ReplyForm";
 
 const samplePosts = [
   {
-    id: 1,
+    id: 4,
     userProfilePhoto: "https://placehold.co/50x50",
     username: "Brenda Aceves",
     timeAgo: "1 day ago",
@@ -19,12 +20,24 @@ const samplePosts = [
       "I just wanted to give a HUGE shout out to my team for finishing our first version of our product! If it weren’t for my incredibly talented developers and designers, I couldn’t imagine being where I’m at..",
     likes: 4,
     comments: [
-      { user: "User1", text: "Congratulations!", userProfilePhoto: "https://placehold.co/50x50" },
-      { user: "User2", text: "Well done team!", userProfilePhoto: "https://placehold.co/50x50" },
+      {
+        id: 1,
+        user: "User1",
+        text: "Congratulations!",
+        userProfilePhoto: "https://placehold.co/50x50",
+        replies: [],
+      },
+      {
+        id: 2,
+        user: "User2",
+        text: "Well done team!",
+        userProfilePhoto: "https://placehold.co/50x50",
+        replies: [],
+      },
     ],
   },
   {
-    id: 2,
+    id: 3,
     userProfilePhoto: "https://placehold.co/50x50",
     username: "John Doe",
     timeAgo: "2 days ago",
@@ -33,12 +46,12 @@ const samplePosts = [
       "I think it would be great if we could add a dark mode to the app. It's becoming a standard feature and our users would appreciate it.",
     likes: 7,
     comments: [
-      { user: "User3", text: "I second this!", userProfilePhoto: "https://placehold.co/50x50" },
-      { user: "User4", text: "Dark mode would be awesome!", userProfilePhoto: "https://placehold.co/50x50" },
+      { id: 3, user: "User3", text: "I second this!", userProfilePhoto: "https://placehold.co/50x50" },
+      { id: 4, user: "User4", text: "Dark mode would be awesome!", userProfilePhoto: "https://placehold.co/50x50" },
     ],
   },
   {
-    id: 3,
+    id: 2,
     userProfilePhoto: "https://placehold.co/50x50",
     username: "Alice Smith",
     timeAgo: "3 days ago",
@@ -47,12 +60,12 @@ const samplePosts = [
       "I'm experiencing a crash when I try to upload an image. Has anyone else encountered this issue?",
     likes: 2,
     comments: [
-      { user: "User5", text: "Yes, I'm having the same problem.", userProfilePhoto: "https://placehold.co/50x50" },
-      { user: "User6", text: "It works fine for me. Maybe try reinstalling?", userProfilePhoto: "https://placehold.co/50x50" },
+      { id: 5, user: "User5", text: "Yes, I'm having the same problem.", userProfilePhoto: "https://placehold.co/50x50" },
+      { id: 6, user: "User6", text: "It works fine for me. Maybe try reinstalling?", userProfilePhoto: "https://placehold.co/50x50" },
     ],
   },
   {
-    id: 4,
+    id: 1,
     userProfilePhoto: "https://placehold.co/50x50",
     username: "Bob Johnson",
     timeAgo: "4 days ago",
@@ -61,8 +74,8 @@ const samplePosts = [
       "Reminder: Our weekly standup meeting is tomorrow at 10 AM. Please make sure to have your updates ready.",
     likes: 1,
     comments: [
-      { user: "User7", text: "Got it!", userProfilePhoto: "https://placehold.co/50x50" },
-      { user: "User8", text: "Thanks for the reminder.", userProfilePhoto: "https://placehold.co/50x50" },
+      { id: 7, user: "User7", text: "Got it!", userProfilePhoto: "https://placehold.co/50x50" },
+      { id: 8, user: "User8", text: "Thanks for the reminder.", userProfilePhoto: "https://placehold.co/50x50" },
     ],
   },
 ];
@@ -70,17 +83,34 @@ const samplePosts = [
 const PostDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useUser();
   const post = samplePosts.find((post) => post.id === parseInt(id));
   const [likes, setLikes] = useState(post.likes);
   const [liked, setLiked] = useState(false);
   const [comments, setComments] = useState(post.comments);
   const [newComment, setNewComment] = useState("");
+  const [replyingTo, setReplyingTo] = useState(null);
 
-  
   const handleLikeClick = () => {
     setLikes(liked ? likes - 1 : likes + 1);
     setLiked(!liked);
-    
+  };
+
+  const handleReplySubmit = (commentId, replyText) => {
+    const updatedComments = comments.map((comment) => {
+      if (comment.id === commentId) {
+        return {
+          ...comment,
+          replies: [
+            ...comment.replies,
+            { id: comment.replies.length + 1, user: "CurrentUser", text: replyText, userProfilePhoto: "https://placehold.co/50x50" },
+          ],
+        };
+      }
+      return comment;
+    });
+    setComments(updatedComments);
+    setReplyingTo(null);
   };
 
   const handleCommentChange = (e) => {
@@ -92,7 +122,7 @@ const PostDetails = () => {
     if (newComment.trim()) {
       const updatedComments = [
         ...comments,
-        { user: "CurrentUser", text: newComment, userProfilePhoto: "https://placehold.co/50x50", id: comments.length + 1 },
+        { id: comments.length + 1, user: "CurrentUser", text: newComment, userProfilePhoto: "https://placehold.co/50x50" },
       ];
       setComments(updatedComments);
       setNewComment("");
@@ -110,7 +140,6 @@ const PostDetails = () => {
   return (
     <div className="post-detail-container">
       <div className="post-items">
-        {/* "Go back text", where a user returns back to the community page */}
         <span className="post-backtrack">
           <img src={back_icon} alt="Back" className="back-icon" onClick={handleBackClick} />
           <h2>Go Back</h2>
@@ -119,7 +148,6 @@ const PostDetails = () => {
           <div className="post-details">
             <h2>{post.title}</h2>
             <hr />
-            {/* Post content */}
             <div className="post-user-info">
               <div className="post-user-profile">
                 <img src={post.userProfilePhoto} alt="user profile photo" />
@@ -128,7 +156,6 @@ const PostDetails = () => {
               <p>{post.timeAgo}</p>
             </div>
             <p>{post.content}</p>
-            {/* Post Interactions: likes and comments */}
             <div className="post-interactions">
               <p>{likes}</p>
               <img
@@ -141,12 +168,10 @@ const PostDetails = () => {
               <img className="forum-icon" src={message_icon} alt="Message Icon" />
             </div>
           </div>
-          {/* If the user made the post, put a delete button here */}
           <div className="post-separator"></div>
           <div className="post-details">
             <h2>Discussion</h2>
             <hr />
-            {/* Comments Section */}
             <div className="comments-section">
               {comments.map((comment) => (
                 <div className="comment" key={comment.id}>
@@ -163,7 +188,27 @@ const PostDetails = () => {
                       onClick={() => handleCommentDelete(comment.id)}
                     />
                   )}
+                  <button className="reply-button" onClick={() => setReplyingTo(comment.id)}>Reply</button>
+                  {replyingTo === comment.id && (
+                    <ReplyForm
+                      commentId={comment.id}
+                      onReplySubmit={handleReplySubmit}
+                      onCancel={() => setReplyingTo(null)}
+                    />
+                  )}
                   <hr />
+                  <div className="replies">
+                    {comment.replies &&
+                      comment.replies.map((reply) => (
+                        <div className="reply" key={reply.id}>
+                          <div className="user-reply-header">
+                            <img src={reply.userProfilePhoto} alt="user profile photo" />
+                            <h4>{reply.user}</h4>
+                          </div>
+                          <p>{reply.text}</p>
+                        </div>
+                      ))}
+                  </div>
                 </div>
               ))}
               <form className="comment-form" onSubmit={handleCommentSubmit}>

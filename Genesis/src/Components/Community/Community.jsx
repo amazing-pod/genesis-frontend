@@ -153,7 +153,7 @@ const Community = () => {
                     <CreatePost onCreatePost={handleCreatePost} />
                 )}
                 <div className="posts-container">
-                    {posts.map(post => (
+                    {samplePosts.map(post => (
                         <ForumPost key={post.id} post={post} />
                     ))}
                 </div>
