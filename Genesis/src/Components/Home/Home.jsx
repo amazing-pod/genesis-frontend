@@ -6,97 +6,51 @@ import MiniIdeaCard from "./MiniIdeaCard/MiniIdeaCard";
 import IdeaCard from "../Brainstorm/IdeaCard/IdeaCard";
 import MiniPostCard from "./MiniPostCard/MiniPostCard";
 import { useUser } from "@clerk/clerk-react";
+import axios from "axios";
 
 const Home = () => {
-	const ideaDummyData = [
-		{
-			id: 1,
-			title: "Community Garden Initiative",
-			description:
-				"Create a community garden to promote sustainable living and local food production.",
-			projectFeatures: [
-				"Raised beds",
-				"Compost station",
-				"Education workshops",
-			],
-			dayGenerated: "2023-07-14",
-			impact: 5,
-			feasibility: 4,
-			difficulty: 3,
-			category: "Environment",
-			bookmarked: true,
-		},
-		{
-			id: 2,
-			title: "Online Learning Platform",
-			description:
-				"Build a platform offering courses and tutorials in various subjects.",
-			projectFeatures: [
-				"Video lectures",
-				"Interactive quizzes",
-				"Progress tracking",
-			],
-			dayGenerated: "2023-07-12",
-			impact: 4,
-			feasibility: 4,
-			difficulty: 3,
-			category: "Education",
-			bookmarked: true,
-		},
-		{
-			id: 3,
-			title: "Green Energy Solutions",
-			description:
-				"Implement renewable energy solutions to reduce carbon footprint in urban areas.",
-			projectFeatures: [
-				"Solar panel installations",
-				"Wind turbine farms",
-				"Energy-efficient buildings",
-			],
-			dayGenerated: "2023-07-10",
-			impact: 5,
-			feasibility: 3,
-			difficulty: 4,
-			category: "Environment",
-			bookmarked: true,
-		},
-		{
-			id: 4,
-			title: "Green Energy Solutions",
-			description:
-				"Implement renewable energy solutions to reduce carbon footprint in urban areas.",
-			projectFeatures: [
-				"Solar panel installations",
-				"Wind turbine farms",
-				"Energy-efficient buildings",
-			],
-			dayGenerated: "2023-07-10",
-			impact: 5,
-			feasibility: 3,
-			difficulty: 4,
-			category: "Environment",
-			bookmarked: true,
-		},
-		{
-			id: 5,
-			title: "Green Energy Solutions",
-			description:
-				"Implement renewable energy solutions to reduce carbon footprint in urban areas.",
-			projectFeatures: [
-				"Solar panel installations",
-				"Wind turbine farms",
-				"Energy-efficient buildings",
-			],
-			dayGenerated: "2023-07-10",
-			impact: 5,
-			feasibility: 3,
-			difficulty: 4,
-			category: "Environment",
-			bookmarked: true,
-		},
-	];
-
 	const { user } = useUser();
+
+	// Gathering all relevant data from brainstorm page:
+	const [mostFeasibleIdea, setMostFeasibleIdea] = useState('');
+	const [easiestIdea, setEasiestIdea] = useState('');
+	const [mostDifficultIdea, setMostDifficultIdea] = useState('');
+	const [mostImpactfulIdea, setMostImpactfulIdea] = useState('');
+	const [bookmarkedIdeas, setBookmarkedIdeas] = useState([]);
+	// Gathering all relevant data from community page (2 most recent posts):
+	const [mostRecentPosts, setMostRecentPosts] = useState([]);
+
+	// useEffect(() => {
+	// 	useEffect(() => {
+	// 	const fetchIdeas = async () => {
+	// 		// Testing getting most feasible idea
+	// 		const response = await axios.get(
+	// 			`${import.meta.env.VITE_GENESIS_API_DEV_URL}/project/${user.id}/mostFeasible`
+	// 		);
+	// 		console.log(response.data);
+			
+	// 	};
+	// 	fetchIdeas();
+	// }, []);
+
+	// 	// const fetchAllData = async () => {
+	// 	// 	const feasibleIdeaResponse = await axios.get()
+	// 	// }
+	// })
+
+	const [ideas, setIdeas] = useState([]);
+	useEffect(() => {
+		// Set Bookmarked Ideas
+		const fetchIdeas = async () => {
+			const response = await axios.get(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/projects/project/${user.id}/bookmarkedIdeas`
+			);
+			console.log(response.data);
+			setIdeas(response.data.ideas);
+		};
+		fetchIdeas();
+	}, []);
+
 
 	return (
 		<>
@@ -128,8 +82,9 @@ const Home = () => {
 						<h3>Bookmarked Ideas</h3>
 						<hr />
 						<div className="bookmark-card-container">
-							<div className="bookmark-main-container">
-								{ideaDummyData.map((idea) => (
+						<div className="bookmark-main-container">
+							{ideas && ideas.length > 0 ? (
+								ideas.map((idea) => (
 									<IdeaCard
 										key={idea.id}
 										id={idea.id}
@@ -143,8 +98,12 @@ const Home = () => {
 										category={idea.category}
 										bookmarked={idea.bookmarked}
 									/>
-								))}
-							</div>
+								))
+							) : (
+								<p>No bookmarked ideas available.</p>
+							)}
+						</div>
+
 						</div>
 						<h3>New Posts</h3>
 						<hr />
