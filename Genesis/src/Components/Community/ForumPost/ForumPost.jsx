@@ -73,6 +73,7 @@ const ForumPost = ({ post }) => {
 	const [likes, setLikes] = useState(post.likeCount);
 	const [liked, setLiked] = useState(false);
 	const navigate = useNavigate();
+	const notify = () => toast("Thank you for liking a post");
 	const { user } = useUser;
 
 	useEffect(() => {
@@ -84,6 +85,7 @@ const ForumPost = ({ post }) => {
 		event.stopPropagation(); // Prevents navigating to the post when liking
 		setLikes(liked ? likes - 1 : likes + 1);
 		setLiked(!liked);
+		notify();
 	};
 
 	const handlePostClick = () => {

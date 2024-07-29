@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./PostDetails.css";
 import upvote_inactive_icon from "../../../assets/png/upvote_inactive.png";
@@ -6,6 +6,7 @@ import upvote_active_icon from "../../../assets/png/upvote_active.png";
 import message_icon from "../../../assets/png/reply_icon.png";
 import delete_icon from "../../../assets/png/delete_icon.png";
 import back_icon from "../../../assets/png/backtrack_icon.png";
+import ReplyForm from "../ForumPost/ReplyForm";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 
@@ -17,6 +18,7 @@ const PostDetails = () => {
 	const [liked, setLiked] = useState(false);
 	const [comments, setComments] = useState([]);
 	const [newComment, setNewComment] = useState("");
+	const [replyingTo, setReplyingTo] = useState(null);
 	const { user } = useUser();
 
 	useEffect(() => {
@@ -39,6 +41,28 @@ const PostDetails = () => {
 		}
 	}, [id, user]);
 
+	const handleReplySubmit = (commentId, replyText) => {
+		const updatedComments = comments.map((comment) => {
+			if (comment.id === commentId) {
+				return {
+					...comment,
+					replies: [
+						...comment.replies,
+						{
+							id: comment.replies.length + 1,
+							user: "CurrentUser",
+							text: replyText,
+							userProfilePhoto: "https://placehold.co/50x50",
+						},
+					],
+				};
+			}
+			return comment;
+		});
+		setComments(updatedComments);
+		setReplyingTo(null);
+	};
+
 	const handleLikeClick = () => {
 		setLikes(liked ? likes - 1 : likes + 1);
 		setLiked(!liked);
@@ -49,6 +73,7 @@ const PostDetails = () => {
 	};
 
 	const handleCommentSubmit = (e) => {
+		e.preventDefault();
 		const createReply = async () => {
 			const response = await axios.post(
 				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads`,
@@ -64,7 +89,6 @@ const PostDetails = () => {
 			setNewComment("");
 		};
 
-		e.preventDefault();
 		if (newComment.trim()) {
 			createReply();
 		}
@@ -79,6 +103,17 @@ const PostDetails = () => {
 			console.log(response.data);
 		};
 		deleteComment();
+	};
+
+	const handlePostDelete = (postId) => {
+		const deletePost = async () => {
+			const response = await axios.delete(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${postId}`
+			);
+			console.log(response.data);
+		};
+		deletePost();
+		navigate("/community");
 	};
 
 	const handleBackClick = () => {
@@ -130,6 +165,14 @@ const PostDetails = () => {
 								src={message_icon}
 								alt="Message Icon"
 							/>
+							{post.username === user.username && (
+								<img
+									className="delete-icon"
+									src={delete_icon}
+									alt="Delete Post"
+									onClick={() => handlePostDelete(post.id)}
+								/>
+							)}
 						</div>
 					</div>
 					{/* If the user made the post, put a delete button here */}
@@ -164,7 +207,43 @@ const PostDetails = () => {
 											onClick={() => handleCommentDelete(comment.id)}
 										/>
 									)}
+									<button
+										className="reply-button"
+										onClick={() => setReplyingTo(comment.id)}
+									>
+										Reply
+									</button>
+									{replyingTo === comment.id && (
+										<ReplyForm
+											commentId={comment.id}
+											onReplySubmit={handleReplySubmit}
+											onCancel={() => setReplyingTo(null)}
+										/>
+									)}
 									<hr />
+									<div className="replies">
+										{comment.replies &&
+											comment.replies.map((reply) => (
+												<div className="reply" key={reply.id}>
+													<div className="user-reply-header">
+														<img
+															src={reply.userProfilePhoto}
+															alt="user profile photo"
+														/>
+														<h4>{reply.user}</h4>
+													</div>
+													<p>{reply.text}</p>
+													{reply.user === "CurrentUser" && (
+														<img
+															className="delete-icon"
+															src={delete_icon}
+															alt="Delete Reply"
+															onClick={() => handleCommentDelete(comment.id)}
+														/>
+													)}
+												</div>
+											))}
+									</div>
 								</div>
 							))}
 							<form className="comment-form" onSubmit={handleCommentSubmit}>

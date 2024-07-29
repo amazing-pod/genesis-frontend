@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 import './Header.css';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import profile_photo from "../../../assets/png/profile_photo.png";
-import {
-    NovuProvider,
-    PopoverNotificationCenter,
-    NotificationBell,
-} from '@novu/notification-center';
 import { UserButton } from '@clerk/clerk-react';
 
 const Header = () => {
@@ -41,13 +36,8 @@ const Header = () => {
                     <Link to="/community">Community</Link>
                 </div>
                 <div className="header-item-container">
-                    <NovuProvider subscriberId={'6695569b2b72370872914016'} applicationIdentifier={'6shjFasFADUI'}>
-                        <PopoverNotificationCenter colorScheme={'light'}>
-                            {({ unseenCount }) => (
-                                <NotificationBell unseenCount={unseenCount} />
-                            )}
-                        </PopoverNotificationCenter>
-                    </NovuProvider>
+                   
+                       
                     <div className="profile-container" onClick={handleProfileClick}>
                         {/* <img className="profile-icon" src={profile_photo} alt="User profile photo" />
                         {showDropdown && (
