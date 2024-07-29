@@ -4,8 +4,7 @@ import Header from '../Shared/Header/Header';
 import dropdown_icon from "../../assets/png/dropdown_icon.png";
 import CreatePost from '../Community/ForumPost/CreatePost';
 import ForumPost from './ForumPost/ForumPost';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 const samplePosts = [   
     {
@@ -157,7 +156,6 @@ const Community = () => {
                         <ForumPost key={post.id} post={post} />
                     ))}
                 </div>
-				<ToastContainer />
             </div>
         </>
     );

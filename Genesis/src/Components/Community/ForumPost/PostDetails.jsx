@@ -46,8 +46,18 @@ const samplePosts = [
       "I think it would be great if we could add a dark mode to the app. It's becoming a standard feature and our users would appreciate it.",
     likes: 7,
     comments: [
-      { id: 3, user: "User3", text: "I second this!", userProfilePhoto: "https://placehold.co/50x50" },
-      { id: 4, user: "User4", text: "Dark mode would be awesome!", userProfilePhoto: "https://placehold.co/50x50" },
+      { id: 3,
+       user: "User3",
+       text: "I second this!", 
+       userProfilePhoto: "https://placehold.co/50x50",
+       replies: [] 
+      },
+      { id: 4, 
+        user: "User4", 
+        text: "Dark mode would be awesome!", 
+        userProfilePhoto: "https://placehold.co/50x50",
+        replies: [] 
+      },
     ],
   },
   {
@@ -60,8 +70,18 @@ const samplePosts = [
       "I'm experiencing a crash when I try to upload an image. Has anyone else encountered this issue?",
     likes: 2,
     comments: [
-      { id: 5, user: "User5", text: "Yes, I'm having the same problem.", userProfilePhoto: "https://placehold.co/50x50" },
-      { id: 6, user: "User6", text: "It works fine for me. Maybe try reinstalling?", userProfilePhoto: "https://placehold.co/50x50" },
+      { id: 5, 
+        user: "User5", 
+        text: "Yes, I'm having the same problem.", 
+        userProfilePhoto: "https://placehold.co/50x50",
+        replies:[] 
+      },
+      { id: 6, 
+        user: "User6", 
+        text: "It works fine for me. Maybe try reinstalling?", 
+        userProfilePhoto: "https://placehold.co/50x50",
+        replies: [] 
+      },
     ],
   },
   {
@@ -74,8 +94,18 @@ const samplePosts = [
       "Reminder: Our weekly standup meeting is tomorrow at 10 AM. Please make sure to have your updates ready.",
     likes: 1,
     comments: [
-      { id: 7, user: "User7", text: "Got it!", userProfilePhoto: "https://placehold.co/50x50" },
-      { id: 8, user: "User8", text: "Thanks for the reminder.", userProfilePhoto: "https://placehold.co/50x50" },
+      { id: 7, 
+        user: "User7", 
+        text: "Got it!", 
+        userProfilePhoto: "https://placehold.co/50x50",
+        replies: [] 
+      },
+      { id: 8, 
+        user: "User8", 
+        text: "Thanks for the reminder.", 
+        userProfilePhoto: "https://placehold.co/50x50",
+        replies: [] 
+      },
     ],
   },
 ];
