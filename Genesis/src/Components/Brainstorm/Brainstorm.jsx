@@ -8,6 +8,8 @@ import IdeaCard from "./IdeaCard/IdeaCard";
 import ViewIdeaModal from "./ViewIdeaModal/ViewIdeaModal";
 import IdeationModal from "./IdeationModal/IdeationModal";
 import { DropdownProvider } from "../../context/DropdownContext";
+import { useProject } from "../../context/ProjectContext";
+import { useUser } from "@clerk/clerk-react";
 
 const Brainstorm = () => {
 	const [ideaDummyData, setIdeaDummyData] = useState([
@@ -120,18 +122,52 @@ const Brainstorm = () => {
 	const [selectedIdea, setSelectedIdea] = useState(null);
 	const [openIdeationModal, setOpenIdeationModal] = useState(false);
 	const [ideas, setIdeas] = useState([]);
+	const { user } = useUser();
+	const { project, setProject } = useProject();
 
 	useEffect(() => {
-		const fetchIdeas = async () => {
-			const response = await axios.get(
-				`${
-					import.meta.env.VITE_GENESIS_API_DEV_URL
-				}/projects/clz2ezc320001d25xpih95js7`
+		// const fetchIdeas = async () => {
+		// 	console.log(project);
+		// 	const response = await axios.get(
+		// 		`${import.meta.env.VITE_GENESIS_API_DEV_URL}/projects/${project}`
+		// 	);
+		// 	console.log(response.data);
+		// 	setIdeas(response.data.ideas);
+		// };
+
+		const doAll = async () => {
+			let projectId = "";
+
+			const response1 = await axios.get(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/projects/owner/${user.id}`
 			);
-			console.log(response.data);
+			console.log(response1.data);
+			console.log("first");
+
+			if (response1.data.length) {
+				projectId = response1.data[0].id;
+				setProject(response1.data[0].id);
+			} else {
+				const response2 = await axios.post(
+					`${import.meta.env.VITE_GENESIS_API_DEV_URL}/projects`,
+					{ ownerId: user.id, title: "default" }
+				);
+				console.log(response2.data);
+				console.log("second");
+				projectId = response2.data.id;
+				setProject(response2.data.id);
+			}
+
+			console.log(projectId);
+			setProject(projectId);
+
+			const response = await axios.get(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/projects/${projectId}`
+			);
+			console.log("ideas", response.data);
 			setIdeas(response.data.ideas);
 		};
-		fetchIdeas();
+		doAll();
 	}, []);
 
 	const toggleDropdown = () => {

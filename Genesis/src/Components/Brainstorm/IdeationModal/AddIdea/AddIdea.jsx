@@ -6,6 +6,7 @@ import add_idea_graphic from "../../../../assets/png/add_idea.png";
 import IdeationModal from "../IdeationModal";
 import Dropdown from "../../../Shared/Dropdown/Dropdown";
 import { useDropdown } from "../../../../context/DropdownContext";
+import { useProject } from "../../../../context/ProjectContext";
 
 const AddIdea = ({ closeModal }) => {
 	const [newFeatureText, setNewFeatureText] = useState("");
@@ -13,6 +14,7 @@ const AddIdea = ({ closeModal }) => {
 	const [newFeatureName, setNewFeatureName] = useState("");
 	const [newFeatureDescription, setNewFeatureDescription] = useState("");
 	const { option } = useDropdown();
+	const { project } = useProject();
 
 	const addProjectIdea = () => {
 		closeModal();
@@ -32,9 +34,7 @@ const AddIdea = ({ closeModal }) => {
 			console.log(impact, feasibility, difficulty);
 
 			const response2 = await axios.post(
-				`${
-					import.meta.env.VITE_GENESIS_API_DEV_URL
-				}/projects/clz2ezc320001d25xpih95js7`,
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/projects/${project}`,
 				{
 					title: newFeatureName,
 					description: newFeatureDescription,

@@ -3,7 +3,7 @@ import axios from "axios";
 import "./Community.css";
 import Header from "../Shared/Header/Header";
 import dropdown_icon from "../../assets/png/dropdown_icon.png";
-import CreatePost from "../Community/ForumPost/CreatePost";
+import CreatePost from "./ForumPost/CreatePost";
 import ForumPost from "./ForumPost/ForumPost";
 
 const MiniNavbar = ({

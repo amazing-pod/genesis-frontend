@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./IdeaCard.css";
 import bookmark_inactive_icon from "../../../assets/png/bookmark_inactive.png";
 import bookmark_active_icon from "../../../assets/png/bookmark_active.png";
+import axios from "axios";
+import { useProject } from "../../../context/ProjectContext";
 
 const IdeaCard = ({
 	id,
@@ -17,6 +19,7 @@ const IdeaCard = ({
 }) => {
 	const [bookmarkToggle, setBookmarkToggle] = useState(bookmarked);
 	const tagClass = `${category.toLowerCase()}-tag`;
+	const { project } = useProject();
 
 	let ratingGenerator = (rating) => {
 		let result = [];
@@ -35,6 +38,20 @@ const IdeaCard = ({
 		if (!event.target.classList.contains("bookmark-icon")) {
 			openModal(id);
 		}
+	};
+
+	const handleBookmark = () => {
+		setBookmarkToggle(!bookmarkToggle);
+
+		const bookmarkIdea = async () => {
+			const response = await axios.put(
+				`${
+					import.meta.env.VITE_GENESIS_API_DEV_URL
+				}/projects/${project}/ideas/${id}`
+			);
+			console.log(response.data);
+		};
+		bookmarkIdea();
 	};
 
 	return (
@@ -77,7 +94,7 @@ const IdeaCard = ({
 					<div className={tagClass}>{category}</div>
 					<img
 						className="bookmark-icon"
-						onClick={() => setBookmarkToggle(!bookmarkToggle)}
+						onClick={handleBookmark}
 						src={bookmarkToggle ? bookmark_active_icon : bookmark_inactive_icon}
 						alt="Bookmark status"
 					/>

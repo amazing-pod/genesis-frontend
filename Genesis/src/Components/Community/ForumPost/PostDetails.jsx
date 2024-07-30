@@ -6,7 +6,7 @@ import upvote_active_icon from "../../../assets/png/upvote_active.png";
 import message_icon from "../../../assets/png/reply_icon.png";
 import delete_icon from "../../../assets/png/delete_icon.png";
 import back_icon from "../../../assets/png/backtrack_icon.png";
-import ReplyForm from "../ForumPost/ReplyForm";
+import ReplyForm from "./ReplyForm";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 
