@@ -5,6 +5,7 @@ import upvote_inactive_icon from "../../../assets/png/upvote_inactive.png";
 import upvote_active_icon from "../../../assets/png/upvote_active.png";
 import message_icon from "../../../assets/png/reply_icon.png";
 import { useUser } from "@clerk/clerk-react";
+import axios from "axios";
 
 const samplePosts = [
 	{
@@ -74,16 +75,30 @@ const ForumPost = ({ post }) => {
 	const [liked, setLiked] = useState(false);
 	const navigate = useNavigate();
 	const notify = () => toast("Thank you for liking a post");
-	const { user } = useUser;
+	const { user } = useUser();
 
 	useEffect(() => {
 		setLikes(post.likeCount);
 		setLiked(post.likedBy.find((liker) => liker.id === user.id) ? true : false);
 	}, []);
 
-	const handleLikeClick = (event) => {
+	const handleLikeClick = async (event) => {
 		event.stopPropagation(); // Prevents navigating to the post when liking
-		setLikes(liked ? likes - 1 : likes + 1);
+		if (liked) {
+			setLikes(likes - 1);
+			await axios.put(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${
+					post.id
+				}/unlike/${user.id}`
+			);
+		} else {
+			setLikes(likes + 1);
+			await axios.put(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${post.id}/like/${
+					user.id
+				}`
+			);
+		}
 		setLiked(!liked);
 		notify();
 	};

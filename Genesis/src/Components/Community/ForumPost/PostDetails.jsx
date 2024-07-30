@@ -63,8 +63,22 @@ const PostDetails = () => {
 		setReplyingTo(null);
 	};
 
-	const handleLikeClick = () => {
-		setLikes(liked ? likes - 1 : likes + 1);
+	const handleLikeClick = async () => {
+		if (liked) {
+			setLikes(likes - 1);
+			await axios.put(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${
+					post.id
+				}/unlike/${user.id}`
+			);
+		} else {
+			setLikes(likes + 1);
+			await axios.put(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${post.id}/like/${
+					user.id
+				}`
+			);
+		}
 		setLiked(!liked);
 	};
 
