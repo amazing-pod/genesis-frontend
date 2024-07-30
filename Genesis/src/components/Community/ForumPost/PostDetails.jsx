@@ -42,6 +42,18 @@ const PostDetails = () => {
 	}, [id, user]);
 
 	const handleReplySubmit = (commentId, replyText) => {
+		const createReply = async () => {
+			const response = await axios.post(
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads`,
+				{
+					authorId: user.id,
+					content: replyText,
+					replyToId: commentId,
+				}
+			);
+			console.log(response.data);
+		};
+
 		const updatedComments = comments.map((comment) => {
 			if (comment.id === commentId) {
 				return {
@@ -50,15 +62,16 @@ const PostDetails = () => {
 						...comment.replies,
 						{
 							id: comment.replies.length + 1,
-							user: "CurrentUser",
+							user: user.username,
 							text: replyText,
-							userProfilePhoto: "https://placehold.co/50x50",
+							userProfilePhoto: user.imageUrl,
 						},
 					],
 				};
 			}
 			return comment;
 		});
+		createReply();
 		setComments(updatedComments);
 		setReplyingTo(null);
 	};
@@ -179,7 +192,7 @@ const PostDetails = () => {
 								src={message_icon}
 								alt="Message Icon"
 							/>
-							{post.username === user.username && (
+							{post.author?.id === user.id && (
 								<img
 									className="delete-icon"
 									src={delete_icon}
@@ -241,13 +254,13 @@ const PostDetails = () => {
 												<div className="reply" key={reply.id}>
 													<div className="user-reply-header">
 														<img
-															src={reply.userProfilePhoto}
+															src={reply.author?.profile?.picture}
 															alt="user profile photo"
 														/>
-														<h4>{reply.user}</h4>
+														<h4>{reply.author?.username}</h4>
 													</div>
-													<p>{reply.text}</p>
-													{reply.user === "CurrentUser" && (
+													<p>{reply.content}</p>
+													{reply.author?.id === user.id && (
 														<img
 															className="delete-icon"
 															src={delete_icon}
