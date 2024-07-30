@@ -12,6 +12,8 @@ import ProtectedLayout from "./layouts/ProtectedLayout.jsx";
 import RootLayout from "./layouts/RootLayout.jsx";
 import UserProfile from "./components/Shared/UserProfile/UserProfile.jsx";
 import PostDetails from "./components/Community/ForumPost/PostDetails.jsx";
+import { DropdownProvider } from "./context/DropdownContext.jsx";
+import { ProjectProvider } from "./context/ProjectContext.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -32,7 +34,7 @@ const router = createBrowserRouter([
 					{ path: "/home", element: <Home /> },
 					{ path: "/user-profile", element: <UserProfile /> },
 					{ path: "/community", element: <Community /> },
-					{ path: "/community/post/:id", element: <PostDetails /> },
+					{ path: "/community/threads/:id", element: <PostDetails /> },
 					{ path: "/brainstorm", element: <Brainstorm /> },
 				],
 			},
@@ -42,6 +44,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
-		<RouterProvider router={router} />
+		<ProjectProvider>
+			<DropdownProvider>
+				<RouterProvider router={router} />
+			</DropdownProvider>
+		</ProjectProvider>
 	</React.StrictMode>
 );
