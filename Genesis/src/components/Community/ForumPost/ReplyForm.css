@@ -1,0 +1,65 @@
+
+  .replies {
+    margin-top: 10px;
+    margin-left: 20px;
+  }
+  
+  .reply {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+  }
+  
+  .user-reply-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .user-reply-header img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .comment-form,
+  .reply-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .comment-form textarea,
+  .reply-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    resize: none;
+    margin-bottom: 10px;
+  }
+  
+  .comment-form button,
+  .reply-form button {
+    align-self: flex-end;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .comment-form button:hover,
+  .reply-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .delete-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  

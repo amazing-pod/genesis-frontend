@@ -6,6 +6,7 @@ import upvote_active_icon from "../../../assets/png/upvote_active.png";
 import message_icon from "../../../assets/png/reply_icon.png";
 import { useUser } from "@clerk/clerk-react";
 
+
 const samplePosts = [
 	{
 		id: 1,
