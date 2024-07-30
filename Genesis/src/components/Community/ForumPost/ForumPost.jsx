@@ -85,24 +85,22 @@ const ForumPost = ({ post }) => {
 	const handleLikeClick = async (event) => {
 		event.stopPropagation(); // Prevents navigating to the post when liking
 		if (liked) {
-			setLikes(likes - 1);
-			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads/${
-					post.id
-				}/unlike/${user.id}`
-			);
+			if (likes > 0) { // Check to prevent decrementing into negative values
+				setLikes(likes - 1);
+				await axios.put(
+					`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${post.id}/unlike/${user.id}`
+				);
+			}
 		} else {
 			setLikes(likes + 1);
 			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads/${post.id}/like/${
-					user.id
-				}`
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${post.id}/like/${user.id}`
 			);
 		}
 		setLiked(!liked);
 		notify();
 	};
-
+	
 	const handlePostClick = () => {
 		navigate(`/community/threads/${post.id}`); // Navigate to the post details page
 	};

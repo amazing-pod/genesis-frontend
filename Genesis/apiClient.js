@@ -1,6 +1,6 @@
 // apiClient.js
 
-const remoteHostUrl = process.env.VITE_GENESIS_API_PROD_URL || "http://localhost:3000";
+const remoteHostUrl = process.env.VITE_GENESIS_API_DEV_URL || "http://localhost:3000";
 
 // Example function to fetch data from the backend
 async function fetchData() {

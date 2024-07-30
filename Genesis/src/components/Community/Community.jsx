@@ -74,7 +74,7 @@ const Community = () => {
 	useEffect(() => {
 		const fetchPosts = async () => {
 			const response = await axios.get(
-				`${import.meta.env.VITE_GENESIS_API_PROD_URL}threads/posts`
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/posts`
 			);
 			console.log(response.data);
 			setPosts(response.data);

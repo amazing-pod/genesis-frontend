@@ -65,7 +65,7 @@ const IdeationProject = ({ closeModal }) => {
 	const addStep = () => {
 		const createIdea = async () => {
 			const response = await axios.post(
-				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/api/chat`,
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/api/chat`,
 				{
 					prompt: `Based on the category: Healthcare and the following issues: ${editedFeatures}, always generate an array of 5 project ideas best suited for this category. Each object in the array should always have a title and a one-sentence description always in this exact format without any white space: {title: title,description:description}. Following the array, provide only a numeric impact, feasibility, and difficulty rating out of 5 for this project idea always in this exact format without any white space: impact:#,feasibility: #,difficulty:#`,
 				}
@@ -79,7 +79,7 @@ const IdeationProject = ({ closeModal }) => {
 
 			// const response2 = await axios.post(
 			// 	`${
-			// 		import.meta.env.VITE_GENESIS_API_PROD_URL
+			// 		import.meta.env.VITE_GENESIS_API_DEV_URL
 			// 	}/projects/clz2ezc320001d25xpih95js7`,
 			// 	{
 			// 		title: newFeatureName,
@@ -186,7 +186,7 @@ const IdeationProject = ({ closeModal }) => {
 									onClick={() => {
 										const createIdea = async () => {
 											const response = await axios.post(
-												`${import.meta.env.VITE_GENESIS_API_PROD_URL}/api/chat`,
+												`${import.meta.env.VITE_GENESIS_API_DEV_URL}/api/chat`,
 												{
 													prompt: `Based on the category: Healthcare and the following issues: ${editedFeatures}, always generate an array of 5 project ideas best suited for this category. Each object in the array should always have a title and a one-sentence description always in this exact format without any white space: {title: title,description:description}. Following the array, provide only a numeric impact, feasibility, and difficulty rating out of 5 for this project idea always in this exact format without any white space: impact:#,feasibility: #,difficulty:#`,
 												}
