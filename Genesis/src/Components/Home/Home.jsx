@@ -17,7 +17,6 @@ const Home = () => {
 	const [easiestIdea, setEasiestIdea] = useState({});
 	const [mostDifficultIdea, setMostDifficultIdea] = useState({});
 	const [mostImpactfulIdea, setMostImpactfulIdea] = useState({});
-
 	useEffect(() => {
 		const fetchHomeData = async () => {
 			try {
@@ -51,6 +50,8 @@ const Home = () => {
 				const mostImpactfulIdeaData = data.find(item => item.mostImpactfulIdea) ? data.find(item => item.mostImpactfulIdea).mostImpactfulIdea : {};
 				console.log("Most Impactful Idea:", mostImpactfulIdeaData);
 				setMostImpactfulIdea(mostImpactfulIdeaData);
+
+				setReplies()
 			} catch (error) {
 				console.error("Error fetching home data:", error);
 			}
@@ -151,6 +152,8 @@ const Home = () => {
 									title={post.title}
 									description={post.content}
 									likeCount={post.likeCount}
+									profilePicture={post.author.profile.picture}
+									replyCount={post.replies ? post.replies.length : 0}
 								/>
 							))
 						) : (
