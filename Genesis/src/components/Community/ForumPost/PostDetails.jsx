@@ -10,116 +10,6 @@ import ReplyForm from "../ForumPost/ReplyForm";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 
-const PostDetails = () => {
-	const { id } = useParams();
-	const navigate = useNavigate();
-	const [post, setPost] = useState({});
-	const [likes, setLikes] = useState(0);
-	const [liked, setLiked] = useState(false);
-	const [comments, setComments] = useState([]);
-	const [newComment, setNewComment] = useState("");
-	const { user } = useUser();
-
-const samplePosts = [
-  {
-    id: 4,
-    userProfilePhoto: "https://placehold.co/50x50",
-    username: "Brenda Aceves",
-    timeAgo: "1 day ago",
-    title: "Appreciation Post",
-    content:
-      "I just wanted to give a HUGE shout out to my team for finishing our first version of our product! If it weren’t for my incredibly talented developers and designers, I couldn’t imagine being where I’m at..",
-    likes: 4,
-    comments: [
-      {
-        id: 1,
-        user: "User1",
-        text: "Congratulations!",
-        userProfilePhoto: "https://placehold.co/50x50",
-        replies: [],
-      },
-      {
-        id: 2,
-        user: "User2",
-        text: "Well done team!",
-        userProfilePhoto: "https://placehold.co/50x50",
-        replies: [],
-      },
-    ],
-  },
-  {
-    id: 3,
-    userProfilePhoto: "https://placehold.co/50x50",
-    username: "John Doe",
-    timeAgo: "2 days ago",
-    title: "Feature Suggestion",
-    content:
-      "I think it would be great if we could add a dark mode to the app. It's becoming a standard feature and our users would appreciate it.",
-    likes: 7,
-    comments: [
-      { id: 3,
-       user: "User3",
-       text: "I second this!", 
-       userProfilePhoto: "https://placehold.co/50x50",
-       replies: [], 
-      },
-      { id: 4, 
-        user: "User4", 
-        text: "Dark mode would be awesome!", 
-        userProfilePhoto: "https://placehold.co/50x50",
-        replies: [], 
-      },
-    ],
-  },
-  {
-    id: 2,
-    userProfilePhoto: "https://placehold.co/50x50",
-    username: "Alice Smith",
-    timeAgo: "3 days ago",
-    title: "Bug Report",
-    content:
-      "I'm experiencing a crash when I try to upload an image. Has anyone else encountered this issue?",
-    likes: 2,
-    comments: [
-      { id: 5, 
-        user: "User5", 
-        text: "Yes, I'm having the same problem.", 
-        userProfilePhoto: "https://placehold.co/50x50",
-        replies:[], 
-      },
-      { id: 6, 
-        user: "User6", 
-        text: "It works fine for me. Maybe try reinstalling?", 
-        userProfilePhoto: "https://placehold.co/50x50",
-        replies: [], 
-      },
-    ],
-  },
-  {
-    id: 1,
-    userProfilePhoto: "https://placehold.co/50x50",
-    username: "Bob Johnson",
-    timeAgo: "4 days ago",
-    title: "Weekly Standup",
-    content:
-      "Reminder: Our weekly standup meeting is tomorrow at 10 AM. Please make sure to have your updates ready.",
-    likes: 1,
-    comments: [
-      { id: 7, 
-        user: "User7", 
-        text: "Got it!", 
-        userProfilePhoto: "https://placehold.co/50x50",
-        replies: [], 
-      },
-      { id: 8, 
-        user: "User8", 
-        text: "Thanks for the reminder.", 
-        userProfilePhoto: "https://placehold.co/50x50",
-        replies: [],
-      },
-    ],
-  },
-];
 
 const PostDetails = () => {
   const { id } = useParams();
@@ -131,6 +21,108 @@ const PostDetails = () => {
   const [comments, setComments] = useState(post.comments);
   const [newComment, setNewComment] = useState("");
   const [replyingTo, setReplyingTo] = useState(null);
+
+  const samplePosts = [
+    {
+      id: 4,
+      userProfilePhoto: "https://placehold.co/50x50",
+      username: "Brenda Aceves",
+      timeAgo: "1 day ago",
+      title: "Appreciation Post",
+      content:
+        "I just wanted to give a HUGE shout out to my team for finishing our first version of our product! If it weren’t for my incredibly talented developers and designers, I couldn’t imagine being where I’m at..",
+      likes: 4,
+      comments: [
+        {
+          id: 1,
+          user: "User1",
+          text: "Congratulations!",
+          userProfilePhoto: "https://placehold.co/50x50",
+          replies: [],
+        },
+        {
+          id: 2,
+          user: "User2",
+          text: "Well done team!",
+          userProfilePhoto: "https://placehold.co/50x50",
+          replies: [],
+        },
+      ],
+    },
+    {
+      id: 3,
+      userProfilePhoto: "https://placehold.co/50x50",
+      username: "John Doe",
+      timeAgo: "2 days ago",
+      title: "Feature Suggestion",
+      content:
+        "I think it would be great if we could add a dark mode to the app. It's becoming a standard feature and our users would appreciate it.",
+      likes: 7,
+      comments: [
+        { id: 3,
+         user: "User3",
+         text: "I second this!", 
+         userProfilePhoto: "https://placehold.co/50x50",
+         replies: [], 
+        },
+        { id: 4, 
+          user: "User4", 
+          text: "Dark mode would be awesome!", 
+          userProfilePhoto: "https://placehold.co/50x50",
+          replies: [], 
+        },
+      ],
+    },
+    {
+      id: 2,
+      userProfilePhoto: "https://placehold.co/50x50",
+      username: "Alice Smith",
+      timeAgo: "3 days ago",
+      title: "Bug Report",
+      content:
+        "I'm experiencing a crash when I try to upload an image. Has anyone else encountered this issue?",
+      likes: 2,
+      comments: [
+        { id: 5, 
+          user: "User5", 
+          text: "Yes, I'm having the same problem.", 
+          userProfilePhoto: "https://placehold.co/50x50",
+          replies:[], 
+        },
+        { id: 6, 
+          user: "User6", 
+          text: "It works fine for me. Maybe try reinstalling?", 
+          userProfilePhoto: "https://placehold.co/50x50",
+          replies: [], 
+        },
+      ],
+    },
+    {
+      id: 1,
+      userProfilePhoto: "https://placehold.co/50x50",
+      username: "Bob Johnson",
+      timeAgo: "4 days ago",
+      title: "Weekly Standup",
+      content:
+        "Reminder: Our weekly standup meeting is tomorrow at 10 AM. Please make sure to have your updates ready.",
+      likes: 1,
+      comments: [
+        { id: 7, 
+          user: "User7", 
+          text: "Got it!", 
+          userProfilePhoto: "https://placehold.co/50x50",
+          replies: [], 
+        },
+        { id: 8, 
+          user: "User8", 
+          text: "Thanks for the reminder.", 
+          userProfilePhoto: "https://placehold.co/50x50",
+          replies: [],
+        },
+      ],
+    },
+  ];
+  
 
   const handleLikeClick = () => {
     setLikes(liked ? likes - 1 : likes + 1);
