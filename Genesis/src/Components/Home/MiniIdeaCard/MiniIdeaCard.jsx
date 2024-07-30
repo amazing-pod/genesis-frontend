@@ -1,7 +1,9 @@
 import React from 'react';
 import './MiniIdeaCard.css';
 
-const MiniIdeaCard = () => {
+const MiniIdeaCard = ({title, name, description}) => {
+  // console.log("IDEA DATA:");
+  // console.log(ideaData);
   return (
     <>
     <div className="mini-idea-card-container">
