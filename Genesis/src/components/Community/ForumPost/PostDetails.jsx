@@ -7,7 +7,7 @@ import message_icon from "../../../assets/png/reply_icon.png";
 import delete_icon from "../../../assets/png/delete_icon.png";
 import back_icon from "../../../assets/png/backtrack_icon.png";
 import ReplyForm from "./ReplyForm";
-import axios from "axios";
+import axios from "axio./ReplyForm
 import { useUser } from "@clerk/clerk-react";
 
 const PostDetails = () => {
