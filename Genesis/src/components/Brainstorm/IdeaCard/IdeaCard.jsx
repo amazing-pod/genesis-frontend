@@ -46,7 +46,7 @@ const IdeaCard = ({
 		const bookmarkIdea = async () => {
 			const response = await axios.put(
 				`${
-					import.meta.env.VITE_GENESIS_API_DEV_URL
+					import.meta.env.VITE_GENESIS_API_PROD_URL
 				}/projects/${project}/ideas/${id}`
 			);
 			console.log(response.data);

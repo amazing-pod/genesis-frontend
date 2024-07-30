@@ -24,7 +24,7 @@ const PostDetails = () => {
 	useEffect(() => {
 		const fetchPost = async () => {
 			const response = await axios.get(
-				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${id}`
+				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads/${id}`
 			);
 			console.log(response.data);
 			setPost(response.data);
@@ -44,7 +44,7 @@ const PostDetails = () => {
 	const handleReplySubmit = (commentId, replyText) => {
 		const createReply = async () => {
 			const response = await axios.post(
-				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads`,
+				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads`,
 				{
 					authorId: user.id,
 					content: replyText,
@@ -80,14 +80,14 @@ const PostDetails = () => {
 		if (liked) {
 			setLikes(likes - 1);
 			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${
+				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads/${
 					post.id
 				}/unlike/${user.id}`
 			);
 		} else {
 			setLikes(likes + 1);
 			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${post.id}/like/${
+				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads/${post.id}/like/${
 					user.id
 				}`
 			);
@@ -103,7 +103,7 @@ const PostDetails = () => {
 		e.preventDefault();
 		const createReply = async () => {
 			const response = await axios.post(
-				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads`,
+				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads`,
 				{
 					authorId: user.id,
 					content: newComment,
@@ -125,7 +125,7 @@ const PostDetails = () => {
 		setComments(comments.filter((comment) => comment.id !== commentId));
 		const deleteComment = async () => {
 			const response = await axios.delete(
-				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${commentId}`
+				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads/${commentId}`
 			);
 			console.log(response.data);
 		};
@@ -135,7 +135,7 @@ const PostDetails = () => {
 	const handlePostDelete = (postId) => {
 		const deletePost = async () => {
 			const response = await axios.delete(
-				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${postId}`
+				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads/${postId}`
 			);
 			console.log(response.data);
 		};

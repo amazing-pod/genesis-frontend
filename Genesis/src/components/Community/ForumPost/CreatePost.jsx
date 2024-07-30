@@ -25,7 +25,7 @@ const CreatePost = ({ onCreatePost }) => {
 			// onCreatePost(newPost);
 			const createPost = async () => {
 				const response = await axios.post(
-					`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/posts`,
+					`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads/posts`,
 					{
 						title: title,
 						authorId: user.id,
