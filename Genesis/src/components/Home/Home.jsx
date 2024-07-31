@@ -23,7 +23,7 @@ const Home = () => {
 	useEffect(() => {
 		// const fetchProject = async () => {
 		// 	const response = await axios.get(
-		// 		`${import.meta.env.VITE_GENESIS_API_DEV_URL}/projects/owner/${user.id}`
+		// 		`${import.meta.env.VITE_GENESIS_API_URL}/projects/owner/${user.id}`
 		// 	);
 		// 	console.log(response.data);
 		// 	console.log("first");
@@ -35,7 +35,7 @@ const Home = () => {
 
 		// const createProject = async () => {
 		// 	const response = await axios.post(
-		// 		`${import.meta.env.VITE_GENESIS_API_DEV_URL}/projects`,
+		// 		`${import.meta.env.VITE_GENESIS_API_URL}/projects`,
 		// 		{ ownerId: user.id, title: "default" }
 		// 	);
 		// 	console.log(response.data);
@@ -47,7 +47,7 @@ const Home = () => {
 		// 	try {
 		// 		const response = await axios.get(
 		// 			`${
-		// 				import.meta.env.VITE_GENESIS_API_DEV_URL
+		// 				import.meta.env.VITE_GENESIS_API_URL
 		// 			}/projects/${project}/homeData`
 		// 		);
 		// 		console.log(response.data);
@@ -101,7 +101,7 @@ const Home = () => {
 			let projectId = "";
 
 			const response1 = await axios.get(
-				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/projects/owner/${user.id}`
+				`${import.meta.env.VITE_GENESIS_API_URL}/projects/owner/${user.id}`
 			);
 			console.log(response1.data);
 			console.log("first");
@@ -111,7 +111,7 @@ const Home = () => {
 				setProject(response1.data[0].id);
 			} else {
 				const response2 = await axios.post(
-					`${import.meta.env.VITE_GENESIS_API_DEV_URL}/projects`,
+					`${import.meta.env.VITE_GENESIS_API_URL}/projects`,
 					{ ownerId: user.id, title: "default" }
 				);
 				console.log(response2.data);
@@ -126,7 +126,7 @@ const Home = () => {
 			try {
 				const response = await axios.get(
 					`${
-						import.meta.env.VITE_GENESIS_API_DEV_URL
+						import.meta.env.VITE_GENESIS_API_URL
 					}/projects/${projectId}/homeData`
 				);
 				console.log(response.data);
