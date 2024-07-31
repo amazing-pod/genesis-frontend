@@ -9,6 +9,7 @@ import back_icon from "../../../assets/png/backtrack_icon.png";
 import ReplyForm from "./ReplyForm";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
+import { formatDistanceToNow } from "date-fns";
 
 const PostDetails = () => {
 	const { id } = useParams();
@@ -174,7 +175,12 @@ const PostDetails = () => {
 								/>
 								<p>{post.author?.username || "default-username"}</p>
 							</div>
-							<p>{post.createdAt}</p>
+							<p>
+								{/* {formatDistanceToNow(post.createdAt, {
+									addSuffix: true,
+								}).replace("about ", "")} */}
+								{post.createdAt}
+							</p>
 						</div>
 						<p>{post.content}</p>
 						{/* Post Interactions: likes and comments */}

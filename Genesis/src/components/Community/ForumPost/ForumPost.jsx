@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { formatDistanceToNow } from "date-fns";
 import "./ForumPost.css";
 import upvote_inactive_icon from "../../../assets/png/upvote_inactive.png";
 import upvote_active_icon from "../../../assets/png/upvote_active.png";
@@ -119,7 +120,12 @@ const ForumPost = ({ post }) => {
 					/>
 					<p className="forum-post-username">{post.author.username}</p>
 				</div>
-				<p>{post.createdAt}</p>
+				<p>
+					{formatDistanceToNow(post.createdAt, { addSuffix: true }).replace(
+						"about ",
+						""
+					)}
+				</p>
 			</div>
 			{/* Main content */}
 			<div className="forum-content">
