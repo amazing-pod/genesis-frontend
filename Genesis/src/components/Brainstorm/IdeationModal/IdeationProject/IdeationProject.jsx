@@ -83,30 +83,37 @@ const IdeationProject = ({ closeModal }) => {
 	const addStep = () => {
 		const generateIdeas = async () => {
 			const response = await axios.post(
-				`${import.meta.env.VITE_GENESIS_API_URL}/api/chat`,
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/api/chat`,
 				{
 					prompt: `Generate a list of 5 distinct project ideas given the category: ${option} and the issues: ${editedIssues}. Each idea should include a highly appropriate title, a useful description, a highly accurate impact rating, a highly accurate feasibility rating, and a highly accurate difficulty rating. The list should always be in the following format exactly: [{title: 'Virtual Classroom Enhancer', description: 'A tool to create interactive and engaging virtual classrooms with real-time collaboration features.', impact: 5, feasibility: 4, difficulty: 3},{title: 'AI-Powered Tutoring Assistant', description: 'An AI-driven tutoring assistant that provides personalized help to students based on their learning progress.', impact: 4, feasibility: 3, difficulty: 4},{title: 'Gamified Learning Platform', description: 'A platform that uses game mechanics to make remote learning more engaging and motivating for students.', impact: 4, feasibility: 3, difficulty: 3},{title: 'Remote Lab Simulator', description: 'A simulator that allows students to conduct virtual lab experiments and gain hands-on experience remotely.', impact: 5, feasibility: 3, difficulty: 4},{title: 'Collaborative Study Space', description: 'An online space where students can study together, share resources, and support each other's learning.', impact: 3, feasibility: 5, difficulty: 2}]. Please generate the ideas. Never use new line. Never end with period`,
 				}
 			);
 			console.log(response.data);
 
-			let generatedIdeas = JSON.parse(
-				response.data.response
-					.replace(/([{,]\s*)(\w+):/g, '$1"$2":')
-					.replace(/'/g, '"')
-			);
+			// const matches = response.data.response.match(/\d+/g);
+			// const [impact, feasibility, difficulty] = matches.map(Number);
+			// console.log(impact, feasibility, difficulty);
 
-			generatedIdeas = generatedIdeas.map((object) => ({
-				...object,
-				category: option,
-			}));
+			// const response2 = await axios.post(
+			// 	`${
+			// 		import.meta.env.VITE_GENESIS_API_DEV_URL
+			// 	}/projects/clz2ezc320001d25xpih95js7`,
+			// 	{
+			// 		title: newFeatureName,
+			// 		description: newFeatureDescription,
+			// 		category: "Healthcare",
+			// 		features: editedFeatures,
+			// 		tags: [],
+			// 		impact,
+			// 		feasibility,
+			// 		difficulty,
+			// 	}
+			// );
 
-			console.log(generatedIdeas);
-
-			setIdeationProjectData(generatedIdeas);
-			setStep(step + 1);
+			// console.log(response2.data);
 		};
-		generateIdeas();
+		createIdea();
+		setStep(step + 1);
 	};
 
 	const backtrackStep = () => {
@@ -192,7 +199,23 @@ const IdeationProject = ({ closeModal }) => {
 							<></>
 							{/* Take user to main modal */}
 							<div className="project-ideation-button-container">
-								<button className="generate" onClick={addStep}>
+								<button
+									className="generate"
+									onClick={() => {
+										const createIdea = async () => {
+											const response = await axios.post(
+												`${import.meta.env.VITE_GENESIS_API_DEV_URL}/api/chat`,
+												{
+													prompt: `Based on the category: Healthcare and the following issues: ${editedFeatures}, always generate an array of 5 project ideas best suited for this category. Each object in the array should always have a title and a one-sentence description always in this exact format without any white space: {title: title,description:description}. Following the array, provide only a numeric impact, feasibility, and difficulty rating out of 5 for this project idea always in this exact format without any white space: impact:#,feasibility: #,difficulty:#`,
+												}
+											);
+
+											console.log(response.data);
+										};
+
+										addStep();
+									}}
+								>
 									Generate
 								</button>
 								<button className="backtrack" onClick={closeModal}>

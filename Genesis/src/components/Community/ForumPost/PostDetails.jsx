@@ -24,7 +24,7 @@ const PostDetails = () => {
 	useEffect(() => {
 		const fetchPost = async () => {
 			const response = await axios.get(
-				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${id}`
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${id}`
 			);
 			console.log(response.data);
 			setPost(response.data);
@@ -42,18 +42,6 @@ const PostDetails = () => {
 	}, [id, user]);
 
 	const handleReplySubmit = (commentId, replyText) => {
-		const createReply = async () => {
-			const response = await axios.post(
-				`${import.meta.env.VITE_GENESIS_API_URL}/threads`,
-				{
-					authorId: user.id,
-					content: replyText,
-					replyToId: commentId,
-				}
-			);
-			console.log(response.data);
-		};
-
 		const updatedComments = comments.map((comment) => {
 			if (comment.id === commentId) {
 				return {
@@ -62,36 +50,21 @@ const PostDetails = () => {
 						...comment.replies,
 						{
 							id: comment.replies.length + 1,
-							user: user.username,
+							user: "CurrentUser",
 							text: replyText,
-							userProfilePhoto: user.imageUrl,
+							userProfilePhoto: "https://placehold.co/50x50",
 						},
 					],
 				};
 			}
 			return comment;
 		});
-		createReply();
 		setComments(updatedComments);
 		setReplyingTo(null);
 	};
 
-	const handleLikeClick = async () => {
-		if (liked) {
-			setLikes(likes - 1);
-			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/unlike/${
-					user.id
-				}`
-			);
-		} else {
-			setLikes(likes + 1);
-			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/like/${
-					user.id
-				}`
-			);
-		}
+	const handleLikeClick = () => {
+		setLikes(liked ? likes - 1 : likes + 1);
 		setLiked(!liked);
 	};
 
@@ -103,7 +76,7 @@ const PostDetails = () => {
 		e.preventDefault();
 		const createReply = async () => {
 			const response = await axios.post(
-				`${import.meta.env.VITE_GENESIS_API_URL}/threads`,
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads`,
 				{
 					authorId: user.id,
 					content: newComment,
@@ -125,7 +98,7 @@ const PostDetails = () => {
 		setComments(comments.filter((comment) => comment.id !== commentId));
 		const deleteComment = async () => {
 			const response = await axios.delete(
-				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${commentId}`
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${commentId}`
 			);
 			console.log(response.data);
 		};
@@ -135,7 +108,7 @@ const PostDetails = () => {
 	const handlePostDelete = (postId) => {
 		const deletePost = async () => {
 			const response = await axios.delete(
-				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${postId}`
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${postId}`
 			);
 			console.log(response.data);
 		};
@@ -192,7 +165,7 @@ const PostDetails = () => {
 								src={message_icon}
 								alt="Message Icon"
 							/>
-							{post.author?.id === user.id && (
+							{post.username === user.username && (
 								<img
 									className="delete-icon"
 									src={delete_icon}
@@ -254,13 +227,13 @@ const PostDetails = () => {
 												<div className="reply" key={reply.id}>
 													<div className="user-reply-header">
 														<img
-															src={reply.author?.profile?.picture}
+															src={reply.userProfilePhoto}
 															alt="user profile photo"
 														/>
-														<h4>{reply.author?.username}</h4>
+														<h4>{reply.user}</h4>
 													</div>
-													<p>{reply.content}</p>
-													{reply.author?.id === user.id && (
+													<p>{reply.text}</p>
+													{reply.user === "CurrentUser" && (
 														<img
 															className="delete-icon"
 															src={delete_icon}
