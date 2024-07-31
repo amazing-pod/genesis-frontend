@@ -106,7 +106,7 @@ const Community = () => {
 	const handleCancelCreatePost = () => {
 		setShowCreatePost(false);
 	};
-
+    console.log(posts)
 	return (
 		<>
 			<Header />
