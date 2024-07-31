@@ -8,6 +8,7 @@ import { useUser } from "@clerk/clerk-react";
 import axios from "axios";
 
 const ForumPost = ({ post }) => {
+	console.log("Post info:", post);
 	const [likes, setLikes] = useState(post.likeCount);
 	const [liked, setLiked] = useState(false);
 	const navigate = useNavigate();
