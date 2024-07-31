@@ -5,9 +5,11 @@ import brainstorm_ideation from "../../../assets/png/brainstorm_ideation.png";
 import IdeationProject from "./IdeationProject/IdeationProject";
 import IdeationFeature from "./IdeationFeature/IdeationFeature";
 import AddIdea from "./AddIdea/AddIdea";
+import { useUser } from "@clerk/clerk-react";
 
 const IdeationModal = ({ closeModal }) => {
 	const [modalSelect, setModalSelect] = useState(null);
+	const { user } = useUser();
 
 	const handleButtonClick = (modalType) => {
 		setModalSelect(modalType);
@@ -27,7 +29,7 @@ const IdeationModal = ({ closeModal }) => {
 						<div className="ideation-modal">
 							<div className="ideation-modal-header">
 								<span className="ideation-user-welcome">
-									Welcome, <b>Username.</b>
+									Welcome, <b>{user.username}.</b>
 								</span>
 								<img src={close_icon} alt="close icon" onClick={closeModal} />
 							</div>
