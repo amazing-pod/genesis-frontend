@@ -23,10 +23,12 @@ const CreatePost = ({ onCreatePost, onCancel }) => {
 					}
 				);
 				console.log(response.data);
+				onCreatePost(response.data);
 			};
 			createPost();
 			setTitle("");
 			setContent("");
+			onCancel();
 		}
 	};
 
