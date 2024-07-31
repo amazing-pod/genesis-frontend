@@ -6,13 +6,17 @@ import dropdown_icon from "../../assets/png/dropdown_icon.png";
 import CreatePost from "./ForumPost/CreatePost";
 import ForumPost from "./ForumPost/ForumPost";
 
-const MiniNavbar = ({
-	filter,
-	setFilter,
-	toggleCreatePost,
-	dropdownOpen,
-	toggleDropdown,
-}) => {
+const Community = () => {
+	const [posts, setPosts] = useState([]);
+	const [filter, setFilter] = useState("Newest");
+	const [dropdownOpen, setDropdownOpen] = useState(false);
+	const [showCreatePost, setShowCreatePost] = useState(false);
+
+	const handleCreatePost = (newPost) => {
+		setPosts((posts) => [newPost, ...posts]);
+	};
+
+
 	const handleDropdownItemClick = (filterName) => {
 		setFilter(filterName);
 		toggleDropdown();
@@ -31,45 +35,6 @@ const MiniNavbar = ({
 		};
 	}, [dropdownOpen]);
 
-	return (
-		<div className="mini-navbar">
-			<div className="dropdown">
-				<div className="dropdown-view">
-					<button onClick={toggleDropdown} className="community-dropbtn">
-						{filter}
-						<img
-							className="dropdown-icon"
-							src={dropdown_icon}
-							alt="dropdown icon"
-						/>
-					</button>
-				</div>
-				<div
-					className={`community-dropdown-content ${dropdownOpen ? "show" : ""}`}
-				>
-					<p onClick={() => handleDropdownItemClick("Newest")}>Newest</p>
-					<p onClick={() => handleDropdownItemClick("Oldest")}>Oldest</p>
-					<p onClick={() => handleDropdownItemClick("Most Liked")}>
-						Most Liked
-					</p>
-				</div>
-			</div>
-			<p className="new-post" onClick={toggleCreatePost}>
-				New Post +
-			</p>
-		</div>
-	);
-};
-
-const Community = () => {
-	const [posts, setPosts] = useState([]);
-	const [filter, setFilter] = useState("Newest");
-	const [dropdownOpen, setDropdownOpen] = useState(false);
-	const [showCreatePost, setShowCreatePost] = useState(false);
-
-	const handleCreatePost = (newPost) => {
-		setPosts((posts) => [newPost, ...posts]);
-	};
 
 	useEffect(() => {
 		const fetchPosts = async () => {
@@ -111,13 +76,31 @@ const Community = () => {
 		<>
 			<Header />
 			<div className="community-page-container">
-				<MiniNavbar
-					filter={filter}
-					setFilter={setFilter}
-					toggleCreatePost={toggleCreatePost}
-					dropdownOpen={dropdownOpen}
-					toggleDropdown={toggleDropdown}
-				/>
+			<div className="mini-navbar">
+				<div className="dropdown">
+					<div className="dropdown-view">
+						<button onClick={toggleDropdown} className="community-dropbtn">
+							{filter}
+							<img
+								className="dropdown-icon"
+								src={dropdown_icon}
+								alt="dropdown icon"
+							/>
+						</button>
+					</div>
+					<div
+						className={`community-dropdown-content ${dropdownOpen ? "show" : ""}`}
+					>
+						<p onClick={() => sortPosts("Newest")}>Newest</p>
+						<p onClick={() => sortPosts("Oldest")}>Oldest</p>
+						<p onClick={() => sortPosts("Most Liked")}>Most Liked</p>
+					</div>
+				</div>
+				<p className="new-post" onClick={toggleCreatePost}>
+					New Post +
+				</p>
+			</div>
+			
 				<h2>Community Discussion</h2>
 				<hr />
 				{showCreatePost && <CreatePost onCreatePost={handleCreatePost} onCancel={handleCancelCreatePost}/>}
