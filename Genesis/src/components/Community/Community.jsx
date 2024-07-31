@@ -74,7 +74,7 @@ const Community = () => {
 	useEffect(() => {
 		const fetchPosts = async () => {
 			const response = await axios.get(
-				`${import.meta.env.VITE_GENESIS_API_URL}/threads/posts`
+				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/posts`
 			);
 			console.log(response.data);
 			setPosts(response.data);
@@ -103,6 +103,10 @@ const Community = () => {
 		setDropdownOpen(!dropdownOpen);
 	};
 
+	const handleCancelCreatePost = () => {
+		setShowCreatePost(false);
+	};
+
 	return (
 		<>
 			<Header />
@@ -116,7 +120,7 @@ const Community = () => {
 				/>
 				<h2>Community Discussion</h2>
 				<hr />
-				{showCreatePost && <CreatePost onCreatePost={handleCreatePost} />}
+				{showCreatePost && <CreatePost onCreatePost={handleCreatePost} onCancel={handleCancelCreatePost}/>}
 				<div className="posts-container">
 					{posts.map((post, index) => (
 						<ForumPost key={index} post={post} />
