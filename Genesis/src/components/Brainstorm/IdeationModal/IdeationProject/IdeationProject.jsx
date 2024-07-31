@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./IdeationProject.css";
 import logo from "../../../../assets/png/close.png";
 import generate_projects_image from "../../../../assets/png/generate_projects.png";
@@ -51,7 +51,6 @@ const IdeationProject = ({ closeModal }) => {
 	];
 
 	const addProjectIdea = () => {
-		// Update database here, before modal closes.
 		const createIdeas = async () => {
 			const response = await axios.post(
 				`${
@@ -65,6 +64,7 @@ const IdeationProject = ({ closeModal }) => {
 			console.log(response.data);
 		};
 
+		createIdeas();
 		closeModal();
 	};
 
@@ -83,37 +83,58 @@ const IdeationProject = ({ closeModal }) => {
 	const addStep = () => {
 		const generateIdeas = async () => {
 			const response = await axios.post(
-				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/api/chat`,
+				`${import.meta.env.VITE_GENESIS_API_URL}/api/chat`,
 				{
 					prompt: `Generate a list of 5 distinct project ideas given the category: ${option} and the issues: ${editedIssues}. Each idea should include a highly appropriate title, a useful description, a highly accurate impact rating, a highly accurate feasibility rating, and a highly accurate difficulty rating. The list should always be in the following format exactly: [{title: 'Virtual Classroom Enhancer', description: 'A tool to create interactive and engaging virtual classrooms with real-time collaboration features.', impact: 5, feasibility: 4, difficulty: 3},{title: 'AI-Powered Tutoring Assistant', description: 'An AI-driven tutoring assistant that provides personalized help to students based on their learning progress.', impact: 4, feasibility: 3, difficulty: 4},{title: 'Gamified Learning Platform', description: 'A platform that uses game mechanics to make remote learning more engaging and motivating for students.', impact: 4, feasibility: 3, difficulty: 3},{title: 'Remote Lab Simulator', description: 'A simulator that allows students to conduct virtual lab experiments and gain hands-on experience remotely.', impact: 5, feasibility: 3, difficulty: 4},{title: 'Collaborative Study Space', description: 'An online space where students can study together, share resources, and support each other's learning.', impact: 3, feasibility: 5, difficulty: 2}]. Please generate the ideas. Never use new line. Never end with period`,
 				}
 			);
 			console.log(response.data);
 
-			// const matches = response.data.response.match(/\d+/g);
-			// const [impact, feasibility, difficulty] = matches.map(Number);
-			// console.log(impact, feasibility, difficulty);
+			let generatedIdeas = JSON.parse(
+				response.data.response
+					.replace(/([{,]\s*)(\w+):/g, '$1"$2":')
+					.replace(/'/g, '"')
+			);
 
-			// const response2 = await axios.post(
-			// 	`${
-			// 		import.meta.env.VITE_GENESIS_API_DEV_URL
-			// 	}/projects/clz2ezc320001d25xpih95js7`,
-			// 	{
-			// 		title: newFeatureName,
-			// 		description: newFeatureDescription,
-			// 		category: "Healthcare",
-			// 		features: editedFeatures,
-			// 		tags: [],
-			// 		impact,
-			// 		feasibility,
-			// 		difficulty,
-			// 	}
-			// );
+			generatedIdeas = generatedIdeas.map((object) => ({
+				...object,
+				category: option,
+			}));
 
-			// console.log(response2.data);
+			console.log(generatedIdeas);
+
+			setIdeationProjectData(generatedIdeas);
+			setStep(step + 1);
 		};
-		createIdea();
-		setStep(step + 1);
+		generateIdeas();
+	};
+
+	const regenerateProjectIdeas = () => {
+		const generateIdeas = async () => {
+			const response = await axios.post(
+				`${import.meta.env.VITE_GENESIS_API_URL}/api/chat`,
+				{
+					prompt: `Generate a list of 5 distinct project ideas given the category: ${option} and the issues: ${editedIssues}. Each idea should include a highly appropriate title with a creative name, a useful description, a highly accurate impact rating, a highly accurate feasibility rating, a highly accurate difficulty rating, and a list of 3 main features. The list should always be in the following format exactly: [{title: 'Virtual Classroom Enhancer', description: 'A tool to create interactive and engaging virtual classrooms with real-time collaboration features.', impact: 5, feasibility: 4, difficulty: 3, features: ['Real-time collaboration', 'Interactive quizzes', 'Virtual whiteboard']},{title: 'AI-Powered Tutoring Assistant', description: 'An AI-driven tutoring assistant that provides personalized help to students based on their learning progress.', impact: 4, feasibility: 3, difficulty: 4, features: ['Adaptive learning paths', 'Progress tracking', 'Automated feedback']},{title: 'Gamified Learning Platform', description: 'A platform that uses game mechanics to make remote learning more engaging and motivating for students.', impact: 4, feasibility: 3, difficulty: 3, features: ['Leaderboards', 'Achievement badges', 'Interactive challenges']},{title: 'Remote Lab Simulator', description: 'A simulator that allows students to conduct virtual lab experiments and gain hands-on experience remotely.', impact: 5, feasibility: 3, difficulty: 4, features: ['Virtual lab experiments', 'Real-time data analysis', 'Experiment tutorials']},{title: 'Collaborative Study Space', description: 'An online space where students can study together, share resources, and support each other's learning.', impact: 3, feasibility: 5, difficulty: 2, features: ['Shared resource library', 'Group study sessions', 'Peer support chat']}] Please generate the ideas. Never use new lines. Never end with period or comma`,
+				}
+			);
+			console.log(response.data);
+
+			let generatedIdeas = JSON.parse(
+				response.data.response
+					.replace(/([{,]\s*)(\w+):/g, '$1"$2":')
+					.replace(/'/g, '"')
+			);
+
+			generatedIdeas = generatedIdeas.map((object) => ({
+				...object,
+				category: option,
+			}));
+
+			console.log(generatedIdeas);
+
+			setIdeationProjectData(generatedIdeas);
+		};
+		generateIdeas();
 	};
 
 	const backtrackStep = () => {
@@ -121,14 +142,20 @@ const IdeationProject = ({ closeModal }) => {
 	};
 
 	const handleIconClick = (id) => {
-		setIcons((prevIcons) => ({
-			...prevIcons,
-			[id]:
-				prevIcons[id] === add_inactive_icon
-					? add_active_icon
-					: add_inactive_icon,
-		}));
-		setChosenIdeas([...chosenIdeas, ideationProjectData[id]]);
+		setIcons({
+			...icons,
+			[id]: icons[id] === add_active_icon ? add_inactive_icon : add_active_icon,
+		});
+
+		if (chosenIdeas.includes(ideationProjectData[id])) {
+			console.log(ideationProjectData[id].title, "removed");
+			setChosenIdeas(
+				chosenIdeas.filter((idea) => idea !== ideationProjectData[id])
+			);
+		} else {
+			console.log(ideationProjectData[id].title, "added");
+			setChosenIdeas([...chosenIdeas, ideationProjectData[id]]);
+		}
 	};
 
 	const renderModalContent = () => {
@@ -199,23 +226,7 @@ const IdeationProject = ({ closeModal }) => {
 							<></>
 							{/* Take user to main modal */}
 							<div className="project-ideation-button-container">
-								<button
-									className="generate"
-									onClick={() => {
-										const createIdea = async () => {
-											const response = await axios.post(
-												`${import.meta.env.VITE_GENESIS_API_DEV_URL}/api/chat`,
-												{
-													prompt: `Based on the category: Healthcare and the following issues: ${editedFeatures}, always generate an array of 5 project ideas best suited for this category. Each object in the array should always have a title and a one-sentence description always in this exact format without any white space: {title: title,description:description}. Following the array, provide only a numeric impact, feasibility, and difficulty rating out of 5 for this project idea always in this exact format without any white space: impact:#,feasibility: #,difficulty:#`,
-												}
-											);
-
-											console.log(response.data);
-										};
-
-										addStep();
-									}}
-								>
+								<button className="generate" onClick={addStep}>
 									Generate
 								</button>
 								<button className="backtrack" onClick={closeModal}>
@@ -255,7 +266,7 @@ const IdeationProject = ({ closeModal }) => {
 												<p>{feature.description}</p>
 											</div>
 											<img
-												src={icons[feature.id] || add_inactive_icon}
+												src={icons[index] || add_inactive_icon}
 												alt="add-inactive-icon"
 												onClick={() => handleIconClick(index)}
 												style={{ cursor: "pointer" }}
@@ -270,7 +281,9 @@ const IdeationProject = ({ closeModal }) => {
 								<button className="generate" onClick={addProjectIdea}>
 									Finish
 								</button>
-								<button className="generate">Regenerate</button>
+								<button className="generate" onClick={regenerateProjectIdeas}>
+									Regenerate
+								</button>
 								<button className="backtrack" onClick={backtrackStep}>
 									Go Back
 								</button>

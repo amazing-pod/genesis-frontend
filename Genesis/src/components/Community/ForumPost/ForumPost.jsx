@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { formatDistanceToNow } from "date-fns";
 import "./ForumPost.css";
 import upvote_inactive_icon from "../../../assets/png/upvote_inactive.png";
 import upvote_active_icon from "../../../assets/png/upvote_active.png";
@@ -7,8 +8,70 @@ import message_icon from "../../../assets/png/reply_icon.png";
 import { useUser } from "@clerk/clerk-react";
 import axios from "axios";
 
+const samplePosts = [
+	{
+		id: 1,
+		userProfilePhoto: "https://placehold.co/50x50",
+		username: "Brenda Aceves",
+		timeAgo: "1 day ago",
+		title: "Appreciation Post",
+		content:
+			"I just wanted to give a HUGE shout out to my team for finishing our first version of our product! If it weren’t for my incredibly talented developers and designers, I couldn’t imagine being where I’m at..",
+		likes: 4,
+		comments: [
+			{ user: "User1", text: "Congratulations!" },
+			{ user: "User2", text: "Well done team!" },
+		],
+		tags: ["Team", "Achievement"],
+	},
+	{
+		id: 2,
+		userProfilePhoto: "https://placehold.co/50x50",
+		username: "John Doe",
+		timeAgo: "2 days ago",
+		title: "Feature Suggestion",
+		content:
+			"I think it would be great if we could add a dark mode to the app. It's becoming a standard feature and our users would appreciate it.",
+		likes: 7,
+		comments: [
+			{ user: "User3", text: "I second this!" },
+			{ user: "User4", text: "Dark mode would be awesome!" },
+		],
+		tags: ["Feature", "Suggestion"],
+	},
+	{
+		id: 3,
+		userProfilePhoto: "https://placehold.co/50x50",
+		username: "Alice Smith",
+		timeAgo: "3 days ago",
+		title: "Bug Report",
+		content:
+			"I'm experiencing a crash when I try to upload an image. Has anyone else encountered this issue?",
+		likes: 2,
+		comments: [
+			{ user: "User5", text: "Yes, I'm having the same problem." },
+			{ user: "User6", text: "It works fine for me. Maybe try reinstalling?" },
+		],
+		tags: ["Bug", "Help"],
+	},
+	{
+		id: 4,
+		userProfilePhoto: "https://placehold.co/50x50",
+		username: "Bob Johnson",
+		timeAgo: "4 days ago",
+		title: "Weekly Standup",
+		content:
+			"Reminder: Our weekly standup meeting is tomorrow at 10 AM. Please make sure to have your updates ready.",
+		likes: 1,
+		comments: [
+			{ user: "User7", text: "Got it!" },
+			{ user: "User8", text: "Thanks for the reminder." },
+		],
+		tags: ["Reminder", "Meeting"],
+	},
+];
+
 const ForumPost = ({ post }) => {
-	console.log("Post info:", post);
 	const [likes, setLikes] = useState(post.likeCount);
 	const [liked, setLiked] = useState(false);
 	const navigate = useNavigate();
@@ -23,22 +86,24 @@ const ForumPost = ({ post }) => {
 	const handleLikeClick = async (event) => {
 		event.stopPropagation(); // Prevents navigating to the post when liking
 		if (liked) {
-			if (likes > 0) { // Check to prevent decrementing into negative values
-				setLikes(likes - 1);
-				await axios.put(
-					`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${post.id}/unlike/${user.id}`
-				);
-			}
+			setLikes(likes - 1);
+			await axios.put(
+				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/unlike/${
+					user.id
+				}`
+			);
 		} else {
 			setLikes(likes + 1);
 			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/${post.id}/like/${user.id}`
+				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/like/${
+					user.id
+				}`
 			);
 		}
 		setLiked(!liked);
 		notify();
 	};
-	
+
 	const handlePostClick = () => {
 		navigate(`/community/threads/${post.id}`); // Navigate to the post details page
 	};
@@ -50,12 +115,17 @@ const ForumPost = ({ post }) => {
 				<div className="forum-user-profile">
 					<img
 						className="user-profile-photo"
-						src={post?.author?.profile?.picture || 'https://placehold.co/50x50'}
+						src={post.author.profile.picture}
 						alt="User profile photo"
 					/>
-					<p className="forum-post-username">{post?.author?.username}</p>
+					<p className="forum-post-username">{post.author.username}</p>
 				</div>
-				<p>{post.createdAt}</p>
+				<p>
+					{formatDistanceToNow(post.createdAt, { addSuffix: true }).replace(
+						"about ",
+						""
+					)}
+				</p>
 			</div>
 			{/* Main content */}
 			<div className="forum-content">
