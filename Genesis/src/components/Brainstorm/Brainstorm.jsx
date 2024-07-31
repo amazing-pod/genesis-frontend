@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Brainstorm.css";
@@ -130,7 +129,7 @@ const Brainstorm = () => {
 		// const fetchIdeas = async () => {
 		// 	console.log(project);
 		// 	const response = await axios.get(
-		// 		`${import.meta.env.VITE_GENESIS_API_PROD_URL}/projects/${project}`
+		// 		`${import.meta.env.VITE_GENESIS_API_URL}/projects/${project}`
 		// 	);
 		// 	console.log(response.data);
 		// 	setIdeas(response.data.ideas);
@@ -140,7 +139,7 @@ const Brainstorm = () => {
 			let projectId = "";
 
 			const response1 = await axios.get(
-				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/projects/owner/${user.id}`
+				`${import.meta.env.VITE_GENESIS_API_URL}/projects/owner/${user.id}`
 			);
 			console.log(response1.data);
 			console.log("first");
@@ -150,7 +149,7 @@ const Brainstorm = () => {
 				setProject(response1.data[0].id);
 			} else {
 				const response2 = await axios.post(
-					`${import.meta.env.VITE_GENESIS_API_PROD_URL}/projects`,
+					`${import.meta.env.VITE_GENESIS_API_URL}/projects`,
 					{ ownerId: user.id, title: "default" }
 				);
 				console.log(response2.data);
@@ -163,7 +162,7 @@ const Brainstorm = () => {
 			setProject(projectId);
 
 			const response = await axios.get(
-				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/projects/${projectId}`
+				`${import.meta.env.VITE_GENESIS_API_URL}/projects/${projectId}`
 			);
 			console.log("ideas", response.data);
 			setIdeas(response.data.ideas);
@@ -301,4 +300,3 @@ const Brainstorm = () => {
 };
 
 export default Brainstorm;
-

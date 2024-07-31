@@ -21,7 +21,7 @@ const AddIdea = ({ closeModal }) => {
 
 		const createIdea = async () => {
 			const response = await axios.post(
-				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/api/chat`,
+				`${import.meta.env.VITE_GENESIS_API_URL}/api/chat`,
 				{
 					prompt: `Based on the category: ${option}, title: ${newFeatureName}, description: ${newFeatureDescription}, and the following features: ${editedFeatures}, provide only a numeric impact, feasibility, and difficulty rating out of 5 for this project idea always in this exact format without any white space: impact:#,feasibility: #,difficulty:#`,
 				}
@@ -34,7 +34,7 @@ const AddIdea = ({ closeModal }) => {
 			console.log(impact, feasibility, difficulty);
 
 			const response2 = await axios.post(
-				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/projects/${project}`,
+				`${import.meta.env.VITE_GENESIS_API_URL}/projects/${project}/ideas`,
 				{
 					title: newFeatureName,
 					description: newFeatureDescription,

@@ -87,14 +87,14 @@ const ForumPost = ({ post }) => {
 		if (liked) {
 			setLikes(likes - 1);
 			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads/${
-					post.id
-				}/unlike/${user.id}`
+				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/unlike/${
+					user.id
+				}`
 			);
 		} else {
 			setLikes(likes + 1);
 			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_PROD_URL}/threads/${post.id}/like/${
+				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/like/${
 					user.id
 				}`
 			);
