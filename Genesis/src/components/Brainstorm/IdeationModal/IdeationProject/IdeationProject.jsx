@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./IdeationProject.css";
 import logo from "../../../../assets/png/close.png";
 import generate_projects_image from "../../../../assets/png/generate_projects.png";
@@ -51,7 +51,6 @@ const IdeationProject = ({ closeModal }) => {
 	];
 
 	const addProjectIdea = () => {
-		// Update database here, before modal closes.
 		const createIdeas = async () => {
 			const response = await axios.post(
 				`${
@@ -65,6 +64,7 @@ const IdeationProject = ({ closeModal }) => {
 			console.log(response.data);
 		};
 
+		createIdeas();
 		closeModal();
 	};
 
@@ -114,14 +114,20 @@ const IdeationProject = ({ closeModal }) => {
 	};
 
 	const handleIconClick = (id) => {
-		setIcons((prevIcons) => ({
-			...prevIcons,
-			[id]:
-				prevIcons[id] === add_inactive_icon
-					? add_active_icon
-					: add_inactive_icon,
-		}));
-		setChosenIdeas([...chosenIdeas, ideationProjectData[id]]);
+		setIcons({
+			...icons,
+			[id]: icons[id] === add_active_icon ? add_inactive_icon : add_active_icon,
+		});
+
+		if (chosenIdeas.includes(ideationProjectData[id])) {
+			console.log(ideationProjectData[id].title, "removed");
+			setChosenIdeas(
+				chosenIdeas.filter((idea) => idea !== ideationProjectData[id])
+			);
+		} else {
+			console.log(ideationProjectData[id].title, "added");
+			setChosenIdeas([...chosenIdeas, ideationProjectData[id]]);
+		}
 	};
 
 	const renderModalContent = () => {
@@ -232,7 +238,7 @@ const IdeationProject = ({ closeModal }) => {
 												<p>{feature.description}</p>
 											</div>
 											<img
-												src={icons[feature.id] || add_inactive_icon}
+												src={icons[index] || add_inactive_icon}
 												alt="add-inactive-icon"
 												onClick={() => handleIconClick(index)}
 												style={{ cursor: "pointer" }}
