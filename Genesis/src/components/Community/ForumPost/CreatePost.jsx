@@ -3,7 +3,7 @@ import "./CreatePost.css";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 
-const CreatePost = ({ onCreatePost }) => {
+const CreatePost = ({ onCreatePost, onCancel }) => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const { user } = useUser();
@@ -11,18 +11,6 @@ const CreatePost = ({ onCreatePost }) => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		if (title && content) {
-			// const newPost = {
-			// 	id: Date.now(),
-			// 	userProfilePhoto: "https://placehold.co/50x50", // Default profile photo
-			// 	username,
-			// 	timeAgo: "Just now", // Placeholder time
-			// 	title,
-			// 	content,
-			// 	likes: 0,
-			// 	comments: [],
-			// 	tags: [],
-			// };
-			// onCreatePost(newPost);
 			const createPost = async () => {
 				const response = await axios.post(
 					`${import.meta.env.VITE_GENESIS_API_DEV_URL}/threads/posts`,
@@ -73,6 +61,7 @@ const CreatePost = ({ onCreatePost }) => {
 						setUsername("");
 						setTitle("");
 						setContent("");
+						onCancel();
 					}}
 				>
 					Cancel
