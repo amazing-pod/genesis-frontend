@@ -7,7 +7,7 @@ import upvote_active_icon from "../../../assets/png/upvote_active.png";
 import message_icon from "../../../assets/png/reply_icon.png";
 import { useUser } from "@clerk/clerk-react";
 import axios from "axios";
-import { toast } from "react-toastify"; // Ensure you import this if you're using it
+import { toast } from "react-toastify";
 
 const ForumPost = ({ post }) => {
     const [likes, setLikes] = useState(post.likeCount);
@@ -24,23 +24,33 @@ const ForumPost = ({ post }) => {
 
     const handleLikeClick = async (event) => {
         event.stopPropagation(); // Prevents navigating to the post when liking
-        try {
-            if (liked) {
-                setLikes(likes - 1);
+
+        if (liked) {
+            // User has already liked, so they want to unlike
+            try {
                 await axios.put(
                     `${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/unlike/${user.id}`
                 );
-            } else {
-                setLikes(likes + 1);
+                setLikes(likes - 1);
+                setLiked(false);
+                notify();
+            } catch (error) {
+                console.error("Error unliking the post:", error);
+                // Optionally, revert the UI changes if the request fails
+            }
+        } else {
+            // User has not liked yet, so they want to like
+            try {
                 await axios.put(
                     `${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/like/${user.id}`
                 );
+                setLikes(likes + 1);
+                setLiked(true);
+                notify();
+            } catch (error) {
+                console.error("Error liking the post:", error);
+                // Optionally, revert the UI changes if the request fails
             }
-            setLiked(!liked);
-            notify();
-        } catch (error) {
-            console.error("Error updating like status:", error);
-            // Optionally, revert the UI changes if the request fails
         }
     };
 
