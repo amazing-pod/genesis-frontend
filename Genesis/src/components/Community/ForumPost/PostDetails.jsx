@@ -70,30 +70,26 @@ const PostDetails = () => {
                     }
                 );
                 console.log("Created reply response:", response.data);
+                const updatedComments = comments.map((comment) => {
+                    if (comment.id === commentId) {
+                        return {
+                            ...comment,
+                            replies: [
+                                ...comment.replies,
+                                response.data,
+                            ],
+                        };
+                    }
+                    return comment;
+                });
+                setComments(updatedComments);
+                setReplyingTo(null);
             } catch (error) {
                 console.error("Error creating reply:", error);
             }
         };
 
-        const updatedComments = comments.map((comment) => {
-            if (comment.id === commentId) {
-                return {
-                    ...comment,
-                    replies: [
-                        ...comment.replies,
-                        {
-                            id: comment.replies.length + 1,
-                            authorId: user.id,
-                            content: replyText,
-                        },
-                    ],
-                };
-            }
-            return comment;
-        });
         createReply();
-        setComments(updatedComments);
-        setReplyingTo(null);
     };
 
     const handleLikeClick = async () => {
@@ -147,34 +143,60 @@ const PostDetails = () => {
         }
     };
 
-    const handleCommentDelete = (commentId) => {
-        setComments(comments.filter((comment) => comment.id !== commentId));
+	const handleCommentDelete = (commentId) => {
+        const updatedComments = comments.map((comment) => {
+            if (comment.id === commentId) {
+                return { ...comment, deleted: true }; // Mark as deleted
+            }
+            return comment;
+        });
+        setComments(updatedComments);
         const deleteComment = async () => {
             try {
                 const response = await axios.delete(
-                    `${import.meta.env.VITE_GENESIS_API_URL}/threads/${commentId}`
+                    `${import.meta.env.VITE_GENESIS_API_URL}/threads/${commentId}`,
+                    { deleted: true } // Patch to mark as deleted
                 );
-                console.log("Deleted comment response:", response.data);
+                console.log("Marked comment as deleted:", response.data);
             } catch (error) {
-                console.error("Error deleting comment:", error);
+                console.error("Error marking comment as deleted:", error);
             }
         };
         deleteComment();
     };
 
-    const handlePostDelete = (postId) => {
-        const deletePost = async () => {
-            try {
-                const response = await axios.delete(
-                    `${import.meta.env.VITE_GENESIS_API_URL}/threads/${postId}`
-                );
-                console.log("Deleted post response:", response.data);
-                navigate("/community");
-            } catch (error) {
-                console.error("Error deleting post:", error);
-            }
-        };
-        deletePost();
+    const handleReplyDelete = async (commentId, replyId) => {
+        try {
+            await axios.delete(
+                `${import.meta.env.VITE_GENESIS_API_URL}/threads/${replyId}`,
+				{ deleted: true }
+            );
+            console.log("Deleted reply:", replyId);
+            const updatedComments = comments.map((comment) => {
+                if (comment.id === commentId) {
+                    return {
+                        ...comment,
+                        replies: comment.replies.filter((reply) => reply.id !== replyId),
+                    };
+                }
+                return comment;
+            });
+            setComments(updatedComments);
+        } catch (error) {
+            console.error("Error deleting reply:", error);
+        }
+    };
+
+    const handlePostDelete = async (postId) => {
+        try {
+            const response = await axios.delete(
+                `${import.meta.env.VITE_GENESIS_API_URL}/threads/${postId}`
+            );
+            console.log("Deleted post response:", response.data);
+            navigate("/community");
+        } catch (error) {
+            console.error("Error deleting post:", error);
+        }
     };
 
     const handleBackClick = () => {
@@ -206,9 +228,7 @@ const PostDetails = () => {
                                 />
                                 <p>{post.author?.username || "default-username"}</p>
                             </div>
-                            <p>
-                                {post.updatedAt}
-                            </p>
+                            <p>{post.updatedAt}</p>
                         </div>
                         <p>{post.content}</p>
                         <div className="post-interactions">
@@ -256,7 +276,7 @@ const PostDetails = () => {
                                             {comment.deleted ? "[deleted]" : comment.author?.username}
                                         </h3>
                                     </div>
-                                    <p>{comment.content}</p>
+                                    <p>{comment.deleted ? "[This comment has been deleted]" : comment.content}</p>
                                     {!comment.deleted && comment.author?.id === user.id && (
                                         <img
                                             className="delete-icon"
@@ -300,7 +320,7 @@ const PostDetails = () => {
                                                                 className="delete-icon"
                                                                 src={delete_icon}
                                                                 alt="Delete Reply"
-                                                                onClick={() => handleCommentDelete(comment.id)}
+                                                                onClick={() => handleReplyDelete(comment.id, reply.id)}
                                                             />
                                                         )}
                                                         {/* Log reply details */}
