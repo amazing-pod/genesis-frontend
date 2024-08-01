@@ -88,11 +88,11 @@
 }
 
 .emphasis-text {
-  background: #7272FF;
-  background: linear-gradient(to right, #7272FF 0%, #FF6584 81%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  /* display: flex; */
+	background: #7272ff;
+	background: linear-gradient(to right, #7272ff 0%, #ff6584 81%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	/* display: flex; */
 }
 
 .landing-item-container {
@@ -116,10 +116,10 @@ img {
 p {
 	font-size: 20px;
 }
-  
+
 .landing-transition-text {
-  text-align: center;
-  font-size: 36px;
+	text-align: center;
+	font-size: 36px;
 }
 
 .landing-end {

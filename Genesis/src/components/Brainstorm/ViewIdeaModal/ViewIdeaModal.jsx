@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ViewIdeaModal.css";
 import axios from "axios";
 import edit_icon from "../../../assets/png/edit.png";
@@ -6,33 +6,29 @@ import close_icon from "../../../assets/png/close.png";
 import remove_icon from "../../../assets/svg/remove.svg";
 import add_icon from "../../../assets/png/add_inactive_pink.png";
 
-const ProjectFeatureGenerator = ({ category, title, description, issues, features, option, setGeneratedIdeas }) => {
+const ProjectFeatureGenerator = ({
+	category,
+	title,
+	description,
+	issues,
+	features,
+	option,
+	editedFeatures,
+	setEditedFeatures,
+}) => {
 	const fetchFeatureSuggestion = async () => {
 		try {
 			const response = await axios.post(
 				`${import.meta.env.VITE_GENESIS_API_URL}/api/chat`,
 				{
-					prompt: `Based on the provided category: ${category}, title: ${title}, description: ${description}, related issues: ${issues}, and existing features: ${features}, suggest exactly one specific valuable distinct feature that can enhance the project in a concise manner. Do not provide justification. Never preface the feature with anything`
+					prompt: `Based on the provided category: ${category}, title: ${title}, description: ${description}, related issues: ${issues}, and existing features: ${features}, suggest exactly one specific valuable distinct feature that can enhance the project in a concise manner. Do not provide justification. Never preface the feature with anything. Never end in a period or comma`,
 				}
 			);
 			console.log(response.data);
 
-			let ideas = JSON.parse(
-				response.data.response
-					.replace(/([{,]\s*)(\w+):/g, '$1"$2":')
-					.replace(/'/g, '"')
-			);
-
-			ideas = ideas.map((object) => ({
-				...object,
-				category: option,
-			}));
-
-			console.log(ideas);
-
-			setGeneratedIdeas(ideas);
+			setEditedFeatures([...editedFeatures, response.data.response]);
 		} catch (error) {
-			console.error('Error fetching feature suggestion:', error);
+			console.error("Error fetching feature suggestion:", error);
 		}
 	};
 
@@ -46,10 +42,14 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 	const [editing, setEditing] = useState(false);
 	const [editedTitle, setEditedTitle] = useState(idea.title);
 	const [editedDescription, setEditedDescription] = useState(idea.description);
-	const [editedFeatures, setEditedFeatures] = useState([...idea.features]);
+	const [editedFeatures, setEditedFeatures] = useState([]);
 	const [selectedTag, setSelectedTag] = useState(idea.category);
 	const [newFeatureText, setNewFeatureText] = useState("");
 	const [generatedIdeas, setGeneratedIdeas] = useState([]);
+
+	useEffect(() => {
+		setEditedFeatures([...idea.features]);
+	}, []);
 
 	const handleEditClick = () => {
 		setEditing(true);
@@ -145,15 +145,6 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 					)}
 
 					<h3>Project Features</h3>
-					<ProjectFeatureGenerator
-						category={selectedTag}
-						title={editedTitle}
-						description={editedDescription}
-						issues={[]}
-						features={editedFeatures}
-						option={selectedTag}
-						setGeneratedIdeas={setGeneratedIdeas}
-					/>
 					{generatedIdeas.length > 0 && (
 						<div>
 							<h3>Generated Project Feature:</h3>
@@ -164,6 +155,7 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 							</ul>
 						</div>
 					)}
+
 					{editing ? (
 						<>
 							{editedFeatures.map((feature, index) => (
@@ -194,13 +186,24 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 						</>
 					) : (
 						<>
-							{idea.features.map((feature, index) => (
+							{editedFeatures.map((feature, index) => (
 								<p key={index}>
 									{index + 1}. {feature}
 								</p>
 							))}
 						</>
 					)}
+
+					<ProjectFeatureGenerator
+						category={selectedTag}
+						title={editedTitle}
+						description={editedDescription}
+						issues={[]}
+						features={editedFeatures}
+						option={selectedTag}
+						editedFeatures={editedFeatures}
+						setEditedFeatures={setEditedFeatures}
+					/>
 
 					<h3>Category</h3>
 					{editing ? (
