@@ -179,7 +179,7 @@ const PostDetails = () => {
 								{/* {formatDistanceToNow(post.createdAt, {
 									addSuffix: true,
 								}).replace("about ", "")} */}
-								{post.createdAt}
+								{post.updatedAt}
 							</p>
 						</div>
 						<p>{post.content}</p>
