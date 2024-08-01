@@ -1,10 +1,47 @@
 import React, { useState } from "react";
 import "./ViewIdeaModal.css";
+import axios from "axios";
 import edit_icon from "../../../assets/png/edit.png";
 import close_icon from "../../../assets/png/close.png";
 import remove_icon from "../../../assets/svg/remove.svg";
 import add_icon from "../../../assets/png/add_inactive_pink.png";
 
+const ProjectFeatureGenerator = ({ category, title, description, issues, features, option, setGeneratedIdeas }) => {
+	const fetchFeatureSuggestion = async () => {
+		try {
+			const response = await axios.post(
+				`${import.meta.env.VITE_GENESIS_API_URL}/api/chat`,
+				{
+					prompt: `Based on the provided category: ${category}, title: ${title}, description: ${description}, related issues: ${issues}, and existing features: ${features}, suggest exactly one specific valuable distinct feature that can enhance the project in a concise manner. Do not provide justification. Never preface the feature with anything`
+				}
+			);
+			console.log(response.data);
+
+			let ideas = JSON.parse(
+				response.data.response
+					.replace(/([{,]\s*)(\w+):/g, '$1"$2":')
+					.replace(/'/g, '"')
+			);
+
+			ideas = ideas.map((object) => ({
+				...object,
+				category: option,
+			}));
+
+			console.log(ideas);
+
+			setGeneratedIdeas(ideas);
+		} catch (error) {
+			console.error('Error fetching feature suggestion:', error);
+		}
+	};
+
+	return (
+		<div>
+			<button onClick={fetchFeatureSuggestion}>Generate Project Feature</button>
+		</div>
+	);
+};
 const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 	const [editing, setEditing] = useState(false);
 	const [editedTitle, setEditedTitle] = useState(idea.title);
@@ -12,6 +49,7 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 	const [editedFeatures, setEditedFeatures] = useState([...idea.features]);
 	const [selectedTag, setSelectedTag] = useState(idea.category);
 	const [newFeatureText, setNewFeatureText] = useState("");
+	const [generatedIdeas, setGeneratedIdeas] = useState([]);
 
 	const handleEditClick = () => {
 		setEditing(true);
@@ -107,6 +145,25 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 					)}
 
 					<h3>Project Features</h3>
+					<ProjectFeatureGenerator
+						category={selectedTag}
+						title={editedTitle}
+						description={editedDescription}
+						issues={[]}
+						features={editedFeatures}
+						option={selectedTag}
+						setGeneratedIdeas={setGeneratedIdeas}
+					/>
+					{generatedIdeas.length > 0 && (
+						<div>
+							<h3>Generated Project Feature:</h3>
+							<ul>
+								{generatedIdeas.map((idea, index) => (
+									<li key={index}>{idea.feature}</li>
+								))}
+							</ul>
+						</div>
+					)}
 					{editing ? (
 						<>
 							{editedFeatures.map((feature, index) => (
