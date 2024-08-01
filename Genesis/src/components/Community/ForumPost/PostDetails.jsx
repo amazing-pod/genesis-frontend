@@ -9,7 +9,7 @@ import back_icon from "../../../assets/png/backtrack_icon.png";
 import ReplyForm from "./ReplyForm";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, parseISO } from "date-fns";
 
 const PostDetails = () => {
     const { id } = useParams();
@@ -20,7 +20,7 @@ const PostDetails = () => {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
     const [replyingTo, setReplyingTo] = useState(null);
-    const [replyUsers, setReplyUsers] = useState({}); // State to store user profiles
+    const [replyUsers, setReplyUsers] = useState({});
     const { user } = useUser();
 
     useEffect(() => {
@@ -38,7 +38,6 @@ const PostDetails = () => {
                         ? true
                         : false
                 );
-                // Fetch user profiles for each reply
                 const users = await Promise.all(
                     response.data.replies.map(async (reply) => {
                         const userResponse = await axios.get(
@@ -146,7 +145,7 @@ const PostDetails = () => {
 	const handleCommentDelete = (commentId) => {
         const updatedComments = comments.map((comment) => {
             if (comment.id === commentId) {
-                return { ...comment, deleted: true }; // Mark as deleted
+                return { ...comment, deleted: true };
             }
             return comment;
         });
@@ -155,7 +154,7 @@ const PostDetails = () => {
             try {
                 const response = await axios.delete(
                     `${import.meta.env.VITE_GENESIS_API_URL}/threads/${commentId}`,
-                    { deleted: true } // Patch to mark as deleted
+                    { deleted: true }
                 );
                 console.log("Marked comment as deleted:", response.data);
             } catch (error) {
@@ -169,7 +168,7 @@ const PostDetails = () => {
         try {
             await axios.delete(
                 `${import.meta.env.VITE_GENESIS_API_URL}/threads/${replyId}`,
-				{ deleted: true }
+                { deleted: true }
             );
             console.log("Deleted reply:", replyId);
             const updatedComments = comments.map((comment) => {
@@ -228,7 +227,7 @@ const PostDetails = () => {
                                 />
                                 <p>{post.author?.username || "default-username"}</p>
                             </div>
-                            <p>{post.updatedAt}</p>
+                            {post.createdAt ? formatDistanceToNow(parseISO(post.createdAt), { addSuffix: true }).replace("about ", "") : "Date unavailable"}
                         </div>
                         <p>{post.content}</p>
                         <div className="post-interactions">
@@ -245,17 +244,26 @@ const PostDetails = () => {
                                 src={message_icon}
                                 alt="Message Icon"
                             />
-                            {post.author?.id === user.id && (
+                            {/* {post.author?.id === user.id && (
+                                <>
+                                <button>a</button>
                                 <img
                                     className="delete-icon"
                                     src={delete_icon}
                                     alt="Delete Post"
                                     onClick={() => handlePostDelete(post.id)}
                                 />
-                            )}
+                                </>
+                            )} */}
                         </div>
                     </div>
-                    <div className="post-separator"></div>
+                    <div className="post-separator">
+                    {/* User can delete their own post if they are the author */}
+                    {post.author?.id === user.id && (
+                        <button className="forum-delete" onClick={() => handlePostDelete(post.id)}>Delete</button>
+                    )}
+                    </div>
+                    {/* Comments and replies to post */}
                     <div className="post-details">
                         <h2>Discussion</h2>
                         <hr />
@@ -285,12 +293,14 @@ const PostDetails = () => {
                                             onClick={() => handleCommentDelete(comment.id)}
                                         />
                                     )}
+                                    <div className="reply-separator">
                                     <button
                                         className="reply-button"
                                         onClick={() => setReplyingTo(comment.id)}
                                     >
                                         Reply
                                     </button>
+                                    </div>
                                     {replyingTo === comment.id && (
                                         <ReplyForm
                                             commentId={comment.id}
@@ -298,14 +308,15 @@ const PostDetails = () => {
                                             onCancel={() => setReplyingTo(null)}
                                         />
                                     )}
-                                    <hr />
+                                    {/* Display Replies if there are any */}
+                                    { (comment.replies && comment.replies.length != 0) ? <h2>Replies:</h2> : null }
                                     <div className="replies">
                                         {comment.replies &&
                                             comment.replies.map((reply) => {
-                                                // Fetch the user profile details if not already available
                                                 const userProfile = replyUsers[reply.authorId];
                                                 return (
                                                     <div className="reply" key={reply.id}>
+                                                        <hr />
                                                         <div className="user-reply-header">
                                                             <img
                                                                 className="user-profile-photo"
@@ -323,12 +334,13 @@ const PostDetails = () => {
                                                                 onClick={() => handleReplyDelete(comment.id, reply.id)}
                                                             />
                                                         )}
-                                                        {/* Log reply details */}
                                                         {console.log("Reply details:", reply)}
                                                     </div>
                                                 );
                                             })}
                                     </div>
+                                    <hr />
+
                                 </div>
                             ))}
                             <form className="comment-form" onSubmit={handleCommentSubmit}>
