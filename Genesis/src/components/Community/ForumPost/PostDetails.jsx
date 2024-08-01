@@ -78,23 +78,24 @@ const PostDetails = () => {
 	};
 
 	const handleLikeClick = async () => {
-		if (liked) {
-			setLikes(likes - 1);
-			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/unlike/${
-					user.id
-				}`
-			);
-		} else {
-			setLikes(likes + 1);
-			await axios.put(
-				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/like/${
-					user.id
-				}`
-			);
+		try {
+			if (liked) {
+				await axios.put(
+					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/unlike/${user.id}`
+				);
+				setLikes(likes - 1);
+			} else {
+				await axios.put(
+					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/like/${user.id}`
+				);
+				setLikes(likes + 1);
+			}
+			setLiked(!liked);
+		} catch (error) {
+			console.error("Error updating like status:", error);
 		}
-		setLiked(!liked);
 	};
+	
 
 	const handleCommentChange = (e) => {
 		setNewComment(e.target.value);
