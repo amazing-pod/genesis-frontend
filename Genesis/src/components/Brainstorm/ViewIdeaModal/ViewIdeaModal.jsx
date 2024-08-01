@@ -7,6 +7,8 @@ import remove_icon from "../../../assets/svg/remove.svg";
 import add_icon from "../../../assets/png/add_inactive_pink.png";
 
 const ProjectFeatureGenerator = ({
+	projectId,
+	ideaId,
 	category,
 	title,
 	description,
@@ -32,9 +34,33 @@ const ProjectFeatureGenerator = ({
 		}
 	};
 
+	const fetchFeatureSuggestionAndAdd = async () => {
+		const response = await axios.post(
+			`${import.meta.env.VITE_GENESIS_API_URL}/api/chat`,
+			{
+				prompt: `Based on the provided category: ${category}, title: ${title}, description: ${description}, related issues: ${issues}, and existing features: ${features}, suggest exactly one specific valuable distinct feature that can enhance the project in a concise manner. Do not provide justification. Never preface the feature with anything. Never end in a period or comma`,
+			}
+		);
+		console.log(response.data);
+
+		setEditedFeatures([...editedFeatures, response.data.response]);
+
+		const response2 = await axios.put(
+			`${
+				import.meta.env.VITE_GENESIS_API_URL
+			}/projects/${projectId}/ideas/${ideaId}/features`,
+			{
+				feature: response.data.response,
+			}
+		);
+		console.log(response2.data);
+	};
+
 	return (
 		<div>
-			<button onClick={fetchFeatureSuggestion}>Generate Project Feature</button>
+			<button onClick={fetchFeatureSuggestionAndAdd}>
+				Generate Project Feature
+			</button>
 		</div>
 	);
 };
@@ -195,6 +221,8 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 					)}
 
 					<ProjectFeatureGenerator
+						projectId={idea.projectId}
+						ideaId={idea.id}
 						category={selectedTag}
 						title={editedTitle}
 						description={editedDescription}
