@@ -103,6 +103,10 @@ const Community = () => {
 		setDropdownOpen(!dropdownOpen);
 	};
 
+	const handleCancelCreatePost = () => {
+		setShowCreatePost(false);
+	};
+
 	return (
 		<>
 			<Header />
@@ -116,7 +120,12 @@ const Community = () => {
 				/>
 				<h2>Community Discussion</h2>
 				<hr />
-				{showCreatePost && <CreatePost onCreatePost={handleCreatePost} />}
+				{showCreatePost && (
+					<CreatePost
+						onCreatePost={handleCreatePost}
+						onCancel={handleCancelCreatePost}
+					/>
+				)}
 				<div className="posts-container">
 					{posts.map((post, index) => (
 						<ForumPost key={index} post={post} />

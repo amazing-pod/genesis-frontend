@@ -3,7 +3,7 @@ import "./CreatePost.css";
 import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 
-const CreatePost = ({ onCreatePost }) => {
+const CreatePost = ({ onCreatePost, onCancel }) => {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const { user } = useUser();
@@ -39,6 +39,7 @@ const CreatePost = ({ onCreatePost }) => {
 			createPost();
 			setTitle("");
 			setContent("");
+			onCancel();
 		}
 	};
 
@@ -70,9 +71,9 @@ const CreatePost = ({ onCreatePost }) => {
 					type="button"
 					className="cancel-button"
 					onClick={() => {
-						setUsername("");
 						setTitle("");
 						setContent("");
+						onCancel();
 					}}
 				>
 					Cancel
