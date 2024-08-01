@@ -14,7 +14,7 @@ import { formatDistanceToNow } from "date-fns";
 const PostDetails = () => {
 	const { id } = useParams();
 	const navigate = useNavigate();
-	const [post, setPost] = useState({});
+	const [post, setPost] = useState({ updatedAt: Date.now() });
 	const [likes, setLikes] = useState(0);
 	const [liked, setLiked] = useState(false);
 	const [comments, setComments] = useState([]);
@@ -30,7 +30,7 @@ const PostDetails = () => {
 			console.log(response.data);
 			setPost(response.data);
 			setComments(response.data.replies);
-			setLikes(response.data.likeCount);
+			setLikes(response.data.likedBy.length);
 			setLiked(
 				response.data.likedBy.find((liker) => liker.id === user.id)
 					? true
@@ -81,12 +81,16 @@ const PostDetails = () => {
 		try {
 			if (liked) {
 				await axios.put(
-					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/unlike/${user.id}`
+					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/unlike/${
+						user.id
+					}`
 				);
 				setLikes(likes - 1);
 			} else {
 				await axios.put(
-					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/like/${user.id}`
+					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${post.id}/like/${
+						user.id
+					}`
 				);
 				setLikes(likes + 1);
 			}
@@ -95,7 +99,6 @@ const PostDetails = () => {
 			console.error("Error updating like status:", error);
 		}
 	};
-	
 
 	const handleCommentChange = (e) => {
 		setNewComment(e.target.value);
@@ -177,10 +180,10 @@ const PostDetails = () => {
 								<p>{post.author?.username || "default-username"}</p>
 							</div>
 							<p>
-								{/* {formatDistanceToNow(post.createdAt, {
+								{formatDistanceToNow(post.updatedAt, {
 									addSuffix: true,
-								}).replace("about ", "")} */}
-								{post.updatedAt}
+								}).replace("about ", "")}
+								{/* {post.updatedAt} */}
 							</p>
 						</div>
 						<p>{post.content}</p>
