@@ -107,6 +107,8 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 					)}
 
 					<h3>Project Features</h3>
+					<button onClick={() => handleButtonClick("feature")}>Generate Project Features</button>
+
 					{editing ? (
 						<>
 							{editedFeatures.map((feature, index) => (
