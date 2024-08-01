@@ -20,6 +20,7 @@ const PostDetails = () => {
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
     const [replyingTo, setReplyingTo] = useState(null);
+    const [replyUsers, setReplyUsers] = useState({}); // State to store user profiles
     const { user } = useUser();
 
     useEffect(() => {
@@ -37,6 +38,17 @@ const PostDetails = () => {
                         ? true
                         : false
                 );
+                // Fetch user profiles for each reply
+                const users = await Promise.all(
+                    response.data.replies.map(async (reply) => {
+                        const userResponse = await axios.get(
+                            `${import.meta.env.VITE_GENESIS_API_URL}/users/id/${reply.authorId}`
+                        );
+                        return { [reply.authorId]: userResponse.data };
+                    })
+                );
+                const userMap = Object.assign({}, ...users);
+                setReplyUsers(userMap);
             } catch (error) {
                 console.error("Error fetching post data:", error);
             }
@@ -71,9 +83,8 @@ const PostDetails = () => {
                         ...comment.replies,
                         {
                             id: comment.replies.length + 1,
-                            user: user.username,
-                            text: replyText,
-                            userProfilePhoto: user.imageUrl,
+                            authorId: user.id,
+                            content: replyText,
                         },
                     ],
                 };
@@ -229,8 +240,8 @@ const PostDetails = () => {
                         <h2>Discussion</h2>
                         <hr />
                         <div className="comments-section">
-                            {comments.map((comment, index) => (
-                                <div className="comment" key={index}>
+                            {comments.map((comment) => (
+                                <div className="comment" key={comment.id}>
                                     <div className="user-comment-header">
                                         <img
                                             className="user-profile-photo"
@@ -270,29 +281,33 @@ const PostDetails = () => {
                                     <hr />
                                     <div className="replies">
                                         {comment.replies &&
-                                            comment.replies.map((reply) => (
-												
-                                                <div className="reply" key={reply.id}>
-                                                    <div className="user-reply-header">
-                                                        <img
-                                                            src={reply.author?.profile?.picture}
-                                                            alt="user profile photo"
-                                                        />
-                                                        <h4>{reply.author?.username}</h4>
+                                            comment.replies.map((reply) => {
+                                                // Fetch the user profile details if not already available
+                                                const userProfile = replyUsers[reply.authorId];
+                                                return (
+                                                    <div className="reply" key={reply.id}>
+                                                        <div className="user-reply-header">
+                                                            <img
+                                                                className="user-profile-photo"
+                                                                src={userProfile?.profile?.picture || "default-image-url"}
+                                                                alt="user profile photo"
+                                                            />
+                                                            <h4>{userProfile?.username || "Unknown User"}</h4>
+                                                        </div>
+                                                        <p>{reply.content}</p>
+                                                        {reply.authorId === user.id && (
+                                                            <img
+                                                                className="delete-icon"
+                                                                src={delete_icon}
+                                                                alt="Delete Reply"
+                                                                onClick={() => handleCommentDelete(comment.id)}
+                                                            />
+                                                        )}
+                                                        {/* Log reply details */}
+                                                        {console.log("Reply details:", reply)}
                                                     </div>
-                                                    <p>{reply.content}</p>
-                                                    {reply.authorId === user.id && (
-                                                        <img
-                                                            className="delete-icon"
-                                                            src={delete_icon}
-                                                            alt="Delete Reply"
-                                                            onClick={() => handleCommentDelete(comment.id)}
-                                                        />
-                                                    )}
-                                                    {/* Log reply details */}
-                                                    {console.log("Reply details:", reply)}
-                                                </div>
-                                            ))}
+                                                );
+                                            })}
                                     </div>
                                 </div>
                             ))}
