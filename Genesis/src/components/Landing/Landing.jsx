@@ -10,6 +10,7 @@ const Landing = () => {
 		<>
 			{/* Landing Navbar */}
 			<header className="landing-navbar">
+				{/* <img src={logo} className="logo" /> */}
 				<h6 className="genesis-text">Genesis</h6>
 				<div className="button-container">
 					<Link to="/login" className="landing-login-button">
