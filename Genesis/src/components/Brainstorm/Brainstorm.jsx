@@ -10,6 +10,7 @@ import IdeationModal from "./IdeationModal/IdeationModal";
 import { DropdownProvider } from "../../context/DropdownContext";
 import { useProject } from "../../context/ProjectContext";
 import { useUser } from "@clerk/clerk-react";
+import { useIdeas } from "../../context/IdeasContext";
 
 const Brainstorm = () => {
 	const [ideaDummyData, setIdeaDummyData] = useState([
@@ -121,7 +122,7 @@ const Brainstorm = () => {
 	const [sortedIdeas, setSortedIdeas] = useState([]);
 	const [selectedIdea, setSelectedIdea] = useState(null);
 	const [openIdeationModal, setOpenIdeationModal] = useState(false);
-	const [ideas, setIdeas] = useState([]);
+	const { ideas, setIdeas } = useIdeas();
 	const { user } = useUser();
 	const { project, setProject } = useProject();
 

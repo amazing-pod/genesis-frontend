@@ -4,7 +4,6 @@ import axios from "axios";
 import { useUser } from "@clerk/clerk-react";
 
 const CreatePost = ({ onCreatePost, onCancel }) => {
-	const [username, setUsername] = useState("")
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const { user } = useUser();
@@ -72,7 +71,6 @@ const CreatePost = ({ onCreatePost, onCancel }) => {
 					type="button"
 					className="cancel-button"
 					onClick={() => {
-						setUsername("");
 						setTitle("");
 						setContent("");
 						onCancel();
