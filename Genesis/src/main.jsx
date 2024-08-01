@@ -14,6 +14,7 @@ import UserProfile from "./components/Shared/UserProfile/UserProfile.jsx";
 import PostDetails from "./components/Community/ForumPost/PostDetails.jsx";
 import { DropdownProvider } from "./context/DropdownContext.jsx";
 import { ProjectProvider } from "./context/ProjectContext.jsx";
+import { IdeasProvider } from "./context/IdeasContext.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -45,9 +46,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<React.StrictMode>
 		<ProjectProvider>
-			<DropdownProvider>
-				<RouterProvider router={router} />
-			</DropdownProvider>
+			<IdeasProvider>
+				<DropdownProvider>
+					<RouterProvider router={router} />
+				</DropdownProvider>
+			</IdeasProvider>
 		</ProjectProvider>
 	</React.StrictMode>
 );
