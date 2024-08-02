@@ -18,7 +18,10 @@ const ProjectMain = () => {
 					const responseData = response.data;
 					console.log(response.data);
 					if (Array.isArray(response.data)) {
-						setUserProjects(responseData.filter(project => project.id === user.id));
+						let test = responseData.filter(project => project.ownerId === user.id);
+						console.log("test", test);
+
+						setUserProjects(responseData.filter(project => project.owner.id === user.id));
 					} else {
 						console.error('Expected an array but received:', response.data);
 						setUserProjects([]);
@@ -35,7 +38,8 @@ const ProjectMain = () => {
 
 	return (
 		<div className="project-page-container">
-			<button>create a project</button>
+			<CreateProject />
+
 			{/* <Brainstorm/> */}
 
 			{/* User Projects */}
@@ -59,8 +63,6 @@ const ProjectMain = () => {
             ) : (
                 <p>No projects found for this user.</p>
             )}
-
-				<CreateProject />
 				
 			</div>
 		</div>
