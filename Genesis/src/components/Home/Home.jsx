@@ -21,82 +21,6 @@ const Home = () => {
 	const { project, setProject } = useProject();
 
 	useEffect(() => {
-		// const fetchProject = async () => {
-		// 	const response = await axios.get(
-		// 		`${import.meta.env.VITE_GENESIS_API_URL}/projects/owner/${user.id}`
-		// 	);
-		// 	console.log(response.data);
-		// 	console.log("first");
-
-		// 	if (response.data.length) {
-		// 		setProject(response.data[0].id);
-		// 	}
-		// };
-
-		// const createProject = async () => {
-		// 	const response = await axios.post(
-		// 		`${import.meta.env.VITE_GENESIS_API_URL}/projects`,
-		// 		{ ownerId: user.id, title: "default" }
-		// 	);
-		// 	console.log(response.data);
-		// 	console.log("second");
-		// 	setProject(response.data.id);
-		// };
-
-		// const fetchHomeData = async () => {
-		// 	try {
-		// 		const response = await axios.get(
-		// 			`${
-		// 				import.meta.env.VITE_GENESIS_API_URL
-		// 			}/projects/${project}/homeData`
-		// 		);
-		// 		console.log(response.data);
-		// 		console.log("third");
-
-		// 		const data = response.data;
-		// 		// Log each data item before setting the state
-		// 		const bookmarkedIdeasData = data.find((item) => item.bookmarkedIdeas)
-		// 			? data.find((item) => item.bookmarkedIdeas).bookmarkedIdeas
-		// 			: [];
-		// 		console.log("Bookmarked Ideas:", bookmarkedIdeasData);
-		// 		setBookmarkedIdeas(bookmarkedIdeasData);
-
-		// 		const mostRecentPostsData = data.find((item) => item.mostRecentPosts)
-		// 			? data.find((item) => item.mostRecentPosts).mostRecentPosts
-		// 			: [];
-		// 		console.log("Most Recent Posts:", mostRecentPostsData);
-		// 		setMostRecentPosts(mostRecentPostsData);
-
-		// 		const mostFeasibleIdeaData = data.find((item) => item.mostFeasibleIdea)
-		// 			? data.find((item) => item.mostFeasibleIdea).mostFeasibleIdea
-		// 			: {};
-		// 		console.log("Most Feasible Idea:", mostFeasibleIdeaData);
-		// 		setMostFeasibleIdea(mostFeasibleIdeaData);
-
-		// 		const easiestIdeaData = data.find((item) => item.easiestIdea)
-		// 			? data.find((item) => item.easiestIdea).easiestIdea
-		// 			: {};
-		// 		console.log("Easiest Idea:", easiestIdeaData);
-		// 		setEasiestIdea(easiestIdeaData);
-
-		// 		const mostDifficultIdeaData = data.find((item) => item.mostDifficulIdea)
-		// 			? data.find((item) => item.mostDifficulIdea).mostDifficulIdea
-		// 			: {};
-		// 		console.log("Most Difficult Idea:", mostDifficultIdeaData);
-		// 		setMostDifficultIdea(mostDifficultIdeaData);
-
-		// 		const mostImpactfulIdeaData = data.find(
-		// 			(item) => item.mostImpactfulIdea
-		// 		)
-		// 			? data.find((item) => item.mostImpactfulIdea).mostImpactfulIdea
-		// 			: {};
-		// 		console.log("Most Impactful Idea:", mostImpactfulIdeaData);
-		// 		setMostImpactfulIdea(mostImpactfulIdeaData);
-		// 	} catch (error) {
-		// 		console.error("Error fetching home data:", error);
-		// 	}
-		// };
-
 		const doAll = async () => {
 			let projectId = "";
 
@@ -175,14 +99,6 @@ const Home = () => {
 				console.error("Error fetching home data:", error);
 			}
 		};
-
-		// fetchProject();
-
-		// if (!project) {
-		// 	createProject();
-		// }
-
-		// fetchHomeData();
 
 		doAll();
 	}, [user.id]);
@@ -285,9 +201,12 @@ const Home = () => {
 								mostRecentPosts.map((post) => (
 									<MiniPostCard
 										key={post.id}
+										id={post.id}
 										title={post.title}
 										description={post.content}
-										likeCount={post.likeCount}
+										likeCount={post.likedBy.length}
+										likedBy={post.likedBy}
+										profilePicture={post.author?.profile?.picture}
 									/>
 								))
 							) : (

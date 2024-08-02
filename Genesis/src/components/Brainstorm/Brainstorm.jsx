@@ -118,7 +118,7 @@ const Brainstorm = () => {
 		},
 	]);
 	const [dropdownOpen, setDropdownOpen] = useState(false);
-	const [filter, setFilter] = useState("Category");
+	const [filter, setFilter] = useState("Newest");
 	const [sortedIdeas, setSortedIdeas] = useState([]);
 	const [selectedIdea, setSelectedIdea] = useState(null);
 	const [openIdeationModal, setOpenIdeationModal] = useState(false);
@@ -201,9 +201,9 @@ const Brainstorm = () => {
 	const sortIdeas = (filter) => {
 		let sorted = [...ideas];
 		if (filter === "Oldest") {
-			sorted.sort((a, b) => new Date(a.updatedAt) - new Date(b.updatedAt));
+			sorted.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
 		} else if (filter === "Newest") {
-			sorted.sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt));
+			sorted.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 		} else if (filter === "Bookmarked") {
 			sorted.sort((a, b) => {
 				if (a.bookmarked === b.bookmarked) {
@@ -278,14 +278,14 @@ const Brainstorm = () => {
 					<IdeationModal closeModal={toggleIdeationModal} />
 				)}
 				<div className="idea-card-container">
-					{sortedIdeas.map((idea, index) => (
+					{sortedIdeas.map((idea) => (
 						<IdeaCard
-							key={index}
+							key={idea.id}
 							id={idea.id}
 							title={idea.title}
 							description={idea.description}
 							projectFeatures={idea.projectFeatures}
-							dayGenerated={idea.updatedAt}
+							dayGenerated={idea.createdAt}
 							impact={idea.impact}
 							feasibility={idea.feasibility}
 							difficulty={idea.difficulty}

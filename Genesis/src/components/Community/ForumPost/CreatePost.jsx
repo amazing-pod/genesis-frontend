@@ -10,26 +10,18 @@ const CreatePost = ({ onCreatePost, onCancel }) => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		if (title && content) {
-			// const newPost = {
-			// 	id: Date.now(),
-			// 	userProfilePhoto: "https://placehold.co/50x50", // Default profile photo
-			// 	username,
-			// 	timeAgo: "Just now", // Placeholder time
-			// 	title,
-			// 	content,
-			// 	likes: 0,
-			// 	comments: [],
-			// 	tags: [],
-			// };
-			// onCreatePost(newPost);
+
+		const trimmedTitle = title.trim();
+		const trimmedContent = content.trim();
+
+		if (trimmedTitle && trimmedContent) {
 			const createPost = async () => {
 				const response = await axios.post(
 					`${import.meta.env.VITE_GENESIS_API_URL}/threads/posts`,
 					{
-						title: title,
+						title: trimmedTitle,
 						authorId: user.id,
-						content: content,
+						content: trimmedContent,
 						category: "Random",
 						tags: [],
 					}
@@ -40,6 +32,7 @@ const CreatePost = ({ onCreatePost, onCancel }) => {
 			setTitle("");
 			setContent("");
 			onCancel();
+			window.location.reload();
 		}
 	};
 

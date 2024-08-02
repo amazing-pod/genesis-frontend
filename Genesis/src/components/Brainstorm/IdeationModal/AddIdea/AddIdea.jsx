@@ -48,6 +48,7 @@ const AddIdea = ({ closeModal }) => {
 			);
 
 			console.log(response2.data);
+			window.location.reload();
 		};
 		createIdea();
 	};

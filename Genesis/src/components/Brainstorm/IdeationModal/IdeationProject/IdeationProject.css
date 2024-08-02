@@ -205,6 +205,10 @@ span > p {
     margin: auto;
 }
 
+
+.progress-container {
+    width: 90%;
+}
 .progress-bar-inner {
     width: 90%;
     height: 90%;
@@ -232,5 +236,5 @@ span > p {
 
 .loading-screen > h2 {
     text-align: center;
-    font-size: 30px;
+    font-size: 50px;
 }

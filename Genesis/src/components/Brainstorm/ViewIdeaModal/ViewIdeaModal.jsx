@@ -58,7 +58,10 @@ const ProjectFeatureGenerator = ({
 
 	return (
 		<div>
-			<button onClick={fetchFeatureSuggestionAndAdd}>
+			<button
+				onClick={fetchFeatureSuggestionAndAdd}
+				className="generate-features-button"
+			>
 				Generate Project Feature
 			</button>
 		</div>
@@ -150,6 +153,7 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 							<>
 								<h2>{idea.title}</h2>
 								<img
+									style={{ visibility: "hidden" }} // make edit button hidden
 									src={edit_icon}
 									alt="edit icon"
 									onClick={handleEditClick}

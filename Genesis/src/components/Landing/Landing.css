@@ -24,7 +24,7 @@
 .button-container {
 	display: flex;
 	gap: 30px;
-	margin-right: 20px;
+	margin-right: 50px;
 	/* height: 60px; */
 	text-align: center;
 	justify-content: center;
@@ -33,10 +33,10 @@
 
 .landing-login-button {
 	border: 5px solid #6c63ff;
-	padding: 1em;
+	padding: 0.5em;
 	background-color: white;
 	border-radius: 20px;
-	width: 200px;
+	width: 150px;
 	font-size: 20px;
 	color: #6c63ff;
 	cursor: pointer;
@@ -45,10 +45,10 @@
 
 .landing-register-button {
 	border: 5px solid #6c63ff;
-	padding: 1em;
+	padding: 0.5em;
 	background-color: #6c63ff;
 	border-radius: 20px;
-	width: 200px;
+	width: 150px;
 	font-size: 20px;
 	color: white;
 	text-align: center;
