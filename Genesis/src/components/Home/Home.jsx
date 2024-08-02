@@ -205,6 +205,7 @@ const Home = () => {
 										title={post.title}
 										description={post.content}
 										likeCount={post.likedBy.length}
+										likedBy={post.likedBy}
 										profilePicture={post.author?.profile?.picture}
 									/>
 								))

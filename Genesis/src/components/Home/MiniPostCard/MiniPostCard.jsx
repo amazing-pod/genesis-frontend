@@ -14,6 +14,7 @@ const MiniPostCard = ({
 	title,
 	description,
 	likeCount,
+	likedBy,
 	profilePicture,
 }) => {
 	// console.log("post data:", postData);
@@ -21,6 +22,10 @@ const MiniPostCard = ({
 	const [liked, setLiked] = useState(false);
 	const { user } = useUser();
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		setLiked(likedBy.some((liker) => liker.id === user.id));
+	}, [user.id]);
 
 	const handlePostClick = () => {
 		navigate(`/community/threads/${id}`); // Navigate to the post details page
