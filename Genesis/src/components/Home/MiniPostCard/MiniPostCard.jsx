@@ -4,27 +4,66 @@ import profile_photo from "../../../assets/png/profile_photo.png";
 import upvote_inactive_icon from "../../../assets/png/upvote_inactive.png";
 import upvote_active_icon from "../../../assets/png/upvote_active.png";
 import message_icon from "../../../assets/png/reply_icon.png";
+import { useUser } from "@clerk/clerk-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // Should take in a title, content, like count,
-const MiniPostCard = ({ title, description, likeCount }) => {
+const MiniPostCard = ({
+	id,
+	title,
+	description,
+	likeCount,
+	profilePicture,
+}) => {
 	// console.log("post data:", postData);
-	// const [likes, setLikes] = useState(post.likes);
+	const [likes, setLikes] = useState(likeCount);
 	const [liked, setLiked] = useState(false);
-	// const navigate = useNavigate();
+	const { user } = useUser();
+	const navigate = useNavigate();
 
-	const handleLikeClick = (event) => {
+	const handlePostClick = () => {
+		navigate(`/community/threads/${id}`); // Navigate to the post details page
+	};
+
+	const handleLikeClick = async (event) => {
 		event.stopPropagation(); // Prevents navigating to the post when liking
-		setLikes(liked ? likes - 1 : likes + 1);
-		setLiked(!liked);
+
+		try {
+			if (liked) {
+				const response = await axios.put(
+					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${id}/unlike/${
+						user.id
+					}`
+				);
+				console.log("Unlike response:", response.data);
+				setLikes(likes - 1);
+			} else {
+				const response = await axios.put(
+					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${id}/like/${
+						user.id
+					}`
+				);
+				console.log("Like response:", response.data);
+				setLikes(likes + 1);
+			}
+			setLiked(!liked);
+		} catch (error) {
+			console.error("Error updating like status:", error);
+		}
 	};
 
 	return (
 		<>
-			<div className="mini-post-card-container">
+			<div className="mini-post-card-container" onClick={handlePostClick}>
 				{/* Post Header */}
 				<div className="mini-post-header">
 					<h3>{title}</h3>
-					<img src={profile_photo} alt="user profile photo" />
+					<img
+						className="mini-user-profile-photo"
+						src={profilePicture || profile_photo}
+						alt="user profile photo"
+					/>
 				</div>
 				{/* Post Info/Body */}
 				<div className="mini-post-body">
@@ -32,7 +71,7 @@ const MiniPostCard = ({ title, description, likeCount }) => {
 				</div>
 				{/* Post Interactions: Likes and Messages */}
 				<div className="mini-post-interactions">
-					<p>{likeCount}</p>
+					<p>{likes}</p>
 					<img
 						onClick={handleLikeClick}
 						className="forum-icon"

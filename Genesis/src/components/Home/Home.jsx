@@ -201,9 +201,11 @@ const Home = () => {
 								mostRecentPosts.map((post) => (
 									<MiniPostCard
 										key={post.id}
+										id={post.id}
 										title={post.title}
 										description={post.content}
 										likeCount={post.likedBy.length}
+										profilePicture={post.author?.profile?.picture}
 									/>
 								))
 							) : (
