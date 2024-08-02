@@ -1,7 +1,7 @@
 import './ProjectMain.css';
 import Brainstorm from '../Brainstorm/Brainstorm';
 import React, { useState, useEffect } from 'react';
-// import CreateProject from '../ProjectMain/CreateProject/CreateProject';
+import CreateProject from './CreateProject/CreateProject';
 import axios from 'axios';
 import { useUser } from '@clerk/clerk-react';
 
@@ -13,11 +13,12 @@ const ProjectMain = () => {
 		const fetchProjects = async () => {
 			try {
 				if (user) {
-					const response = await axios.get(`${import.meta.env.VITE_GENESIS_API_PROD_URL}/projects/owner/${user.id}`);
+					const response = await axios.get(`${import.meta.env.VITE_GENESIS_API_PROD_URL}/projects`);
 					// Log the response data to ensure it's an array
+					const responseData = response.data;
 					console.log(response.data);
 					if (Array.isArray(response.data)) {
-						setUserProjects(response.data);
+						setUserProjects(responseData.filter(project => project.id === user.id));
 					} else {
 						console.error('Expected an array but received:', response.data);
 						setUserProjects([]);
@@ -39,19 +40,27 @@ const ProjectMain = () => {
 
 			{/* User Projects */}
 			<div className="project-items-container">
-				{Array.isArray(userProjects) && userProjects.length > 0 ? (
-					userProjects.map((project, index) => (
-						<div key={index} className="project-card">
-							<p>{project.title}</p>
-							<p>{project.owner.username}</p>
-							<p>Ideas: {project.ideas.length}</p>
-						</div>
-					))
-				) : (
-					<p>You have no projects. Create one to get started.</p>
-				)}
+            {userProjects.length > 0 ? (
+                userProjects.map(project => (
+                    <div key={project.id}>
+                        <h2>{project.title}</h2>
+                        <p>Owner: {project.owner.username}</p>
+                        <p>Created At: {new Date(project.createdAt).toLocaleDateString()}</p>
+                        {/* Display additional project details as needed */}
+                        {/* For example, displaying ideas */}
+                        <h3>Ideas:</h3>
+                        <ul>
+                            {project.ideas.map(idea => (
+                                <li key={idea.id}>{idea.title}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ))
+            ) : (
+                <p>No projects found for this user.</p>
+            )}
 
-				{/* <CreateProject /> */}
+				<CreateProject />
 				
 			</div>
 		</div>
