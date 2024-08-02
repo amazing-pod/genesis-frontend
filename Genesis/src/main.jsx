@@ -9,6 +9,7 @@ import Home from "./components/Home/Home.jsx";
 import Community from "./components/Community/Community.jsx";
 import Brainstorm from "./components/Brainstorm/Brainstorm.jsx";
 import ProtectedLayout from "./layouts/ProtectedLayout.jsx";
+import ProjectMain from "./components/ProjectMain/ProjectMain.jsx";
 import RootLayout from "./layouts/RootLayout.jsx";
 import UserProfile from "./components/Shared/UserProfile/UserProfile.jsx";
 import PostDetails from "./components/Community/ForumPost/PostDetails.jsx";
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
 					{ path: "/community", element: <Community /> },
 					{ path: "/community/threads/:id", element: <PostDetails /> },
 					{ path: "/brainstorm", element: <Brainstorm /> },
+					{ path: "/project", element: <ProjectMain /> },
 				],
 			},
 		],
