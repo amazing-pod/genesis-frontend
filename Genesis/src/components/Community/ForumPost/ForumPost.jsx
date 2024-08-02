@@ -75,7 +75,7 @@ const ForumPost = ({ post }) => {
 					<p className="forum-post-username">{post.author.username}</p>
 				</div>
 				<p>
-					{formatDistanceToNow(post.updatedAt, { addSuffix: true }).replace(
+					{formatDistanceToNow(post.createdAt, { addSuffix: true }).replace(
 						"about ",
 						""
 					)}

@@ -80,11 +80,11 @@ const Community = () => {
 				const sortedPosts = response.data;
 				if (filter === "Newest") {
 					sortedPosts.sort(
-						(a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+						(a, b) => new Date(b.createdAt) - new Date(a.createdAt)
 					);
 				} else if (filter === "Oldest") {
 					sortedPosts.sort(
-						(a, b) => new Date(a.updatedAt) - new Date(b.updatedAt)
+						(a, b) => new Date(a.createdAt) - new Date(b.createdAt)
 					);
 				} else if (filter === "Most Liked") {
 					sortedPosts.sort((a, b) => b.likedBy.length - a.likedBy.length);
@@ -131,8 +131,8 @@ const Community = () => {
 					/>
 				)}
 				<div className="posts-container">
-					{posts.map((post, index) => (
-						<ForumPost key={index} post={post} />
+					{posts.map((post) => (
+						<ForumPost key={post.id} post={post} />
 					))}
 				</div>
 			</div>
