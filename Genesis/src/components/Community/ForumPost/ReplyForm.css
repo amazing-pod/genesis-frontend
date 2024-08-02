@@ -63,3 +63,35 @@
     margin-left: 10px;
   }
   
+
+  .reply-form {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+
+  .reply-form > textarea {
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 20px;
+  }
+
+  .reply-form-buttons {
+    display: flex;
+    gap: 10px;
+
+  }
+
+  .reply-form-buttons > button {
+    font-size: 20px;
+  }
+
+  .comment-form {
+    width: 90%;
+    margin: auto;
+    padding-top: 1em;
+  }
+
+  .comment-form > button {
+    margin: 10px auto 20px auto;
+  }
