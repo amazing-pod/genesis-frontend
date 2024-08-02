@@ -32,6 +32,7 @@ const CreatePost = ({ onCreatePost, onCancel }) => {
 			setTitle("");
 			setContent("");
 			onCancel();
+			window.location.reload();
 		}
 	};
 

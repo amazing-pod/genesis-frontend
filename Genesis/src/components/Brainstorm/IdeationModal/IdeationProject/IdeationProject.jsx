@@ -11,8 +11,10 @@ import add_active_icon from "../../../../assets/png/add_active.png";
 import axios from "axios";
 import { useDropdown } from "../../../../context/DropdownContext";
 import { useProject } from "../../../../context/ProjectContext";
+import { useNavigate } from "react-router-dom";
 
 const IdeationProject = ({ closeModal }) => {
+	const navigate = useNavigate();
 	const [step, setStep] = useState(0);
 	const [newFeatureText, setNewFeatureText] = useState("");
 	const [editedIssues, setEditedIssues] = useState([]);
@@ -22,33 +24,6 @@ const IdeationProject = ({ closeModal }) => {
 	const [ideationProjectData, setIdeationProjectData] = useState([]);
 	const { option } = useDropdown();
 	const { project } = useProject();
-
-	const ideationProjectDummyData = [
-		{
-			id: 1,
-			name: "Health Monitoring System",
-			description:
-				"Develop a system to monitor vital signs and health metrics remotely, providing real-time data to healthcare providers.",
-		},
-		{
-			id: 2,
-			name: "Environmental Monitoring Network",
-			description:
-				"Build a network of IoT sensors to monitor air quality, water levels, and other environmental factors in urban areas.",
-		},
-		{
-			id: 3,
-			name: "Food Delivery Optimization",
-			description:
-				"Optimize food delivery routes and scheduling to reduce delivery times and improve customer satisfaction.",
-		},
-		{
-			id: 4,
-			name: "Virtual Reality Training Simulator",
-			description:
-				"Develop a VR simulator for training purposes in industries such as healthcare, aviation, and engineering.",
-		},
-	];
 
 	const addProjectIdea = () => {
 		const createIdeas = async () => {
@@ -62,10 +37,12 @@ const IdeationProject = ({ closeModal }) => {
 			);
 
 			console.log(response.data);
+
+			closeModal();
+			window.location.reload();
 		};
 
 		createIdeas();
-		closeModal();
 	};
 
 	const handleFeatureAdd = () => {

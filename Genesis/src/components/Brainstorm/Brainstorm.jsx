@@ -118,7 +118,7 @@ const Brainstorm = () => {
 		},
 	]);
 	const [dropdownOpen, setDropdownOpen] = useState(false);
-	const [filter, setFilter] = useState("Category");
+	const [filter, setFilter] = useState("Newest");
 	const [sortedIdeas, setSortedIdeas] = useState([]);
 	const [selectedIdea, setSelectedIdea] = useState(null);
 	const [openIdeationModal, setOpenIdeationModal] = useState(false);
