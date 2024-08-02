@@ -43,9 +43,6 @@ const IdeationModal = ({ closeModal }) => {
 								<button onClick={() => handleButtonClick("project")}>
 									I'm looking to generate new project ideas
 								</button>
-								<button onClick={() => handleButtonClick("feature")}>
-									I'm looking to generate new project features
-								</button>
 								<button onClick={() => handleButtonClick("addIdea")}>
 									I would like to add a project idea to my idea list
 								</button>
