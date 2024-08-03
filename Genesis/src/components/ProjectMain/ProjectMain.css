@@ -42,51 +42,18 @@
     background-color: #e55672;
 }
 
-/* Project table layout */
-.project-table {
-    padding: 1em;
+.project-row, .project-row-info {
     display: grid;
-    grid-template-columns: 40px 3fr 1fr;
-    grid-auto-rows: min-content;
+    grid-template-columns: 50px 1fr 50px;
+    grid-template-areas:
+    "index content delete";
+    padding: 0em 1em;
     align-items: center;
-    gap: 10px;
-    border-collapse: collapse; /* Ensures that the lines appear without gaps */
+
 }
 
-.project-table > div {
-    display: contents; /* Allows children to use grid-area properly */
-}
-
-.project-index {
-    grid-column: 1;
-    text-align: center;
-    font-size: 20px;
-}
-
-.project-title {
-    grid-column: 2;
-}
-
-.project-delete {
-    grid-column: 3;
-    height: 50px;
-    width: 50px;
-}
-
-/* Container for each project row */
-.project-row {
-    display: contents; /* Ensure rows align properly */
-    position: relative; /* Position relative for absolute positioning of the border */
-}
-
-.project-row:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-bottom: 1px solid black;
-}
+.project-index { grid-area: index;}
+.project-title {grid-area: content;}
 
 /* Container for all user projects */
 .user-project-container {
@@ -97,25 +64,31 @@
 
 /* Adding a new project */
 .new-project-info {
-    width: 90%;
     display: flex;
     justify-content: center;
     margin: auto;
-    padding: 3em 0em 1em 0em;
+    padding: 2em 1em 1em 1em;
 }
 
 .new-project-info > input {
     padding: 1em;
-    width: 70%;
+    width: 60%;
     font-size: 20px;
-    border-radius: 10px;
-    border: 2px solid #FF6584;
+    border-radius: 5px;
+    border: 1px solid black;
 }
 
 .new-project-info > input:hover {
-    border: 2px solid #e55672;
+    border: 1px solid black;
 }
 
+.new-project-info > input:active {
+    border: 1px solid black !important;
+}
+
+.project-row:hover {
+    background-color: #F5F2F2;
+}
 
 .new-project-info > button {
     padding: 8px 16px;
@@ -129,4 +102,14 @@
     font-size: 20px;
     margin: auto 0 auto auto;
 
+}
+
+.project-divider {
+    width: 100%;
+}
+
+.project-delete:hover {
+    content: url('../../assets/svg/delete_active_icon.svg'); /* Change the icon on hover */
+    height: 50px;
+    width: 50px;
 }
