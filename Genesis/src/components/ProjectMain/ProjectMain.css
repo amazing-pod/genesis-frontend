@@ -1,0 +1,132 @@
+.project-main-container {
+    background-color: #F5F2F2;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-page-container {
+    outline: 2px solid black;
+    width: 80%;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.project-header {
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+
+.project-header > h2 {
+    font-size: 40px;
+    font-weight: 400;
+    margin: 20px 0px;
+}
+
+.project-add {
+    padding: 8px 16px;
+    background-color: #FF6584;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    margin: auto 0 auto auto;
+}
+.project-add:hover {
+    background-color: #e55672;
+}
+
+/* Project table layout */
+.project-table {
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 40px 3fr 1fr;
+    grid-auto-rows: min-content;
+    align-items: center;
+    gap: 10px;
+    border-collapse: collapse; /* Ensures that the lines appear without gaps */
+}
+
+.project-table > div {
+    display: contents; /* Allows children to use grid-area properly */
+}
+
+.project-index {
+    grid-column: 1;
+    text-align: center;
+    font-size: 20px;
+}
+
+.project-title {
+    grid-column: 2;
+}
+
+.project-delete {
+    grid-column: 3;
+    height: 50px;
+    width: 50px;
+}
+
+/* Container for each project row */
+.project-row {
+    display: contents; /* Ensure rows align properly */
+    position: relative; /* Position relative for absolute positioning of the border */
+}
+
+.project-row:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+/* Container for all user projects */
+.user-project-container {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+
+/* Adding a new project */
+.new-project-info {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 3em 0em 1em 0em;
+}
+
+.new-project-info > input {
+    padding: 1em;
+    width: 70%;
+    font-size: 20px;
+    border-radius: 10px;
+    border: 2px solid #FF6584;
+}
+
+.new-project-info > input:hover {
+    border: 2px solid #e55672;
+}
+
+
+.new-project-info > button {
+    padding: 8px 16px;
+    background-color: #FF6584;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 250px;
+    height: 50px;
+    font-size: 20px;
+    margin: auto 0 auto auto;
+
+}
