@@ -4,17 +4,23 @@
     outline: 1px solid #C0C0C0;
     border-radius: 10px;
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.05);
+    /* width: 350px; */
 }
 
 .mini-idea-header {
     background-color: #F5F2F2;
 }
 
-.mini-idea-header > h3, .mini-idea-body > h3 {
+.mini-idea-header > h3 {
     padding: 10px;
     margin: 0px;
 }
 
+.mini-idea-body > h3 {
+    font-size: 23px;
+    padding: 10px;
+    margin: 0px;
+}
 
 .mini-idea-body > p {
     padding: 10px;
@@ -24,4 +30,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
     -webkit-line-clamp: 2; /* Number of lines to display */
+}
+
+
+/* Responsiveness */
+@media screen and (max-width: 1500px) {
+    .mini-idea-header > h3 {
+        font-size: 26px;
+    }
+    .mini-idea-body > h3 {
+        font-size: 20px;
+    }
+
 }
