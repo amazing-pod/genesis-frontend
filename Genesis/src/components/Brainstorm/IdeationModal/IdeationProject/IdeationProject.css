@@ -176,3 +176,65 @@ span > p {
     visibility: visible;
     opacity: 1;
 }
+
+
+.progress-bar-container {
+    outline: 1px solid #6C63FF;
+    display: flex;
+    align-items: center;
+    width: 90%;
+}
+/* .progress-bar-container {
+    padding: 10px;
+    width: 150px;
+    height: 20px;
+    border: 1px solid black;
+    border-radius: 30px;
+    background-color: pink;
+    display: flex;
+} */
+
+.progress-bar-outer {
+    width: 90%;
+    height: 60px;
+    outline: 5px solid #ff6584;
+    border-radius: 20px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    margin: auto;
+}
+
+
+.progress-container {
+    width: 90%;
+}
+.progress-bar-inner {
+    width: 90%;
+    height: 90%;
+    background-color: #ff6584;
+    border-radius: 20px;
+    margin-left: 5px;
+    animation: progressMove 5s infinite;
+}
+
+/* Animation for moving progress bar */
+@keyframes progressMove {
+    from {width: 10%;}
+    to {width: 99%;}
+ }
+
+
+.loading-screen {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.loading-screen > h2 {
+    text-align: center;
+    font-size: 50px;
+}
