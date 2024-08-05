@@ -152,12 +152,11 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 						) : (
 							<>
 								<h2>{idea.title}</h2>
-								<img
-									style={{ visibility: "hidden" }} // make edit button hidden
+								{/* <img
 									src={edit_icon}
 									alt="edit icon"
 									onClick={handleEditClick}
-								/>
+								/> */}
 							</>
 						)}
 					</div>

@@ -277,7 +277,6 @@ const Brainstorm = () => {
 				{openIdeationModal && (
 					<IdeationModal closeModal={toggleIdeationModal} />
 				)}
-				<div class="idea-card-wrapper">
 				<div className="idea-card-container">
 					{sortedIdeas.map((idea) => (
 						<IdeaCard
@@ -295,7 +294,6 @@ const Brainstorm = () => {
 							openModal={openModalForId}
 						/>
 					))}
-				</div>
 				</div>
 			</div>
 		</>
