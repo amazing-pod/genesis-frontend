@@ -156,6 +156,7 @@ hr {
 	padding: 16px 0;
 	border-top: 1px solid #c0c0c0;
 	border-radius: 0px 0px 10px 10px;
+	width: 100%;
 }
 
 /* Button Styling */
@@ -249,10 +250,26 @@ select {
 		width: 150px;
 		font-size: 16px;
 	}
+	.generate-features-button {
+		font-size: 16px;
+		padding: 0.5em;
+	}
 }
 
-/* @media (max-width: 480px) {
-    .modal-content {
-        width: 95%;
-    }
-    } */
+
+@media (max-width: 480px) {
+	.idea-modal-content, .view-idea-container {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		text-align: center;
+	}
+	.generate-features-button {
+		font-size: 16px;
+		padding: 0.5em;
+		width: 210px;
+	}
+	.view-idea-container > p {
+		text-align: center;
+	}
+}

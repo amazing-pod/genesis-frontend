@@ -109,3 +109,12 @@
 		height: 20px;
 	}
 }
+
+
+@media screen and (max-width: 870px) {
+	.idea-card-container {
+		display: flex;
+		justify-content: center;
+
+	}
+}

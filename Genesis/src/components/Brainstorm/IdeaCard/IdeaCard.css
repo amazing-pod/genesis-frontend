@@ -173,7 +173,7 @@
 }
 
 /* Responsive adjustments */
-@media (max-width: 350px) {
+@media (max-width: 410px) {
 	.idea-card {
 		width: 300px;
 	}
