@@ -39,7 +39,7 @@
 .post-content {
     box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid #333;
 }
 
 
@@ -277,15 +277,16 @@
     font-size: 30px;
     font-weight: 400;
 }
-.delete-icon {
-    width: 18px;
-    height: 18px;
+.user-comment-header > .delete-post-icon {
+    width: 50px;
+    height: 50px;
     cursor: pointer;
     margin-right: 10px;
     transition: color 0.2s;
+    margin: auto 0px;
 }
 
-.delete-icon:hover {
+.delete-post-icon:hover {
     color: #e55672;
 }
 
@@ -391,13 +392,6 @@
     background-color: #e55672;
 }
 
-.delete-icon {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
 
 /* Reply Shape for comment to reply */
 .reply-shape-height {
@@ -472,7 +466,9 @@
 .reply-container {
     margin-top: 20px;
 }
-
+.user-comment-header {
+    align-items: center;
+}
 
 .comment-content > p, .community-reply > p {
     padding-left: 1em;

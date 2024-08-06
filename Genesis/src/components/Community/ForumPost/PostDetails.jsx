@@ -265,6 +265,7 @@ const PostDetails = () => {
 						</div>
 					</div>
 					<div className="post-separator">
+					
 						{/* User can delete their own post if they are the author */}
 						{post.author?.id === user.id && (
 							<button
@@ -275,12 +276,21 @@ const PostDetails = () => {
 							</button>
 						)}
 					</div>
+					<form className="comment-form" onSubmit={handleCommentSubmit}>
+								<textarea
+									value={newComment}
+									onChange={handleCommentChange}
+									placeholder="Reply..."
+									required
+								/>
+								<button type="submit">Post Comment</button>
+							</form>
+							<div className="reply-separator"></div>
 					{/* Comments and replies to post */}
 					<div className="comment-details-header">
 						<h2>Discussion</h2>
 						<hr />
 					</div>
-
 					<div>
 						<div className="comments-section">
 							{comments.map((comment) => (
@@ -307,21 +317,22 @@ const PostDetails = () => {
 											>
 												Reply
 											</button>
+											{!comment.deleted && comment.author?.id === user.id && (
+											<img
+												className="delete-post-icon"
+												src={delete_icon}
+												alt="Delete Comment"
+												onClick={() => handleCommentDelete(comment.id)}
+											/>
+										)}
 										</div>
 										<p>
 											{comment.deleted
 												? "[This comment has been deleted]"
 												: comment.content}
 										</p>
-										{!comment.deleted && comment.author?.id === user.id && (
-											<img
-												className="delete-icon"
-												src={delete_icon}
-												alt="Delete Comment"
-												onClick={() => handleCommentDelete(comment.id)}
-											/>
-										)}
 
+									
 										{replyingTo === comment.id && (
 											<ReplyForm
 												commentId={comment.id}
@@ -376,10 +387,10 @@ const PostDetails = () => {
 												})}
 										</div>
 									</div>
-									<div className="reply-separator"></div>
+									
 								</div>
 							))}
-							<form className="comment-form" onSubmit={handleCommentSubmit}>
+							{/* <form className="comment-form" onSubmit={handleCommentSubmit}>
 								<textarea
 									value={newComment}
 									onChange={handleCommentChange}
@@ -387,7 +398,7 @@ const PostDetails = () => {
 									required
 								/>
 								<button type="submit">Post Comment</button>
-							</form>
+							</form> */}
 						</div>
 					</div>
 				</div>
