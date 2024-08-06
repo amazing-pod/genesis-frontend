@@ -108,11 +108,14 @@ const AddIdea = ({ closeModal }) => {
 						></textarea>
 
 						<h2>Features:</h2>
+						<div className="feature-issues-container">
+
 						{editedFeatures.map((feature, index) => (
 							<p key={index}>
 								{index + 1}. {feature}
 							</p>
 						))}
+						</div>
 						<div className="add-item-container">
 							{/* <textarea name="" id=""></textarea> */}
 							<textarea
