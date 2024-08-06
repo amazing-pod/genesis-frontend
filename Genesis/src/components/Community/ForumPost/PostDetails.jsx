@@ -21,7 +21,6 @@ const PostDetails = () => {
 	const [comments, setComments] = useState([]);
 	const [newComment, setNewComment] = useState("");
 	const [replyingTo, setReplyingTo] = useState(null);
-	const [replyUsers, setReplyUsers] = useState({});
 	const { user } = useUser();
 
 	useEffect(() => {
@@ -39,18 +38,6 @@ const PostDetails = () => {
 						? true
 						: false
 				);
-				const users = await Promise.all(
-					response.data.replies.map(async (reply) => {
-						const userResponse = await axios.get(
-							`${import.meta.env.VITE_GENESIS_API_URL}/users/id/${
-								reply.authorId
-							}`
-						);
-						return { [reply.authorId]: userResponse.data };
-					})
-				);
-				const userMap = Object.assign({}, ...users);
-				setReplyUsers(userMap);
 			} catch (error) {
 				console.error("Error fetching post data:", error);
 			}
@@ -342,21 +329,20 @@ const PostDetails = () => {
 										<div className="community-replies">
 											{comment.replies &&
 												comment.replies.map((reply) => {
-													const userProfile = replyUsers[reply.authorId];
 													return (
 														<div className="community-reply" key={reply.id}>
 															<div className="user-reply-header">
 																<img
 																	className="user-profile-photo"
 																	src={
-																		userProfile?.profile?.picture ||
+																		reply.author?.profile?.picture ||
 																		"default-image-url"
 																	}
 																	alt="user profile photo"
 																/>
 
 																<h4>
-																	{userProfile?.username || "Unknown User"}
+																	{reply.author?.username || "Unknown User"}
 																</h4>
 																{reply.authorId === user.id && (
 																	<button
