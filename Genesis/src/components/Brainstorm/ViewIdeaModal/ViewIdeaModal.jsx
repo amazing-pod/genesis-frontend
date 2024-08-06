@@ -90,10 +90,10 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 					idea.projectId
 				}/ideas/${idea.id}`
 			);
+			closeModal();
+			window.location.reload();
 		};
 		deleteIdea();
-		closeModal();
-		window.location.reload();
 	};
 
 	const handleSaveClick = () => {
