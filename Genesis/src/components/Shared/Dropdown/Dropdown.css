@@ -17,6 +17,7 @@
 .dropdown-icon {
     width: 30px;
     height: 30px;
+    margin-left: auto;
 }
 
 .dropdown-user-view {

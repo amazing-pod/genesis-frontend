@@ -43,7 +43,8 @@ const Dropdown = ({ dropdownPlaceholder, dropdownOptions }) => {
 				<div className="shared-dropdown">
 					<div className="shared-dropdown-view">
 						<button onClick={toggleDropdown} className="dropbtn">
-							{option}
+							{/* Display placeholder if no option is selected */}
+							{option ? option : dropdownPlaceholder}
 							<img
 								className="dropdown-icon"
 								src={dropdown_icon_purple}

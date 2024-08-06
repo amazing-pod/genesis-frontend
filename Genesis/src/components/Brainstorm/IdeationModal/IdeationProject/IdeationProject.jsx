@@ -180,13 +180,12 @@ const IdeationProject = ({ closeModal }) => {
                                     ]}
                                 />
                             </span>
-                            <span>
+                            <span className="category-issues">
                                 <p>
                                     2. Based on your chosen category, describe any issues you
                                     would like your project to address
                                 </p>
-                            </span>
-                            <div
+                                <div
                                 className="tooltip-container"
                                 onMouseEnter={() => setShowTooltip(true)}
                                 onMouseLeave={() => setShowTooltip(false)}
@@ -199,13 +198,17 @@ const IdeationProject = ({ closeModal }) => {
                                     </div>
                                 )}
                             </div>
+                            </span>
+
                             {/* Add respective items here */}
-                            <h2>Issues:</h2>
+                            <h2 className="issues-header">Issues:</h2>
+                            <div className="user-issues-container">
                             {editedIssues.map((feature, index) => (
                                 <p key={index}>
                                     {index + 1}. {feature}
                                 </p>
                             ))}
+                            </div>
                             <div className="add-item-container">
                                 {/* <textarea name="" id=""></textarea> */}
                                 <textarea
