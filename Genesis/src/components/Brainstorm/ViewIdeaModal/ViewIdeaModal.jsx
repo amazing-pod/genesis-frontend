@@ -4,6 +4,7 @@ import axios from "axios";
 import edit_icon from "../../../assets/png/edit.png";
 import close_icon from "../../../assets/png/close.png";
 import remove_icon from "../../../assets/svg/remove.svg";
+import trash_icon from "../../../assets/png/trash.png";
 import add_icon from "../../../assets/png/add_inactive_pink.png";
 
 const ProjectFeatureGenerator = ({
@@ -67,6 +68,7 @@ const ProjectFeatureGenerator = ({
 		</div>
 	);
 };
+
 const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 	const [editing, setEditing] = useState(false);
 	const [editedTitle, setEditedTitle] = useState(idea.title);
@@ -82,6 +84,20 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 
 	const handleEditClick = () => {
 		setEditing(true);
+	};
+
+	const handleDeleteClick = () => {
+		const deleteIdea = async () => {
+			const response = await axios.delete(
+				`${import.meta.env.VITE_GENESIS_API_URL}/projects/${
+					idea.projectId
+				}/ideas/${idea.id}`
+			);
+			console.log(response.data);
+		};
+		deleteIdea();
+		closeModal();
+		window.location.reload();
 	};
 
 	const handleSaveClick = () => {
@@ -153,10 +169,10 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 							<>
 								<h2>{idea.title}</h2>
 								<img
-									style={{ visibility: "hidden" }} // make edit button hidden
-									src={edit_icon}
-									alt="edit icon"
-									onClick={handleEditClick}
+									style={{ cursor: "pointer" }}
+									src={trash_icon}
+									alt="trash icon"
+									onClick={handleDeleteClick}
 								/>
 							</>
 						)}
@@ -268,7 +284,9 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 								<button onClick={handleCancelClick}>Cancel</button>
 							</>
 						) : (
-							<button onClick={closeModal}>Close</button>
+							<button style={{ cursor: "pointer" }} onClick={closeModal}>
+								Close
+							</button>
 						)}
 					</div>
 				</div>
