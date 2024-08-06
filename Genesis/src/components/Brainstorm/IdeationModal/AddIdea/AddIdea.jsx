@@ -27,11 +27,9 @@ const AddIdea = ({ closeModal }) => {
 				}
 			);
 
-			console.log(response.data);
 
 			const matches = response.data.response.match(/\d+/g);
 			const [impact, feasibility, difficulty] = matches.map(Number);
-			console.log(impact, feasibility, difficulty);
 
 			const response2 = await axios.post(
 				`${import.meta.env.VITE_GENESIS_API_URL}/projects/${project}/ideas`,
@@ -46,8 +44,6 @@ const AddIdea = ({ closeModal }) => {
 					difficulty,
 				}
 			);
-
-			console.log(response2.data);
 			window.location.reload();
 		};
 		createIdea();

@@ -27,7 +27,6 @@ const ProjectFeatureGenerator = ({
 					prompt: `Based on the provided category: ${category}, title: ${title}, description: ${description}, related issues: ${issues}, and existing features: ${features}, suggest exactly one specific valuable distinct feature that can enhance the project in a concise manner. Do not provide justification. Never preface the feature with anything. Never end in a period or comma`,
 				}
 			);
-			console.log(response.data);
 
 			setEditedFeatures([...editedFeatures, response.data.response]);
 		} catch (error) {
@@ -42,7 +41,6 @@ const ProjectFeatureGenerator = ({
 				prompt: `Based on the provided category: ${category}, title: ${title}, description: ${description}, related issues: ${issues}, and existing features: ${features}, suggest exactly one specific valuable distinct feature that can enhance the project in a concise manner. Do not provide justification. Never preface the feature with anything. Never end in a period or comma`,
 			}
 		);
-		console.log(response.data);
 
 		setEditedFeatures([...editedFeatures, response.data.response]);
 
@@ -54,7 +52,6 @@ const ProjectFeatureGenerator = ({
 				feature: response.data.response,
 			}
 		);
-		console.log(response2.data);
 	};
 
 	return (
@@ -93,7 +90,6 @@ const ViewIdeaModal = ({ idea, closeModal, onSave }) => {
 					idea.projectId
 				}/ideas/${idea.id}`
 			);
-			console.log(response.data);
 		};
 		deleteIdea();
 		closeModal();

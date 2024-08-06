@@ -6,11 +6,6 @@ import { UserButton } from '@clerk/clerk-react';
 
 const Header = () => {
     const location = useLocation();
-    console.log('Current Route:', location.pathname);
-
-    // Optionally, you can log the full location object for more details
-    console.log('Location Object:', location);
-
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
 

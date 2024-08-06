@@ -29,7 +29,6 @@ const PostDetails = () => {
 				const response = await axios.get(
 					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${id}`
 				);
-				console.log("Fetched post data:", response.data);
 				setPost(response.data);
 				setComments(response.data.replies);
 				setLikes(response.data.likedBy.length);
@@ -58,7 +57,6 @@ const PostDetails = () => {
 						replyToId: commentId,
 					}
 				);
-				console.log("Created reply response:", response.data);
 				const updatedComments = comments.map((comment) => {
 					if (comment.id === commentId) {
 						return {
@@ -86,7 +84,6 @@ const PostDetails = () => {
 						user.id
 					}`
 				);
-				console.log("Unlike response:", response.data);
 				setLikes(likes - 1);
 			} else {
 				const response = await axios.put(
@@ -94,7 +91,6 @@ const PostDetails = () => {
 						user.id
 					}`
 				);
-				console.log("Like response:", response.data);
 				setLikes(likes + 1);
 			}
 			setLiked(!liked);
@@ -119,7 +115,6 @@ const PostDetails = () => {
 						replyToId: id,
 					}
 				);
-				console.log("Created comment response:", response.data);
 				const updatedComments = [...comments, response.data];
 				setComments(updatedComments);
 				setNewComment("");
@@ -147,7 +142,6 @@ const PostDetails = () => {
 					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${commentId}`,
 					{ deleted: true }
 				);
-				console.log("Marked comment as deleted:", response.data);
 			} catch (error) {
 				console.error("Error marking comment as deleted:", error);
 			}
@@ -161,7 +155,6 @@ const PostDetails = () => {
 				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${replyId}`,
 				{ deleted: true }
 			);
-			console.log("Deleted reply:", replyId);
 			const updatedComments = comments.map((comment) => {
 				if (comment.id === commentId) {
 					return {
@@ -182,7 +175,6 @@ const PostDetails = () => {
 			const response = await axios.delete(
 				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${postId}`
 			);
-			console.log("Deleted post response:", response.data);
 			navigate("/community");
 		} catch (error) {
 			console.error("Error deleting post:", error);
@@ -367,7 +359,6 @@ const PostDetails = () => {
 																)}
 															</div>
 															<p>{reply.content}</p>
-															{console.log("Reply details:", reply)}
 														</div>
 													);
 												})}
@@ -376,15 +367,6 @@ const PostDetails = () => {
 									
 								</div>
 							))}
-							{/* <form className="comment-form" onSubmit={handleCommentSubmit}>
-								<textarea
-									value={newComment}
-									onChange={handleCommentChange}
-									placeholder="Reply..."
-									required
-								/>
-								<button type="submit">Post Comment</button>
-							</form> */}
 						</div>
 					</div>
 				</div>

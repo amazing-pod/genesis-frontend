@@ -81,8 +81,6 @@ const UserProfile = () => {
   const { previousPath } = location.state || { previousPath: null };
 
   useEffect(() => {
-    // You can use `previousPath` here if needed
-    console.log('Previous Path:', previousPath);
   }, [previousPath]);
 
   const photoUpload = (e) => {

@@ -27,8 +27,6 @@ const Home = () => {
 			const response1 = await axios.get(
 				`${import.meta.env.VITE_GENESIS_API_URL}/projects/owner/${user.id}`
 			);
-			console.log(response1.data);
-			console.log("first");
 
 			if (response1.data.length) {
 				projectId = response1.data[0].id;
@@ -38,13 +36,10 @@ const Home = () => {
 					`${import.meta.env.VITE_GENESIS_API_URL}/projects`,
 					{ ownerId: user.id, title: "default" }
 				);
-				console.log(response2.data);
-				console.log("second");
 				projectId = response2.data.id;
 				setProject(response2.data.id);
 			}
 
-			console.log(projectId);
 			setProject(projectId);
 
 			try {
@@ -53,39 +48,32 @@ const Home = () => {
 						import.meta.env.VITE_GENESIS_API_URL
 					}/projects/${projectId}/homeData`
 				);
-				console.log(response.data);
-				console.log("third");
 
 				const data = response.data;
 				// Log each data item before setting the state
 				const bookmarkedIdeasData = data.find((item) => item.bookmarkedIdeas)
 					? data.find((item) => item.bookmarkedIdeas).bookmarkedIdeas
 					: [];
-				console.log("Bookmarked Ideas:", bookmarkedIdeasData);
 				setBookmarkedIdeas(bookmarkedIdeasData);
 
 				const mostRecentPostsData = data.find((item) => item.mostRecentPosts)
 					? data.find((item) => item.mostRecentPosts).mostRecentPosts
 					: [];
-				console.log("Most Recent Posts:", mostRecentPostsData);
 				setMostRecentPosts(mostRecentPostsData);
 
 				const mostFeasibleIdeaData = data.find((item) => item.mostFeasibleIdea)
 					? data.find((item) => item.mostFeasibleIdea).mostFeasibleIdea
 					: {};
-				console.log("Most Feasible Idea:", mostFeasibleIdeaData);
 				setMostFeasibleIdea(mostFeasibleIdeaData);
 
 				const easiestIdeaData = data.find((item) => item.easiestIdea)
 					? data.find((item) => item.easiestIdea).easiestIdea
 					: {};
-				console.log("Easiest Idea:", easiestIdeaData);
 				setEasiestIdea(easiestIdeaData);
 
 				const mostDifficultIdeaData = data.find((item) => item.mostDifficulIdea)
 					? data.find((item) => item.mostDifficulIdea).mostDifficulIdea
 					: {};
-				console.log("Most Difficult Idea:", mostDifficultIdeaData);
 				setMostDifficultIdea(mostDifficultIdeaData);
 
 				const mostImpactfulIdeaData = data.find(
@@ -93,7 +81,6 @@ const Home = () => {
 				)
 					? data.find((item) => item.mostImpactfulIdea).mostImpactfulIdea
 					: {};
-				console.log("Most Impactful Idea:", mostImpactfulIdeaData);
 				setMostImpactfulIdea(mostImpactfulIdeaData);
 			} catch (error) {
 				console.error("Error fetching home data:", error);
