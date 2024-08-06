@@ -21,7 +21,6 @@ const PostDetails = () => {
 	const [comments, setComments] = useState([]);
 	const [newComment, setNewComment] = useState("");
 	const [replyingTo, setReplyingTo] = useState(null);
-	const [replyUsers, setReplyUsers] = useState({});
 	const { user } = useUser();
 
 	useEffect(() => {
@@ -30,7 +29,6 @@ const PostDetails = () => {
 				const response = await axios.get(
 					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${id}`
 				);
-				console.log("Fetched post data:", response.data);
 				setPost(response.data);
 				setComments(response.data.replies);
 				setLikes(response.data.likedBy.length);
@@ -39,18 +37,6 @@ const PostDetails = () => {
 						? true
 						: false
 				);
-				const users = await Promise.all(
-					response.data.replies.map(async (reply) => {
-						const userResponse = await axios.get(
-							`${import.meta.env.VITE_GENESIS_API_URL}/users/id/${
-								reply.authorId
-							}`
-						);
-						return { [reply.authorId]: userResponse.data };
-					})
-				);
-				const userMap = Object.assign({}, ...users);
-				setReplyUsers(userMap);
 			} catch (error) {
 				console.error("Error fetching post data:", error);
 			}
@@ -71,7 +57,6 @@ const PostDetails = () => {
 						replyToId: commentId,
 					}
 				);
-				console.log("Created reply response:", response.data);
 				const updatedComments = comments.map((comment) => {
 					if (comment.id === commentId) {
 						return {
@@ -99,7 +84,6 @@ const PostDetails = () => {
 						user.id
 					}`
 				);
-				console.log("Unlike response:", response.data);
 				setLikes(likes - 1);
 			} else {
 				const response = await axios.put(
@@ -107,7 +91,6 @@ const PostDetails = () => {
 						user.id
 					}`
 				);
-				console.log("Like response:", response.data);
 				setLikes(likes + 1);
 			}
 			setLiked(!liked);
@@ -132,7 +115,6 @@ const PostDetails = () => {
 						replyToId: id,
 					}
 				);
-				console.log("Created comment response:", response.data);
 				const updatedComments = [...comments, response.data];
 				setComments(updatedComments);
 				setNewComment("");
@@ -160,7 +142,6 @@ const PostDetails = () => {
 					`${import.meta.env.VITE_GENESIS_API_URL}/threads/${commentId}`,
 					{ deleted: true }
 				);
-				console.log("Marked comment as deleted:", response.data);
 			} catch (error) {
 				console.error("Error marking comment as deleted:", error);
 			}
@@ -174,7 +155,6 @@ const PostDetails = () => {
 				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${replyId}`,
 				{ deleted: true }
 			);
-			console.log("Deleted reply:", replyId);
 			const updatedComments = comments.map((comment) => {
 				if (comment.id === commentId) {
 					return {
@@ -195,7 +175,6 @@ const PostDetails = () => {
 			const response = await axios.delete(
 				`${import.meta.env.VITE_GENESIS_API_URL}/threads/${postId}`
 			);
-			console.log("Deleted post response:", response.data);
 			navigate("/community");
 		} catch (error) {
 			console.error("Error deleting post:", error);
@@ -265,6 +244,7 @@ const PostDetails = () => {
 						</div>
 					</div>
 					<div className="post-separator">
+					
 						{/* User can delete their own post if they are the author */}
 						{post.author?.id === user.id && (
 							<button
@@ -275,12 +255,21 @@ const PostDetails = () => {
 							</button>
 						)}
 					</div>
+					<form className="comment-form" onSubmit={handleCommentSubmit}>
+								<textarea
+									value={newComment}
+									onChange={handleCommentChange}
+									placeholder="Reply..."
+									required
+								/>
+								<button type="submit">Post Comment</button>
+							</form>
+							<div className="reply-separator"></div>
 					{/* Comments and replies to post */}
 					<div className="comment-details-header">
 						<h2>Discussion</h2>
 						<hr />
 					</div>
-
 					<div>
 						<div className="comments-section">
 							{comments.map((comment) => (
@@ -307,21 +296,22 @@ const PostDetails = () => {
 											>
 												Reply
 											</button>
+											{!comment.deleted && comment.author?.id === user.id && (
+											<img
+												className="delete-post-icon"
+												src={delete_icon}
+												alt="Delete Comment"
+												onClick={() => handleCommentDelete(comment.id)}
+											/>
+										)}
 										</div>
 										<p>
 											{comment.deleted
 												? "[This comment has been deleted]"
 												: comment.content}
 										</p>
-										{!comment.deleted && comment.author?.id === user.id && (
-											<img
-												className="delete-icon"
-												src={delete_icon}
-												alt="Delete Comment"
-												onClick={() => handleCommentDelete(comment.id)}
-											/>
-										)}
 
+									
 										{replyingTo === comment.id && (
 											<ReplyForm
 												commentId={comment.id}
@@ -342,21 +332,20 @@ const PostDetails = () => {
 										<div className="community-replies">
 											{comment.replies &&
 												comment.replies.map((reply) => {
-													const userProfile = replyUsers[reply.authorId];
 													return (
 														<div className="community-reply" key={reply.id}>
 															<div className="user-reply-header">
 																<img
 																	className="user-profile-photo"
 																	src={
-																		userProfile?.profile?.picture ||
+																		reply.author?.profile?.picture ||
 																		"default-image-url"
 																	}
 																	alt="user profile photo"
 																/>
 
 																<h4>
-																	{userProfile?.username || "Unknown User"}
+																	{reply.author?.username || "Unknown User"}
 																</h4>
 																{reply.authorId === user.id && (
 																	<button
@@ -370,24 +359,14 @@ const PostDetails = () => {
 																)}
 															</div>
 															<p>{reply.content}</p>
-															{console.log("Reply details:", reply)}
 														</div>
 													);
 												})}
 										</div>
 									</div>
-									<div className="reply-separator"></div>
+									
 								</div>
 							))}
-							<form className="comment-form" onSubmit={handleCommentSubmit}>
-								<textarea
-									value={newComment}
-									onChange={handleCommentChange}
-									placeholder="Reply..."
-									required
-								/>
-								<button type="submit">Post Comment</button>
-							</form>
 						</div>
 					</div>
 				</div>

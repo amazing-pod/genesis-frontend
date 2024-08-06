@@ -17,7 +17,6 @@ const MiniPostCard = ({
 	likedBy,
 	profilePicture,
 }) => {
-	// console.log("post data:", postData);
 	const [likes, setLikes] = useState(likeCount);
 	const [liked, setLiked] = useState(false);
 	const { user } = useUser();
@@ -41,7 +40,6 @@ const MiniPostCard = ({
 						user.id
 					}`
 				);
-				console.log("Unlike response:", response.data);
 				setLikes(likes - 1);
 			} else {
 				const response = await axios.put(
@@ -49,7 +47,6 @@ const MiniPostCard = ({
 						user.id
 					}`
 				);
-				console.log("Like response:", response.data);
 				setLikes(likes + 1);
 			}
 			setLiked(!liked);

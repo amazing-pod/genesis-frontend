@@ -89,7 +89,6 @@ const Community = () => {
 				} else if (filter === "Most Liked") {
 					sortedPosts.sort((a, b) => b.likedBy.length - a.likedBy.length);
 				}
-				console.log("Sorted posts:", sortedPosts);
 				setPosts(sortedPosts);
 			} catch (error) {
 				console.error("Error fetching posts:", error);

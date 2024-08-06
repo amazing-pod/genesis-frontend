@@ -26,7 +26,6 @@ const CreatePost = ({ onCreatePost, onCancel }) => {
 						tags: [],
 					}
 				);
-				console.log(response.data);
 			};
 			createPost();
 			setTitle("");

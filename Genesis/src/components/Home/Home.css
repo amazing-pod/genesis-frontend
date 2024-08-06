@@ -1,5 +1,9 @@
-.home-sidebar-container { grid-area: sidebar}
-.item2 { grid-area: main;}
+.home-sidebar-container {
+	grid-area: sidebar;
+}
+.item2 {
+	grid-area: main;
+}
 
 .home-page-container {
     display: grid;
@@ -13,9 +17,9 @@
 }
 
 .home-page-container > div {
-    background-color: white;
-    /* outline: 1px solid blue; */
-    font-size: 30px;
+	background-color: white;
+	/* outline: 1px solid blue; */
+	font-size: 30px;
 }
 
 /* Mini Sidebar Container */
@@ -31,7 +35,6 @@
     
 
 }
-
 
 .home-page-container > .home-main-content-container {
     background-color: #F0F0F0;
@@ -52,8 +55,8 @@
 }
 
 .home-main-content > h2 {
-    color: #FF6584;
-    font-weight: 400;
+	color: #ff6584;
+	font-weight: 400;
 }
 
 .home-main-content > h3 {
@@ -66,9 +69,10 @@
     font-size: 36px;
 }
 
-.home-main-content > hr, .home-sidebar-container > hr {
-    border: 1px solid #FF6584;
-    width: 330px;
+.home-main-content > hr,
+.home-sidebar-container > hr {
+	border: 1px solid #ff6584;
+	width: 330px;
 }
 
 .home-main-content > p {
@@ -86,33 +90,34 @@
 
 /* Bookmarked Ideas Container */
 .bookmark-card-container {
-    display: flex;
-    gap: 50px;
-    padding: 1em;
-    margin: 20px 0px 40px 0px;
-    overflow: scroll;
-    outline: 2px solid #FF6584;
-    border-radius: 10px;
+	display: flex;
+	gap: 50px;
+	padding: 1em;
+	margin: 20px 0px 40px 0px;
+	overflow: scroll;
+	outline: 2px solid #ff6584;
+	border-radius: 10px;
 }
 
-.bookmark-card-container > *, .bookmark-main-container > * {
-    min-width: 450px;
-    max-width: 450px;
+.bookmark-card-container > *,
+.bookmark-main-container > * {
+	min-width: 450px;
+	max-width: 450px;
 }
 
 .bookmark-main-container {
-    display: flex;
-    gap: 50px;
+	display: flex;
+	gap: 50px;
 }
 
 .home-main-content-container {
-    width: auto;
+	width: auto;
 }
 
 .recent-post-container {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
+	margin-top: 30px;
+	display: flex;
+	justify-content: space-between;
 }
 
 

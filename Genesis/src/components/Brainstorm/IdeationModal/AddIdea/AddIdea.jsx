@@ -27,11 +27,9 @@ const AddIdea = ({ closeModal }) => {
 				}
 			);
 
-			console.log(response.data);
 
 			const matches = response.data.response.match(/\d+/g);
 			const [impact, feasibility, difficulty] = matches.map(Number);
-			console.log(impact, feasibility, difficulty);
 
 			const response2 = await axios.post(
 				`${import.meta.env.VITE_GENESIS_API_URL}/projects/${project}/ideas`,
@@ -46,8 +44,6 @@ const AddIdea = ({ closeModal }) => {
 					difficulty,
 				}
 			);
-
-			console.log(response2.data);
 			window.location.reload();
 		};
 		createIdea();
@@ -112,11 +108,14 @@ const AddIdea = ({ closeModal }) => {
 						></textarea>
 
 						<h2>Features:</h2>
+						<div className="feature-issues-container">
+
 						{editedFeatures.map((feature, index) => (
 							<p key={index}>
 								{index + 1}. {feature}
 							</p>
 						))}
+						</div>
 						<div className="add-item-container">
 							{/* <textarea name="" id=""></textarea> */}
 							<textarea

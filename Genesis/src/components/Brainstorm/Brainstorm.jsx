@@ -127,14 +127,6 @@ const Brainstorm = () => {
 	const { project, setProject } = useProject();
 
 	useEffect(() => {
-		// const fetchIdeas = async () => {
-		// 	console.log(project);
-		// 	const response = await axios.get(
-		// 		`${import.meta.env.VITE_GENESIS_API_URL}/projects/${project}`
-		// 	);
-		// 	console.log(response.data);
-		// 	setIdeas(response.data.ideas);
-		// };
 
 		const doAll = async () => {
 			let projectId = "";
@@ -142,8 +134,6 @@ const Brainstorm = () => {
 			const response1 = await axios.get(
 				`${import.meta.env.VITE_GENESIS_API_URL}/projects/owner/${user.id}`
 			);
-			console.log(response1.data);
-			console.log("first");
 
 			if (response1.data.length) {
 				projectId = response1.data[0].id;
@@ -153,19 +143,15 @@ const Brainstorm = () => {
 					`${import.meta.env.VITE_GENESIS_API_URL}/projects`,
 					{ ownerId: user.id, title: "default" }
 				);
-				console.log(response2.data);
-				console.log("second");
 				projectId = response2.data.id;
 				setProject(response2.data.id);
 			}
 
-			console.log(projectId);
 			setProject(projectId);
 
 			const response = await axios.get(
 				`${import.meta.env.VITE_GENESIS_API_URL}/projects/${projectId}`
 			);
-			console.log("ideas", response.data);
 			setIdeas(response.data.ideas);
 		};
 		doAll();

@@ -49,7 +49,6 @@ const IdeaCard = ({
 					import.meta.env.VITE_GENESIS_API_URL
 				}/projects/${project}/ideas/${id}`
 			);
-			console.log(response.data);
 		};
 		bookmarkIdea();
 	};

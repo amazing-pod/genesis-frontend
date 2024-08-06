@@ -79,6 +79,7 @@
   .reply-form-buttons {
     display: flex;
     gap: 10px;
+    margin-bottom: 20px;
 
   }
 
@@ -86,10 +87,12 @@
     font-size: 20px;
   }
 
+
+
   .comment-form {
     width: 90%;
     margin: auto;
-    padding-top: 1em;
+    padding: 4em 0em 2em 0em;
   }
 
   .comment-form > button {
