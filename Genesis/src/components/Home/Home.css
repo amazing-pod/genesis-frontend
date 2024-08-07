@@ -28,8 +28,8 @@
     flex-direction: column;
     gap: 70px;
     margin: 10px 0px;
-    max-height: 80vh;
-    overflow: scroll;
+    /* max-height: 80vh;
+    overflow: scroll; */
     padding: 20px 0px;
     width: 450;
     
